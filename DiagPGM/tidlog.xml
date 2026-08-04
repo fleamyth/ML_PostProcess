@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Log>
+	<Item Name="TSRID" />
+	<Item Name="SerialNumber" />
+	<Item Name="PartNumber" />
+	<Item Name="Operation" />
+	<Item Name="TesterName" />
+	<Item Name="TestName" />
+	<Item Name="TestVariation" />
+	<Item Name="ErrorCode" />
+	<Item Name="Operator" />
+	<Item Name="StartDateTime" />
+	<Item Name="EndDateTime" />
+	<Item Name="ProductionTest" />
+	<Item Name="TestSuiteName" />
+	<Item Name="ErrorDescription" />
+	<Item Name="MeasurementName" />
+	<Item Name="Value" />
+	<Item Name="Units" />
+	<Item Name="LowerLimit" />
+	<Item Name="UpperLimit" />
+	<Item Name="PegaCode" />
+	<Item Name="TicketID" />
+</Log>

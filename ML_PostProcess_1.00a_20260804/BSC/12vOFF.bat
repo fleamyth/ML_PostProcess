@@ -1,0 +1,1 @@
+..\tools\nicontrol-diags.exe /sio 1.3 0

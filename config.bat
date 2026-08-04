@@ -1,0 +1,176 @@
+@ECHO on
+IF EXIST PN.TXT DEL PN.TXT
+IF EXIST PN.log DEL PN.log
+
+goto RUN
+
+:START
+
+REM SFIS Offline
+:CHECK
+IF "%1" EQU "offline" ECHO OFFLINE>OFFLINE.DAT & GOTO RUN
+
+:SFIS
+IF "%MB%" neq "True" goto RUN
+IF NOT EXIST SN.dat DiagPGM\Screen-diag.exe -enter /ss 100 "SN.dat NOT EXIST!!!" 0xFFFFFF -bg 0xFF0000 & pause & exit /b 255
+SET /p SN=<MBSN.dat
+DiagPGM\KINGSFIS-Diags.exe -d %deviceID% -op %op% -sn %SN% /GPN -F PN.TXT > PN.LOG
+IF NOT EXIST PN.TXT GOTO FAIL
+IF NOT EXIST PN.log GOTO FAIL
+
+:CPU
+Findstr /i /c:"i5" PN.log
+IF %ERRORLEVEL% EQU 0 GOTO i5
+Findstr /i /c:"i7" PN.log
+IF %ERRORLEVEL% EQU 0 GOTO i7
+
+DiagPGM\Screen-diag.exe -enter /ss 100 "PN_Config<br>No Mapping -CPU" 0xFFFFFF -bg 0xFF5500 & exit /b 255
+
+:i5
+SET CPU_Type=i5
+SET CPU_FRQ_Min=2300
+SET CPU_FRQ_Max=2900
+SET CPU_Name=Intel(R) Core(TM) i5-6440HQ CPU @ 2.60GHz
+GOTO GPU
+
+:i7
+SET CPU_Type=i7
+SET CPU_FRQ_Min=2400
+SET CPU_FRQ_Max=3000
+SET CPU_Name=Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz
+GOTO GPU
+
+
+:GPU
+Findstr /i /c:",G1," PN.log
+IF %ERRORLEVEL% EQU 0 GOTO G1
+Findstr /i /c:",G2," PN.log
+IF %ERRORLEVEL% EQU 0 GOTO G2
+
+DiagPGM\Screen-diag.exe -enter /ss 100 "PN_Config<br>No Mapping -GPU" 0xFFFFFF -bg 0xFF5500 & exit /b 255
+
+:G1
+SET GPU_Name=GeForce GTX 1060
+SET /a GPU_MIN=3600
+SET /a GPU_MAX=4500
+set GPU_Vbios=86.6.77.0.1
+ECHO GeForce GTX 965M > GPU.DAT
+goto mem
+
+:G2
+SET GPU_Name=GeForce GTX 1070
+SET /a GPU_MIN=3600
+SET /a GPU_MAX=4500
+set GPU_Vbios=86.4.A8.0.1
+ECHO GeForce GTX 1070 > GPU.DAT
+goto mem
+
+:MEM
+Findstr /i /c:",8G," PN.log
+IF %ERRORLEVEL% EQU 0 GOTO 8G
+Findstr /i /c:",16G," PN.log
+IF %ERRORLEVEL% EQU 0 GOTO 16G
+Findstr /i /c:",32G," PN.log
+IF %ERRORLEVEL% EQU 0 GOTO 32G
+
+DiagPGM\Screen-diag.exe -enter /ss 100 "PN_Config<br>No Mapping-MEM" 0xFFFFFF -bg 0xFF5500 & exit /b 255
+
+
+:16G
+SET MEM_Min=15320875725
+SET MEM_Max=18038862643
+SET Mem0_VID=SK Hynix
+SET Mem1_VID=SK Hynix
+SET MSPD_0_Min=2000
+SET MSPD_0_Max=3000
+SET MSPD_1_Min=2000
+SET MSPD_1_Max=3000
+GOTO TPM
+
+:32G
+SET MEM_Min=30320875725
+SET MEM_Max=36038862643
+SET Mem0_VID=SK Hynix
+SET Mem1_VID=SK Hynix
+SET MSPD_0_Min=2000
+SET MSPD_0_Max=3000
+SET MSPD_1_Min=2000
+SET MSPD_1_Max=3000
+GOTO TPM
+
+:TPM
+Findstr /i /c:"NATIONZ" PN.log
+IF %ERRORLEVEL% EQU 0 GOTO NATIONZ
+Findstr /i /c:"NUVOTON" PN.log
+IF %ERRORLEVEL% EQU 0 GOTO NUVOTON
+
+:NATIONZ
+SET TPM=NATIONZ
+SET TPM_mid=1314150912
+SET TPM_mver=4.12
+SET TPM_sver=2.0, 0, 1.16
+rem SET TPM_mid2=1229346816
+rem SET TPM_mver2=1.3
+rem SET TPM_sver2=2.0, 0, 1.16
+GOTO SSD
+
+:NUVOTON
+SET TPM=NUVOTON
+SET TPM_mid=1314145024
+SET TPM_mver=1.3
+SET TPM_sver=2.0, 0, 1.16
+rem SET TPM_mid2=1314145024
+rem SET TPM_mver2=4.12
+rem SET TPM_sver2=2.0, 0, 1.16
+
+GOTO SSD
+
+DiagPGM\Screen-diag.exe -enter /ss 100 "PN_Config<br>No Mapping - TPM" 0xFFFFFF -bg 0xFF5500 & exit /b 255
+
+
+:SSD
+Findstr /i /c:"TOSHIBA,1T" PN.log
+IF %ERRORLEVEL% EQU 0 GOTO 1T
+Findstr /i /c:"TOSHIBA,2T" PN.log
+IF %ERRORLEVEL% EQU 0 GOTO 2T
+
+goto run
+DiagPGM\Screen-diag.exe -enter /ss 100 "PN_Config<br>No Mapping - SSD" 0xFFFFFF -bg 0xFF5500 & exit /b 255
+
+:1T
+ECHO 64G>SSD.dat
+SET SSD_Min=921000000000
+SET SSD_Max=1126000000000
+SET SSD_Model1=KXG50ZNV1T02 TOSHIBA
+SET SSD_Model2=XXXXXXXX
+SET SSD_Model3=XXXXXXXX
+SET SSD_Model4=XXXXXXXX
+SET SSD_FW1=AAMS4103
+SET SSD_FW2=AAMS4102
+SET SSD_FW3=XXXXXXXX
+SET SSD_FW4=XXXXXXXX
+goto run
+
+:2T
+SET SSD_Min=1843000000000
+SET SSD_Max=2252000000000
+SET SSD_Model1=KXG50PNV2T04 TOSHIBA
+SET SSD_Model2=KXG60PNV2T04 TOSHIBA
+SET SSD_Model3=XXXXXXXX
+SET SSD_Model4=XXXXXXXX
+SET SSD_FW1=AFMS4103
+SET SSD_FW2=AFMS4102
+SET SSD_FW3=AHMS4101
+SET SSD_FW4=XXXXXXXX
+
+goto run
+
+:RUN
+Call Default.bat
+exit /b 0
+
+:FAIL
+CLS
+DiagPGM\Screen-diag.exe -enter /ss 100 "Get Config&P/N CMD Failure! Please Check SFIS!   Press [Enter] to retry" 0xFFFFFF -bg 0xFF0000
+timeout 5
+goto SFIS

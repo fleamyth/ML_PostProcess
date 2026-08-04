@@ -1,0 +1,1 @@
+copy "c:\server\Server.bat - Shortcut.lnk" "C:\Users\MTEAdmin\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\"

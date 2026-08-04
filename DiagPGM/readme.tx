@@ -1,0 +1,51 @@
+- Test --------------------------------
+/? : Show usage.
+/S : Server mode.
+/C : Check rount.
+/GHD : Get HDD SN.
+/GFA : Get FAPN.
+/GPSN : Get AIOISN.
+/GMAC : Get MAC.
+/GPN : Get part number.
+/GPSN : Get AIOSN.
+/GMAC1 : Get MAC by 70SN.
+/GMBSN : Get MBSN.
+/GSSD : Get SSDSN.
+/GMBSSD : Get MBSSDSN.
+/GCUST : Get CUST.
+/GREV : Get REVERSION.
+/GEMMC : Get EMMC.
+/GEMMC1 : Get EMMC1.
+/GEMMC2 : Get EMMC2.
+/GMOBB : Get MOBB.
+/GBV : Get BV.
+/GTV : Get TV.
+/GLV : Get LV.
+/GSPKL : Get SPKL.
+/GSPKR : Get SPKR.
+/GITEMNM : Get ITEMNM.
+/GCUSTVEN : Get CUSTVEN.
+/GKVER : Get KORE Version.
+/GTID : Get Ticket ID by sn.
+/GMBTID : Get Ticket ID by MBSN.
+/GMS : Get Memory Size.
+/GMS1 : Get Memory Size1.
+/GRNR : Get RNR.
+/GITEMSP : Get ITEMSP.
+/UP : Update log to SFIS.
+/P : Pass station.
+ -tid : Update log with TID.
+
+                          Press any key to continue...
+- Test --------------------------------
+ -log <file> : Set log file.
+ -sn <sn> : Set sn
+ -op <opid> : set opid.
+ -d <device> : set device
+ -krown : for krown logs
+ -sfe:single first error by PegaCode.
+ -sfec:single first error by ErrorCode.
+ -f <file> : result file.
+ -imei <IMEI> : set IMEI.
+ -emmc <EMMC> : set EMMC.
+ -status <status> : set status for /p.

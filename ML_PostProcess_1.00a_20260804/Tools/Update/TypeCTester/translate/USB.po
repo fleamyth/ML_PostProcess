@@ -1,0 +1,208 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-14 14:12+0800\n"
+"PO-Revision-Date: 2025-04-14 14:13+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_IE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#: TBT01TestItemInfo.h:208
+msgid "Thunderbolt PDsnk"
+msgstr "USB4 PDsnk"
+
+#: TBT01TestItemInfo.h:209
+msgid "Thunderbolt PDsrc"
+msgstr "USB4 PDsrc"
+
+#: TBT01TestItemInfo.h:211
+msgid "Thunderbolt PDdrp"
+msgstr "USB4 PDdrp"
+
+#: TBT01TestItemNormal.h:73 TBT01XmlParser.hpp:905 TBT01XmlWriter.cpp:1122
+#: TBT01XmlWriter.cpp:1126 TBT01XmlWriter.cpp:1221 TBT01XmlWriter.cpp:1230
+#: TBT01XmlWriter.cpp:1311 TBT01XmlWriter.cpp:1352 TBT01XmlWriter.cpp:1379
+#: TBT01XmlWriter.cpp:1442 TBT01XmlWriter.cpp:1492 TBT01XmlWriter.cpp:1977
+#: TBT01XmlWriter.cpp:1979 TBT01XmlWriter.cpp:1989 TBT01XmlWriter.cpp:2117
+#: TBT01XmlWriter.cpp:2119 TBT01XmlWriter.cpp:2129
+msgid "thunderbolt connect"
+msgstr "usb4 connect"
+
+#: TBT01ConfigDlg.cpp:103 TBT01ConfigDlg.cpp:113 TBT01ConfigDlg.cpp:126
+#: TBT01ConfigDlg.cpp:135 TBT01ConfigDlg.cpp:155 TBT01ConfigDlg.cpp:165
+#: TBT01ConfigDlg.cpp:195 TBT01ConfigDlg.cpp:205
+msgid "switch thunderbolt pd snk,"
+msgstr "switch usb4 pd snk,"
+
+#: TBT01ConfigDlg.cpp:103 TBT01ConfigDlg.cpp:113 TBT01ConfigDlg.cpp:126
+#: TBT01ConfigDlg.cpp:135 TBT01ConfigDlg.cpp:145 TBT01ConfigDlg.cpp:155
+#: TBT01ConfigDlg.cpp:165 TBT01ConfigDlg.cpp:195 TBT01ConfigDlg.cpp:205
+#: TBT01ConfigDlg.cpp:265
+msgid "thunderbolt conn,"
+msgstr "usb4 conn,"
+
+#: TBT01ConfigDlg.cpp:134
+msgid "thunderbolt only mode"
+msgstr "usb4 only mode"
+
+#: TBT01ConfigDlg.cpp:144
+msgid "thunderbolt only parallel mode"
+msgstr "usb4 only parallel mode"
+
+#: TBT01ConfigDlg.cpp:145
+msgid "switch thunderbolt pd src,"
+msgstr "switch usb4 pd src,"
+
+#: TBT01ConfigDlg.cpp:174
+msgid "dp4l without thunderbolt mode"
+msgstr "dp4l without usb4 mode"
+
+#: TBT01ConfigDlg.cpp:184
+msgid "thunderbolt pd src mode"
+msgstr "usb4 pd src mode"
+
+#: TBT01ConfigDlg.cpp:185
+msgid "prepare,switch thunderbolt pd src,"
+msgstr "prepare,switch usb4 pd src,"
+
+#: TBT01ConfigDlg.cpp:185 TBT01TestItemInfo.cpp:78
+msgid "thunderbolt conn"
+msgstr "usb4 conn"
+
+#: TBT01ConfigDlg.cpp:204
+msgid "thunderbolt mode add dp4l pd snk"
+msgstr "usb4 mode add dp4l pd snk"
+
+#: TBT01ConfigDlg.cpp:264
+msgid "thunderbolt flow"
+msgstr "usb4 flow"
+
+#: TBT01ConfigDlg.cpp:265
+msgid "switch thunderbolt,"
+msgstr "switch usb4,"
+
+#: TBT01ConfigDlg.cpp:290
+msgid "ThunderBolt Settings"
+msgstr "USB4 Settings"
+
+#: TBT01ConfigDlg.cpp:291
+msgid "Thunderbolt Test"
+msgstr "USB4 Test"
+
+#: TBT01Operator.cpp:468
+msgid "switch to thunderbolt"
+msgstr "switch to usb4"
+
+#: TBT01Operator.cpp:682
+msgid "get thunderbolt connect state"
+msgstr "get usb4 connect state"
+
+#: TBT01Operator.cpp:1112
+#, c-format
+msgid "rescan host after switch thunderbolt, time = %d"
+msgstr "rescan host after switch usb4, time = %d"
+
+#: TBT01Tester.cpp:1398
+msgid "switch thunderbolt"
+msgstr "switch usb4"
+
+#: TBT01TestItemGeneric.cpp:801
+msgid "thunderbolt Connected when switch thunderbolt"
+msgstr "usb4 Connected when switch usb4"
+
+#: TBT01TestItemGeneric.cpp:827
+msgid "switch thunderbolt connect fail"
+msgstr "switch usb4 connect fail"
+
+#: TBT01TestItemGeneric.cpp:828
+msgid "thunderbolt disconnected when switch thunderbolt."
+msgstr "usb4 disconnected when switch usb4."
+
+#: TBT01TestItemInfo.cpp:80
+msgid "thunderbolt read"
+msgstr "usb4 read"
+
+#: TBT01TestItemInfo.cpp:82
+msgid "thunderbolt write"
+msgstr "usb4 write"
+
+#: TBT01TestItemInfo.cpp:104
+msgid "switch thunderbolt pd src"
+msgstr "switch usb4 pd src"
+
+#: TBT01TestItemInfo.cpp:106
+msgid "switch thunderbolt pd snk"
+msgstr "switch usb4 pd snk"
+
+#: TBT01TestItemInfo.cpp:109
+msgid "switch thunderbolt pd drp"
+msgstr "switch usb4 pd drp"
+
+#: TBT01TestItemInfo.cpp:144
+msgid "switch_tb_pdsrc"
+msgstr "switch_usb4_pdsrc"
+
+#: TBT01TestItemInfo.cpp:145
+msgid "switch_tb_pdsnk"
+msgstr "switch_usb4_pdsnk"
+
+#: TBT01TestItemInfo.cpp:146
+msgid "switch_tb_pddrp"
+msgstr "switch_usb4_pddrp"
+
+#: TBT01TestItemNormal.cpp:277
+#, c-format
+msgid "%s ThunderboltConnInit id 0x%X, optor:%p"
+msgstr "%s USB4ConnInit id 0x%X, optor:%p"
+
+#: TBT01TestItemNormal.cpp:352
+msgid "thunderbolt disconnected."
+msgstr "usb4 disconnected."
+
+#: TBT01XmlWriter.cpp:2007 TBT01XmlWriter.cpp:2147
+msgid "thunderbolt "
+msgstr "usb4 "
+
+#~ msgid "prepare,short,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,switch dp4l pd src,usb2.0 conn,dp,dp audio,pd,switch ss,usb3.2 conn,read speed,write speed,switch thunderbolt pd snk,thunderbolt conn,read speed,write speed,reset,"
+#~ msgstr "prepare,short,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,switch dp4l pd src,usb2.0 conn,dp,dp audio,pd,switch ss,usb3.2 conn,read speed,write speed,switch usb4 pd snk,usb4 conn,read speed,write speed,reset,"
+
+#~ msgid "prepare,short,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,pd conn,switch dp2l pd src ss,usb2.0 conn,dp,dp audio,pd,usb3.2 conn,read speed,write speed,switch thunderbolt pd snk,thunderbolt conn,read speed,write speed,reset,"
+#~ msgstr "prepare,short,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,pd conn,switch dp2l pd src ss,usb2.0 conn,dp,dp audio,pd,usb3.2 conn,read speed,write speed,switch usb4 pd snk,usb4 conn,read speed,write speed,reset,"
+
+#~ msgid "prepare,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,pd conn,switch dp4l pd src,usb2.0 conn,dp,dp audio,pd,switch dp2l pd src ss,dp,usb3.2 conn,read speed,write speed,switch thunderbolt pd snk,thunderbolt conn,read speed,write speed,reset,"
+#~ msgstr "prepare,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,pd conn,switch dp4l pd src,usb2.0 conn,dp,dp audio,pd,switch dp2l pd src ss,dp,usb3.2 conn,read speed,write speed,switch usb4 pd snk,usb4 conn,read speed,write speed,reset,"
+
+#~ msgid "prepare,switch dp4l pd src,pd,dp,switch thunderbolt pd snk,thunderbolt conn,read speed,write speed,reset,"
+#~ msgstr "prepare,switch dp4l pd src,pd,dp,switch usb4 pd snk,usb4 conn,read speed,write speed,reset,"
+
+#~ msgid "prepare,switch dp4l pd snk,dp,switch dp4l pd src,pd,switch thunderbolt pd src,thunderbolt conn,read speed,write speed,reset,"
+#~ msgstr "prepare,switch dp4l pd snk,dp,switch dp4l pd src,pd,switch usb4 pd src,usb4 conn,read speed,write speed,reset,"
+
+#~ msgid "prepare,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,pd conn,switch thunderbolt pd snk,thunderbolt conn,read speed,write speed,switch dp4l pd src,usb2.0 conn,dp,pd,reset,"
+#~ msgstr "prepare,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,pd conn,switch usb4 pd snk,usb4 conn,read speed,write speed,switch dp4l pd src,usb2.0 conn,dp,pd,reset,"
+
+#~ msgid "prepare,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,pd conn,switch thunderbolt pd snk,thunderbolt conn,read speed,write speed,switch dp4l pd src,usb2.0 conn,dp,pd,switch ss,usb3.2 conn,read speed,write speed,reset,"
+#~ msgstr "prepare,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,pd conn,switch usb4 pd snk,usb4 conn,read speed,write speed,switch dp4l pd src,usb2.0 conn,dp,pd,switch ss,usb3.2 conn,read speed,write speed,reset,"
+
+#~ msgid "prepare,switch thunderbolt pd src,thunderbolt conn,read speed,write speed,switch dp4l pd snk,dp,reset,"
+#~ msgstr "prepare,switch usb4 pd src,usb4 conn,read speed,write speed,switch dp4l pd snk,dp,reset,"
+
+#~ msgid "prepare,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,switch dp4l pd snk,usb2.0 conn,dp,dp audio,switch pd src,pd,switch ss,usb3.2 conn,read speed,write speed,switch thunderbolt pd snk,thunderbolt conn,read speed,write speed,reset,"
+#~ msgstr "prepare,switch ss,usb2.0 conn,usb vbus,usb load,usb3.2 conn,read speed,write speed,switch dp4l pd snk,usb2.0 conn,dp,dp audio,switch pd src,pd,switch ss,usb3.2 conn,read speed,write speed,switch usb4 pd snk,usb4 conn,read speed,write speed,reset,"
+
+#~ msgid "prepare,switch dp4l pd snk,usb2.0 conn,dp,switch thunderbolt pd snk,thunderbolt conn,read speed,write speed,switch pd src,pd,reset,"
+#~ msgstr "prepare,switch dp4l pd snk,usb2.0 conn,dp,switch usb4 pd snk,usb4 conn,read speed,write speed,switch pd src,pd,reset,"
+
+#~ msgid "switch thunderbolt,thunderbolt conn,read speed,write speed,"
+#~ msgstr "switch usb4,usb4 conn,read speed,write speed,"

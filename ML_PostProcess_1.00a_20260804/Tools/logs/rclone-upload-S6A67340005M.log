@@ -1,0 +1,391 @@
+2026/08/04 14:55:46 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 14:55:47 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 14:55:52 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 14:55:55 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 14:56:31 INFO  : DCC/20260803_093906/dcc_config.json: Copied (new)
+2026/08/04 14:56:31 INFO  : DGC/20260803_162213.zip: Copied (new)
+2026/08/04 15:02:07 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:02:26 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:02:27 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 15:02:27 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:02:30 INFO  : DCC: Set directory modification time (using SetModTime)
+2026/08/04 15:02:31 INFO  : DGC: Set directory modification time (using SetModTime)
+2026/08/04 15:02:31 INFO  : There was nothing to transfer
+2026/08/04 15:02:31 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                 0 / 0, -, Listed 10
+Elapsed time:         3.9s
+
+2026/08/04 15:02:32 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:02:33 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:02:33 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 15:02:33 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:02:39 INFO  : log_file_20260804_150020.log: Copied (new)
+2026/08/04 15:02:39 INFO  : 
+Transferred:   	  126.392 KiB / 126.392 KiB, 100%, 31.598 KiB/s, ETA 0s
+Checks:                 0 / 0, -, Listed 3
+Transferred:            1 / 1, 100%
+Elapsed time:         4.8s
+
+2026/08/04 15:23:37 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:23:38 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:23:39 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 15:23:41 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 15:23:52 INFO  : DCC/20260804_151503/dcc_uniformity.zip: Copied (new)
+2026/08/04 15:23:55 INFO  : DCC/20260804_151503/dcc_apply_color_cal.zip: Copied (new)
+2026/08/04 15:23:56 INFO  : DGC/20260804_151503/nominal_workflow_calibration_capture_set.yaml: Copied (new)
+2026/08/04 15:23:57 INFO  : DGC/20260804_151503/station_id.yaml: Copied (new)
+2026/08/04 15:23:57 INFO  : DCC/20260804_151503/dcc_capture.zip: Copied (new)
+2026/08/04 15:23:57 INFO  : DGC/20260804_151503/stereo.textproto: Copied (new)
+2026/08/04 15:23:57 INFO  : DCC/20260804_151503/dcc_config.json: Copied (new)
+2026/08/04 15:23:57 INFO  : DCC/20260804_151503/dcc_uniformity_validation.zip: Copied (new)
+2026/08/04 15:23:58 INFO  : DCC/20260804_151503/dcc_white_point.zip: Copied (new)
+2026/08/04 15:24:28 INFO  : DGC/20260804_151503.zip: Copied (new)
+2026/08/04 15:24:31 INFO  : DCC/20260804_151503/uniformity_validation/capture/image_capture_metadata.yaml: Copied (new)
+2026/08/04 15:24:32 INFO  : DGC/20260804_151503/nominal_workflow_calibration/display_geometry_calibrator.log: Copied (new)
+2026/08/04 15:24:32 INFO  : DGC/20260804_151503/nominal_workflow_calibration/display_profile.textproto: Copied (new)
+2026/08/04 15:24:32 INFO  : DGC/20260804_151503/nominal_workflow_calibration/calibration_specs.yaml: Copied (new)
+2026/08/04 15:24:36 INFO  : DCC/20260804_151503/autoexposure_debug/ae_right_iter_00_it_66664_max_36226.0.csv: Copied (new)
+2026/08/04 15:24:36 INFO  : DCC/20260804_151503/whitepoint_ok2cal_capture.zip: Copied (new)
+2026/08/04 15:24:37 INFO  : DCC/20260804_151503/high_freq_mura_capture/geometry/dataset.yaml: Copied (new)
+2026/08/04 15:24:38 INFO  : DCC/20260804_151503/high_freq_mura_capture/geometry/image_capture_metadata.yaml: Copied (new)
+2026/08/04 15:24:42 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right_irradiance.cal: Copied (new)
+2026/08/04 15:24:42 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right_mask_scaling_factor.yaml: Copied (new)
+2026/08/04 15:24:52 INFO  : DGC/20260804_151503/calibration_captures/left_0_0_0_right_0_0_0/right_grid_blue.png: Copied (new)
+2026/08/04 15:24:52 INFO  : DGC/20260804_151503/calibration_captures/left_0_0_0_right_0_0_0/right_grid_green.png: Copied (new)
+2026/08/04 15:24:54 INFO  : DGC/20260804_151503/calibration_captures/left_0_0_0_right_0_0_0/right_grid_red.png: Copied (new)
+2026/08/04 15:24:54 INFO  : DCC/20260804_151503/capture/right_mask_scaling_factor.yaml: Copied (new)
+2026/08/04 15:24:54 INFO  : DCC/20260804_151503/capture/right_irradiance.cal: Copied (new)
+2026/08/04 15:24:56 INFO  : DGC/20260804_151503/calibration_captures/left_2_0_0_right_-2_0_0/right_grid_red.png: Copied (new)
+2026/08/04 15:24:56 INFO  : DGC/20260804_151503/calibration_captures/left_2_0_0_right_-2_0_0/right_grid_blue.png: Copied (new)
+2026/08/04 15:24:58 INFO  : DGC/20260804_151503/calibration_captures/left_2_0_0_right_-2_0_0/right_grid_green.png: Copied (new)
+2026/08/04 15:24:58 INFO  : DCC/20260804_151503/high_freq_mura_capture/uniformity/uncorrected/image_capture_metadata.yaml: Copied (new)
+2026/08/04 15:25:59 INFO  : DGC/20260804_151503/nominal_workflow_calibration/debug/side_right_channel_blue_depth_grid.csv: Copied (new)
+2026/08/04 15:26:42 INFO  : DGC/20260804_151503/feature_detection/nominal_workflow_calibration/device_feature_set.textproto: Copied (new)
+2026/08/04 15:26:42 INFO  : DCC/20260804_151503/white_point_calibration/corrected_rgb_primaries/macbeth20.png: Copied (new)
+2026/08/04 15:26:42 INFO  : DCC/20260804_151503/white_point_calibration/corrected_rgb_primaries/green.png: Copied (new)
+2026/08/04 15:26:42 INFO  : DCC/20260804_151503/white_point_calibration/corrected_rgb_primaries/red.png: Copied (new)
+2026/08/04 15:26:42 INFO  : DCC/20260804_151503/white_point_calibration/corrected_rgb_primaries/blue.png: Copied (new)
+2026/08/04 15:26:43 INFO  : DGC/20260804_151503/nominal_workflow_calibration/debug/side_right_channel_blue_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 15:26:45 INFO  : DGC/20260804_151503/nominal_workflow_calibration/debug/side_right_channel_green_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 15:26:45 INFO  : DGC/20260804_151503/feature_detection/nominal_workflow_calibration/feature_detection.log: Copied (new)
+2026/08/04 15:26:45 INFO  : DGC/20260804_151503/nominal_workflow_calibration/debug/side_right_channel_green_depth_grid.csv: Copied (new)
+2026/08/04 15:26:46 INFO  : DGC/20260804_151503/nominal_workflow_calibration/debug/side_right_channel_red_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 15:26:50 INFO  : DCC/20260804_151503/white_point_calibration/corrected_rgb_primaries/white.png: Copied (new)
+2026/08/04 15:26:50 INFO  : DCC/20260804_151503/white_point_calibration/corrected_rgb_primaries/macbeth22.png: Copied (new)
+2026/08/04 15:26:50 INFO  : DGC/20260804_151503/nominal_workflow_calibration/debug/side_right_channel_red_depth_grid.csv: Copied (new)
+2026/08/04 15:26:50 INFO  : DGC/20260804_151503/verification_assets/nominal_workflow_calibration/virtual_image_position.yaml: Copied (new)
+2026/08/04 15:26:59 INFO  : DCC/20260804_151503/apply_color_cal/uniformity/062P0141_cal.hdf5: Copied (new)
+2026/08/04 15:27:00 INFO  : DCC/20260804_151503/uniformity_validation/capture/green/right/right_white.png: Copied (new)
+2026/08/04 15:27:31 INFO  : DCC/20260804_151503/uniformity_validation/capture/red/right/right_white.png: Copied (new)
+2026/08/04 15:27:34 INFO  : DCC/20260804_151503/high_freq_mura_calibration/uniformity/right_correction_map.png: Copied (new)
+2026/08/04 15:27:41 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/device_metadata/red.yaml: Copied (new)
+2026/08/04 15:27:41 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/device_metadata/white.yaml: Copied (new)
+2026/08/04 15:27:41 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/device_metadata/green.yaml: Copied (new)
+2026/08/04 15:27:41 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/device_metadata/blue.yaml: Copied (new)
+2026/08/04 15:27:42 INFO  : DCC/20260804_151503/high_freq_mura_calibration/uniformity/right_correction_map.tiff: Copied (new)
+2026/08/04 15:27:43 INFO  : DCC/20260804_151503/uniformity_validation/capture/blue/right/right_white.png: Copied (new)
+2026/08/04 15:27:44 INFO  : DCC/20260804_151503/white_point_calibration/correction/right/color_correction.textproto: Copied (new)
+2026/08/04 15:27:47 INFO  : DCC/20260804_151503/white_point_calibration/correction/right/corrected_color.csv: Copied (new)
+2026/08/04 15:27:54 INFO  : DCC/20260804_151503/uniformity_validation/capture/white/right/right_white.png: Copied (new)
+2026/08/04 15:27:55 INFO  : DCC/20260804_151503/uniformity_validation/cropped/0/red_right_white.png: Copied (new)
+2026/08/04 15:27:55 INFO  : DCC/20260804_151503/uniformity_validation/cropped/0/white_right_white.png: Copied (new)
+2026/08/04 15:27:55 INFO  : DCC/20260804_151503/uniformity_validation/cropped/0/green_right_white.png: Copied (new)
+2026/08/04 15:28:59 INFO  : DCC/20260804_151503/white_point_calibration/post_cal_capture/right_irradiance.cal: Copied (new)
+2026/08/04 15:29:01 INFO  : DCC/20260804_151503/uniformity_validation/cropped/0/blue_right_white.png: Copied (new)
+2026/08/04 15:29:02 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/background.csv: Copied (new)
+2026/08/04 15:29:35 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/green.csv: Copied (new)
+2026/08/04 15:29:38 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/red.csv: Copied (new)
+2026/08/04 15:29:43 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/red.png: Copied (new)
+2026/08/04 15:29:46 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/white.csv: Copied (new)
+2026/08/04 15:29:49 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/white.png: Copied (new)
+2026/08/04 15:29:52 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/blue.csv: Copied (new)
+2026/08/04 15:29:52 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/background.png: Copied (new)
+2026/08/04 15:29:52 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/green.png: Copied (new)
+2026/08/04 15:29:52 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/background_peak_detection.png: Copied (new)
+2026/08/04 15:29:52 INFO  : DCC/20260804_151503/whitepoint_ok2cal/capture/right/blue.png: Copied (new)
+2026/08/04 15:29:53 INFO  : DCC/20260804_151503/white_point_calibration/post_cal_capture/right_mask_scaling_factor.yaml: Copied (new)
+2026/08/04 15:29:56 INFO  : DCC/20260804_151503/capture/dcc_smoke_test/dcc_golden_spectra.yaml: Copied (new)
+2026/08/04 15:30:02 INFO  : DCC/20260804_151503/capture/dcc_smoke_test/right_dcc_golden_spectra.png: Copied (new)
+2026/08/04 15:30:02 INFO  : DCC/20260804_151503/capture/dcc_smoke_test/right_dcc_latest_spectra.png: Copied (new)
+2026/08/04 16:48:39 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 16:48:40 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 16:48:41 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 16:48:44 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 16:51:52 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 16:51:53 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 16:51:54 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 16:51:56 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 16:52:39 INFO  : DCC/20260804_164149/dcc_config.json: Copied (new)
+2026/08/04 16:52:47 INFO  : DGC/20260804_164149/stereo.textproto: Copied (new)
+2026/08/04 16:52:47 INFO  : DGC/20260804_164149/station_id.yaml: Copied (new)
+2026/08/04 16:52:47 INFO  : DCC/20260804_164149/dcc_uniformity.zip: Copied (new)
+2026/08/04 16:52:47 INFO  : DGC/20260804_164149/nominal_workflow_calibration_capture_set.yaml: Copied (new)
+2026/08/04 16:52:52 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/virtual_image_position.yaml: Copied (new)
+2026/08/04 16:53:02 INFO  : DGC/20260804_164149/calibration_captures/left_2_0_0_right_-2_0_0/right_grid_green.png: Copied (new)
+2026/08/04 16:53:41 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/feature_detection.log: Copied (new)
+2026/08/04 16:53:41 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/device_feature_set.textproto: Copied (new)
+2026/08/04 16:53:45 INFO  : DGC/20260804_164149/calibration_captures/left_0_0_0_right_0_0_0/right_grid_green.png: Copied (new)
+2026/08/04 16:53:45 INFO  : DGC/20260804_164149/calibration_captures/left_0_0_0_right_0_0_0/right_grid_blue.png: Copied (new)
+2026/08/04 16:53:48 INFO  : DGC/20260804_164149/nominal_workflow_calibration/calibration_specs.yaml: Copied (new)
+2026/08/04 16:53:50 INFO  : DGC/20260804_164149/nominal_workflow_calibration/display_geometry_calibrator.log: Copied (new)
+2026/08/04 16:53:52 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/dataset.yaml: Copied (new)
+2026/08/04 16:53:56 INFO  : DGC/20260804_164149/calibration_captures/left_0_0_0_right_0_0_0/right_grid_red.png: Copied (new)
+2026/08/04 16:53:57 INFO  : DGC/20260804_164149/nominal_workflow_calibration/display_profile.textproto: Copied (new)
+2026/08/04 16:53:58 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/left_0_0_0_right_0_0_0/undistorted_blue_calibu_4512x4512_80_80_11_16_1.png: Copied (new)
+2026/08/04 16:53:58 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/left_0_0_0_right_0_0_0/undistorted_green_calibu_4512x4512_80_80_11_16_1.png: Copied (new)
+2026/08/04 16:53:59 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/image_capture_metadata.yaml: Copied (new)
+2026/08/04 16:57:30 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/left_0_0_0_right_0_0_0/undistorted_red_calibu_4512x4512_80_80_11_16_1.png: Copied (new)
+2026/08/04 16:57:31 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_green_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 16:57:31 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_blue_depth_grid.csv: Copied (new)
+2026/08/04 16:57:31 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_green_depth_grid.csv: Copied (new)
+2026/08/04 16:57:31 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_blue_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 16:57:34 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_red_depth_grid.csv: Copied (new)
+2026/08/04 16:57:38 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_red_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 16:57:39 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_-2_0_0_side_right_color_green/after_medianblur.png: Copied (new)
+2026/08/04 16:57:48 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green/after_medianblur.png: Copied (new)
+2026/08/04 16:57:48 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green/bfs.png: Copied (new)
+2026/08/04 16:57:51 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green/binary_img.png: Copied (new)
+2026/08/04 16:57:52 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green/detected_fiducials.png: Copied (new)
+2026/08/04 16:57:54 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_-2_0_0_side_right_color_green/bfs.png: Copied (new)
+2026/08/04 16:57:54 INFO  : DGC/20260804_164149/device_to_station_extrinsic_calibration/station_camera_captures/left_0_0_0_right_0_0_0/right_station.png: Copied (new)
+2026/08/04 16:57:56 INFO  : DGC/20260804_164149/device_to_station_extrinsic_calibration/station_camera_captures/left_0_0_0_right_0_0_0/left_station.png: Copied (new)
+2026/08/04 16:58:00 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_-2_0_0_side_right_color_green/binary_img.png: Copied (new)
+2026/08/04 16:58:00 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green/opened_img.png: Copied (new)
+2026/08/04 16:58:01 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green/input.png: Copied (new)
+2026/08/04 16:58:02 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green/labels1.svg: Copied (new)
+2026/08/04 16:58:05 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green/labels2.svg: Copied (new)
+2026/08/04 17:09:28 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:09:29 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:09:29 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 17:09:29 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:09:32 INFO  : DCC: Set directory modification time (using SetModTime)
+2026/08/04 17:09:34 INFO  : DGC: Set directory modification time (using SetModTime)
+2026/08/04 17:09:35 INFO  : DCC/20260804_164149: Set directory modification time (using SetModTime)
+2026/08/04 17:09:36 INFO  : DGC/20260804_164149: Set directory modification time (using SetModTime)
+2026/08/04 17:09:37 INFO  : DCC/20260804_164149/high_freq_mura_capture: Set directory modification time (using SetModTime)
+2026/08/04 17:09:38 INFO  : DGC/20260804_164149/calibration_captures: Set directory modification time (using SetModTime)
+2026/08/04 17:09:39 INFO  : DGC/20260804_164149/device_to_station_extrinsic_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:09:39 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry: Set directory modification time (using SetModTime)
+2026/08/04 17:09:40 INFO  : DGC/20260804_164149/feature_detection: Set directory modification time (using SetModTime)
+2026/08/04 17:09:41 INFO  : DGC/20260804_164149/nominal_workflow_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:09:42 INFO  : DGC/20260804_164149/verification_assets: Set directory modification time (using SetModTime)
+2026/08/04 17:09:46 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/right_correction_map.png: Copied (new)
+2026/08/04 17:09:49 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:09:49 INFO  : DGC/20260804_164149/device_to_station_extrinsic_calibration/station_camera_captures: Set directory modification time (using SetModTime)
+2026/08/04 17:09:49 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug: Set directory modification time (using SetModTime)
+2026/08/04 17:09:50 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:09:51 INFO  : DGC/20260804_164149/calibration_captures/left_0_0_0_right_0_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:09:52 INFO  : DGC/20260804_164149/calibration_captures/left_2_0_0_right_-2_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:09:57 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/uniformity_map/right/simulated_white_after_correction.png: Copied (new)
+2026/08/04 17:09:59 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/right_correction_map.tiff: Copied (new)
+2026/08/04 17:09:59 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/uniformity_map/right/correction_map.tiff: Copied (new)
+2026/08/04 17:09:59 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/uniformity_map/right/closed_loop_srgb_gamma_corrected/white.png: Copied (new)
+2026/08/04 17:10:54 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/left_0_0_0_right_0_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:10:55 INFO  : DGC/20260804_164149/device_to_station_extrinsic_calibration/station_camera_captures/left_0_0_0_right_0_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:10:56 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug: Set directory modification time (using SetModTime)
+2026/08/04 17:10:56 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right/debug/find_center_dot/center_finding.png: Copied (new)
+2026/08/04 17:22:58 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:23:33 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:23:33 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 17:23:34 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:23:38 INFO  : DCC/20260804_164149/high_freq_mura_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:23:46 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry: Set directory modification time (using SetModTime)
+2026/08/04 17:23:48 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity: Set directory modification time (using SetModTime)
+2026/08/04 17:23:49 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_0_right_0_0_0/right_ver_green.png: Copied (new)
+2026/08/04 17:23:51 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_0_right_0_0_0/right_ver_red.png: Copied (new)
+2026/08/04 17:23:51 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/uniformity_map: Set directory modification time (using SetModTime)
+2026/08/04 17:23:51 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right: Set directory modification time (using SetModTime)
+2026/08/04 17:23:51 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_-2_0_0_side_right_color_green: Set directory modification time (using SetModTime)
+2026/08/04 17:23:52 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_-2_0_0_side_right_color_red: Set directory modification time (using SetModTime)
+2026/08/04 17:23:53 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/uniformity_map/right: Set directory modification time (using SetModTime)
+2026/08/04 17:23:53 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right/debug: Set directory modification time (using SetModTime)
+2026/08/04 17:23:54 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/debug/eyebox_0_0_0_side_right_color_green: Set directory modification time (using SetModTime)
+2026/08/04 17:23:55 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_6_right_0_0_6/right_ver_blue.png: Copied (new)
+2026/08/04 17:23:55 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/uniformity_map/right/closed_loop_srgb_gamma_corrected: Set directory modification time (using SetModTime)
+2026/08/04 17:23:55 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right/debug/find_center_dot: Set directory modification time (using SetModTime)
+2026/08/04 17:23:55 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_0_right_0_0_0/right_ver_blue.png: Copied (new)
+2026/08/04 17:23:57 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_6_right_0_0_6/right_ver_green.png: Copied (new)
+2026/08/04 17:23:58 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_3_right_0_0_3/right_ver_green.png: Copied (new)
+2026/08/04 17:23:58 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_6_right_0_0_6/right_ver_red.png: Copied (new)
+2026/08/04 17:24:01 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_3_right_0_0_3/right_ver_red.png: Copied (new)
+2026/08/04 17:24:03 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_3_right_0_0_3/right_ver_blue.png: Copied (new)
+2026/08/04 17:24:34 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/image_capture_metadata.yaml: Copied (new)
+2026/08/04 17:24:36 INFO  : DGC/20260804_164149/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_blue.png: Copied (new)
+2026/08/04 17:24:39 INFO  : DGC/20260804_164149/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_green.png: Copied (new)
+2026/08/04 17:24:41 INFO  : DGC/20260804_164149.zip: Copied (new)
+2026/08/04 17:24:42 INFO  : DGC/20260804_164149/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_red.png: Copied (new)
+2026/08/04 17:24:46 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/blue/right/right_white.png: Copied (new)
+2026/08/04 17:24:47 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/blue/right/right_white_sRGB.png: Copied (new)
+2026/08/04 17:24:58 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/blue/right/right_white_XYZ.tiff: Copied (new)
+2026/08/04 17:25:01 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/red/right/right_white_sRGB.png: Copied (new)
+2026/08/04 17:27:51 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:27:52 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:27:53 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 17:27:53 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:27:57 INFO  : DGC/20260804_164149/verification_captures: Set directory modification time (using SetModTime)
+2026/08/04 17:27:57 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity: Set directory modification time (using SetModTime)
+2026/08/04 17:27:58 INFO  : DGC/20260804_164149/verification_captures/nominal: Set directory modification time (using SetModTime)
+2026/08/04 17:27:59 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected: Set directory modification time (using SetModTime)
+2026/08/04 17:28:40 INFO  : DGC/20260804_164149/verification_captures/nominal/left_-3_0_0_right_3_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:28:40 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/blue: Set directory modification time (using SetModTime)
+2026/08/04 17:28:42 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/green: Set directory modification time (using SetModTime)
+2026/08/04 17:28:42 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_0_right_0_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:28:43 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/red: Set directory modification time (using SetModTime)
+2026/08/04 17:28:43 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_3_right_0_0_3: Set directory modification time (using SetModTime)
+2026/08/04 17:28:44 INFO  : DGC/20260804_164149/verification_captures/nominal/left_0_0_6_right_0_0_6: Set directory modification time (using SetModTime)
+2026/08/04 17:28:45 INFO  : DGC/20260804_164149/verification_captures/nominal/left_2_0_0_right_-2_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:29:29 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/green/right: Set directory modification time (using SetModTime)
+2026/08/04 17:29:29 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/red/right: Set directory modification time (using SetModTime)
+2026/08/04 17:29:29 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected/blue/right: Set directory modification time (using SetModTime)
+2026/08/04 17:29:31 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/uniformity_map/right/closed_loop_linear_gamma/white.png: Copied (new)
+2026/08/04 17:29:35 INFO  : DGC/20260804_164149/calibration_captures/left_2_0_0_right_-2_0_0/right_grid_blue.png: Copied (new)
+2026/08/04 17:29:39 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/red/right/right_coarse.png: Copied (new)
+2026/08/04 17:29:42 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/red/right/right_l1_fine.png: Copied (new)
+2026/08/04 17:29:43 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/red/right/right_l2_fine.png: Copied (new)
+2026/08/04 17:29:49 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/green/right/right_coarse.png: Copied (new)
+2026/08/04 17:29:51 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/green/right/right_l1_fine.png: Copied (new)
+2026/08/04 17:29:52 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right/debug/coarse_green/debug_image.png: Copied (new)
+2026/08/04 17:29:54 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/green/right/right_l2_fine.png: Copied (new)
+2026/08/04 17:29:57 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right/debug/coarse_blue/debug_image.png: Copied (new)
+2026/08/04 17:29:59 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right/debug/coarse_red/debug_image.png: Copied (new)
+2026/08/04 17:30:03 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right/debug/find_drawable_region/1_threshold.png: Copied (new)
+2026/08/04 17:32:25 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:32:26 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:32:27 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 17:32:29 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:32:44 INFO  : DCC/20260804_164149/dcc_config.json: Copied (new)
+2026/08/04 17:32:46 INFO  : DCC/20260804_164149/dcc_uniformity.zip: Copied (new)
+2026/08/04 17:32:46 INFO  : DGC/20260804_164149/station_id.yaml: Copied (new)
+2026/08/04 17:32:46 INFO  : DGC/20260804_164149/nominal_workflow_calibration_capture_set.yaml: Copied (new)
+2026/08/04 17:32:48 INFO  : DGC/20260804_164149/stereo.textproto: Copied (new)
+2026/08/04 17:32:48 INFO  : DGC/20260804_164149/nominal_workflow_calibration/calibration_specs.yaml: Copied (new)
+2026/08/04 17:32:48 INFO  : DGC/20260804_164149/nominal_workflow_calibration/display_geometry_calibrator.log: Copied (new)
+2026/08/04 17:32:53 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/virtual_image_position.yaml: Copied (new)
+2026/08/04 17:32:54 INFO  : DGC/20260804_164149/nominal_workflow_calibration/display_profile.textproto: Copied (new)
+2026/08/04 17:32:58 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_green_depth_grid.csv: Copied (new)
+2026/08/04 17:32:58 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_red_depth_grid.csv: Copied (new)
+2026/08/04 17:32:58 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_green_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 17:32:59 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_blue_depth_grid.csv: Copied (new)
+2026/08/04 17:32:59 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_blue_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 17:33:03 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug/side_right_channel_red_display_pixel_depth_grid.csv: Copied (new)
+2026/08/04 17:33:35 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/dataset.yaml: Copied (new)
+2026/08/04 17:33:36 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry/image_capture_metadata.yaml: Copied (new)
+2026/08/04 17:33:39 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/right_correction_map.tiff: Copied (new)
+2026/08/04 17:33:41 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/feature_detection.log: Copied (new)
+2026/08/04 17:33:41 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration/device_feature_set.textproto: Copied (new)
+2026/08/04 17:33:43 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity/right_correction_map.png: Copied (new)
+2026/08/04 17:33:43 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/left_0_0_0_right_0_0_0/undistorted_blue_calibu_4512x4512_80_80_11_16_1.png: Copied (new)
+2026/08/04 17:33:48 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/left_0_0_0_right_0_0_0/undistorted_green_calibu_4512x4512_80_80_11_16_1.png: Copied (new)
+2026/08/04 17:33:48 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/left_0_0_0_right_0_0_0/undistorted_red_calibu_4512x4512_80_80_11_16_1.png: Copied (new)
+2026/08/04 17:33:55 INFO  : DGC/20260804_164149/calibration_captures/left_0_0_0_right_0_0_0/right_grid_green.png: Copied (new)
+2026/08/04 17:33:56 INFO  : DGC/20260804_164149/calibration_captures/left_0_0_0_right_0_0_0/right_grid_blue.png: Copied (new)
+2026/08/04 17:33:58 INFO  : DGC/20260804_164149.zip: Copied (new)
+2026/08/04 17:36:42 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:36:43 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:36:44 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 17:36:44 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 17:36:46 INFO  : DCC: Set directory modification time (using SetModTime)
+2026/08/04 17:36:48 INFO  : DGC: Set directory modification time (using SetModTime)
+2026/08/04 17:36:49 INFO  : DGC/20260804_164149: Set directory modification time (using SetModTime)
+2026/08/04 17:36:50 INFO  : DCC/20260804_164149: Set directory modification time (using SetModTime)
+2026/08/04 17:36:51 INFO  : DGC/20260804_164149/calibration_captures: Set directory modification time (using SetModTime)
+2026/08/04 17:36:53 INFO  : DGC/20260804_164149/feature_detection: Set directory modification time (using SetModTime)
+2026/08/04 17:36:53 INFO  : DCC/20260804_164149/high_freq_mura_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:36:54 INFO  : DCC/20260804_164149/high_freq_mura_capture: Set directory modification time (using SetModTime)
+2026/08/04 17:36:55 INFO  : DGC/20260804_164149/nominal_workflow_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:36:56 INFO  : DGC/20260804_164149/verification_assets: Set directory modification time (using SetModTime)
+2026/08/04 17:36:56 INFO  : DCC/20260804_164149/high_freq_mura_capture/geometry: Set directory modification time (using SetModTime)
+2026/08/04 17:36:57 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity: Set directory modification time (using SetModTime)
+2026/08/04 17:36:57 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry: Set directory modification time (using SetModTime)
+2026/08/04 17:36:58 INFO  : DGC/20260804_164149/calibration_captures/left_0_0_0_right_0_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:36:58 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:36:58 INFO  : DGC/20260804_164149/feature_detection/nominal_workflow_calibration: Set directory modification time (using SetModTime)
+2026/08/04 17:36:58 INFO  : DGC/20260804_164149/nominal_workflow_calibration/debug: Set directory modification time (using SetModTime)
+2026/08/04 17:36:58 INFO  : DCC/20260804_164149/high_freq_mura_calibration/uniformity: Set directory modification time (using SetModTime)
+2026/08/04 17:37:45 INFO  : DGC/20260804_164149/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_green.png: Copied (new)
+2026/08/04 17:37:55 INFO  : DGC/20260804_164149/verification_assets/nominal_workflow_calibration/left_0_0_0_right_0_0_0: Set directory modification time (using SetModTime)
+2026/08/04 17:37:55 INFO  : DCC/20260804_164149/high_freq_mura_calibration/geometry/right: Set directory modification time (using SetModTime)
+2026/08/04 17:37:56 INFO  : DCC/20260804_164149/high_freq_mura_capture/uniformity/uncorrected: Set directory modification time (using SetModTime)
+2026/08/04 17:38:02 INFO  : DGC/20260804_164149/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_red.png: Copied (new)
+2026/08/04 17:38:03 INFO  : DGC/20260804_164149/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_blue.png: Copied (new)
+2026/08/04 18:47:51 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 18:47:52 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 18:47:53 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 18:47:56 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 19:41:59 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 19:42:00 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 19:42:35 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 19:42:38 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 19:42:43 INFO  : Robocal/log_file_20260804_184712.log: Copied (new)
+2026/08/04 20:51:30 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:31 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:32 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 20:51:32 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:35 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:38 INFO  : Google drive root 'S6A67340005M/Robocal/DGC': Making directory
+2026/08/04 20:51:40 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:42 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:44 INFO  : Google drive root 'S6A67340005M/Robocal/DGC': Server side directory move failed - fallback to file moves: can't copy directory - destination already exists
+2026/08/04 20:51:44 INFO  : There was nothing to transfer
+2026/08/04 20:51:44 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.4s
+
+2026/08/04 20:51:44 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:45 INFO  : Google drive root 'S6A67340005M/DGC': Removing directory
+2026/08/04 20:51:47 ERROR : Attempt 1/3 failed with 1 errors and: googleapi: Error 403: The user does not have sufficient permissions for this file., insufficientFilePermissions
+2026/08/04 20:51:47 INFO  : Google drive root 'S6A67340005M/DGC': Removing directory
+2026/08/04 20:51:49 ERROR : Attempt 2/3 failed with 1 errors and: googleapi: Error 403: The user does not have sufficient permissions for this file., insufficientFilePermissions
+2026/08/04 20:51:49 INFO  : Google drive root 'S6A67340005M/DGC': Removing directory
+2026/08/04 20:51:50 ERROR : Attempt 3/3 failed with 1 errors and: googleapi: Error 403: The user does not have sufficient permissions for this file., insufficientFilePermissions
+2026/08/04 20:51:50 NOTICE: Failed to rmdir: googleapi: Error 403: The user does not have sufficient permissions for this file., insufficientFilePermissions
+2026/08/04 20:51:50 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:55 ERROR : error listing: directory not found
+2026/08/04 20:51:55 NOTICE: Failed to lsf with 2 errors: last error was: error in ListJSON: directory not found
+2026/08/04 20:51:55 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 20:51:57 INFO  : Robocal: Set directory modification time (using SetModTime)
+2026/08/04 20:52:01 INFO  : Robocal/log_file_20260804_205037.log: Copied (new)
+2026/08/04 20:52:35 INFO  : Robocal: Set directory modification time (using SetModTime)
+2026/08/04 20:52:35 INFO  : 
+Transferred:   	   25.254 KiB / 25.254 KiB, 100%, 12.625 KiB/s, ETA 0s
+Checks:                 0 / 0, -, Listed 6
+Transferred:            1 / 1, 100%
+Elapsed time:        39.7s
+
+2026/08/04 21:10:41 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 21:10:42 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 21:10:43 INFO  : Google drive root 'S6A67340005M': Making directory
+2026/08/04 21:10:49 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 21:10:52 ERROR : error listing: directory not found
+2026/08/04 21:10:52 NOTICE: Failed to lsf with 2 errors: last error was: error in ListJSON: directory not found
+2026/08/04 21:10:52 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 21:10:55 ERROR : error listing: directory not found
+2026/08/04 21:10:55 NOTICE: Failed to lsf with 2 errors: last error was: error in ListJSON: directory not found
+2026/08/04 21:10:55 NOTICE: gdrive{5SXnH}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/04 21:11:47 INFO  : Robocal/DGC/20260804_210056/stereo.textproto: Copied (new)
+2026/08/04 21:11:48 INFO  : Robocal/DGC/20260804_210056/station_id.yaml: Copied (new)
+2026/08/04 21:11:48 INFO  : Robocal/DGC/20260804_210056/nominal_workflow_calibration_capture_set.yaml: Copied (new)
+2026/08/04 21:11:53 INFO  : Robocal/log_file_20260804_205037.log: Copied (new)
+2026/08/04 21:11:53 INFO  : Robocal/log_file_20260804_210056.log: Copied (new)
+2026/08/04 21:11:58 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_0_0_0_right_0_0_0/right_ver_blue.png: Copied (new)
+2026/08/04 21:11:59 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_0_0_0_right_0_0_0/right_ver_green.png: Copied (new)
+2026/08/04 21:12:01 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_0_0_3_right_0_0_3/right_ver_green.png: Copied (new)
+2026/08/04 21:12:03 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_0_0_3_right_0_0_3/right_ver_blue.png: Copied (new)
+2026/08/04 21:12:08 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_0_0_0_right_0_0_0/right_ver_red.png: Copied (new)
+2026/08/04 21:12:26 INFO  : Robocal/DGC/20260804_210056.zip: Copied (new)
+2026/08/04 21:12:30 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_2_0_0_right_-2_0_0/right_ver_blue.png: Copied (new)
+2026/08/04 21:12:35 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_2_0_0_right_-2_0_0/right_ver_red.png: Copied (new)
+2026/08/04 21:12:37 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_2_0_0_right_-2_0_0/right_ver_green.png: Copied (new)
+2026/08/04 21:12:37 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_blue.png: Copied (new)
+2026/08/04 21:12:38 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_green.png: Copied (new)
+2026/08/04 21:12:42 INFO  : Robocal/DGC/20260804_210056/verification_captures/nominal/left_-3_0_0_right_3_0_0/right_ver_red.png: Copied (new)
+2026/08/04 21:12:44 INFO  : Robocal/DGC/20260804_210056/nominal_workflow_calibration/display_profile.textproto: Copied (new)
+2026/08/04 21:12:44 INFO  : Robocal/DGC/20260804_210056/nominal_workflow_calibration/calibration_specs.yaml: Copied (new)
+2026/08/04 21:12:44 INFO  : Robocal/DGC/20260804_210056/nominal_workflow_calibration/display_geometry_calibrator.log: Copied (new)
+2026/08/04 21:12:49 INFO  : Robocal/DGC/20260804_210056/feature_detection/nominal_workflow_calibration/device_feature_set.textproto: Copied (new)
+2026/08/04 21:12:57 INFO  : Robocal/DGC/20260804_210056/feature_detection/nominal_workflow_calibration/feature_detection.log: Copied (new)
+2026/08/04 21:15:54 INFO  : Robocal/DGC/20260804_210056/calibration_captures/left_0_0_0_right_0_0_0/right_grid_blue.png: Copied (new)
+2026/08/04 21:15:54 INFO  : Robocal/DGC/20260804_210056/calibration_captures/left_0_0_0_right_0_0_0/right_grid_green.png: Copied (new)
+2026/08/04 21:15:56 INFO  : Robocal/DGC/20260804_210056/device_to_station_extrinsic_calibration/station_camera_captures/left_0_0_0_right_0_0_0/right_station.png: Copied (new)
+2026/08/04 21:16:03 INFO  : Robocal/DGC/20260804_210056/calibration_captures/left_2_0_0_right_-2_0_0/right_grid_blue.png: Copied (new)

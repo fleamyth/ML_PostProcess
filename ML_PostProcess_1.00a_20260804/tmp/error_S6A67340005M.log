@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "c:\program files\google\robocal\pre_process.exe.runfiles\_main\dgcc_standalone_station\dcc_station.py", line 424, in pre_process
+    self.color_cal.pre_process()
+  File "c:\program files\google\robocal\pre_process.exe.runfiles\robolibs\plugin\api\apply_color_cal_api.py", line 207, in pre_process
+    self._impl.pre_process(self._do_not_modify_persistent_calibration)
+  File "C:\Program Files\Google\Robocal\pre_process.exe.runfiles\_main\dgcc_standalone_station\config\apply_color_cal_plugins\raxium\raxium.py", line 990, in pre_process
+    raise RuntimeError(
+RuntimeError: Robocal or MLO calibration is detected at /mnt/vendor/persist/firmware/dsi_calib_data! Replace it with Raxium factory DSI file and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\program files\google\robocal\pre_process.exe.runfiles\_main\src\async_processing\preparer.py", line 294, in _prepare
+    await new_station.pre_process(self.adb_serial)
+  File "c:\program files\google\robocal\pre_process.exe.runfiles\_main\dgcc_standalone_station\dcc_station.py", line 432, in pre_process
+    raise robocal_errors.DCCDeviceError(
+src.utility.robocal_errors.DCCDeviceError: DCCDeviceError (Error 702): Error preparing display, received error: Robocal or MLO calibration is detected at /mnt/vendor/persist/firmware/dsi_calib_data! Replace it with Raxium factory DSI file and try again.[ERROR_CODE_702]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\program files\google\robocal\pre_process.exe.runfiles\_main\src\async_processing\preparer.py", line 202, in do_work
+    await asyncio.gather(
+  File "c:\program files\google\robocal\pre_process.exe.runfiles\_main\src\async_processing\preparer.py", line 304, in _prepare
+    raise error_type(e)
+src.utility.robocal_errors.DGCCFailureError: DGCCFailureError (Error 203): DCCDeviceError (Error 702): Error preparing display, received error: Robocal or MLO calibration is detected at /mnt/vendor/persist/firmware/dsi_calib_data! Replace it with Raxium factory DSI file and try again.[ERROR_CODE_702]
+
+
+DGCCFailureError (Error 203): DCCDeviceError (Error 702): Error preparing display, received error: Robocal or MLO calibration is detected at /mnt/vendor/persist/firmware/dsi_calib_data! Replace it with Raxium factory DSI file and try again.[ERROR_CODE_702]

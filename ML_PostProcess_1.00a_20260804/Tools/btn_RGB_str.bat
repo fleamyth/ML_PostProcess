@@ -1,0 +1,37 @@
+@echo off
+cd %~dp0..
+
+:START
+DEl RED.flg
+DEL BLUE.flg
+DEL GREEN.flg
+DEL NODIS.flg
+DEL Timeout.flg
+
+tools\btn-diag.exe /btns tools\btn_rgb.ini -time 180
+Set EXITCODE=%ERRORLEVEL%
+IF %EXITCODE% EQU 1 GOTO RED
+IF %EXITCODE% EQU 2 GOTO GREEN
+IF %EXITCODE% EQU 3 GOTO BLUE
+IF %EXITCODE% EQU 4 GOTO NODIS
+IF %EXITCODE% EQU 254 GOTO Timeout
+
+:RED
+echo RED>RED.flg
+EXIT %EXITCODE%
+
+:GREEN
+echo GREEN>GREEN.flg
+EXIT %EXITCODE%
+
+:BLUE
+echo BLUE>BLUE.flg
+EXIT %EXITCODE%
+
+:NODIS
+echo NODIS>NODIS.flg
+EXIT %EXITCODE%
+
+:Timeout
+echo Timeout>Timeout.flg
+EXIT %EXITCODE%

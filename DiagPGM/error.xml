@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ErrorTransform>
+	<Replace Source="0" To="0" PEGA="" String="Success" />
+	<Replace Source="7B" To="8F000020" PEGA="AKFM9I" String="!- File Execute Error -! The filename / directory name / volume label syntax is incorrect." />
+	<Replace Source="C000013A" To="8F000022" PEGA="AKFFL7" String="!- File Execute Error -! The application terminated as a result of a CTRL+C or CTRL+Break or closing command prompt window." />
+	<Replace Source="42B" To="8F000021" PEGA="AKFFL6" String="!- File Execute Error -! The application is closed by someone from system tray." />
+</ErrorTransform>

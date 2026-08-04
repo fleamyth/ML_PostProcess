@@ -1,0 +1,2 @@
+ToolPath=D:\Desktop\Document\TBT01\软件\TBT01Tester_v1.0.0.16_Beta7_20250103
+P1=

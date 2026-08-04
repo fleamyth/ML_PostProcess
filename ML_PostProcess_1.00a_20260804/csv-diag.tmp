@@ -1,0 +1,7 @@
+TSRID,SerialNumber,PartNumber,Operation,TesterName,TestName,TestVariation,ErrorCode,Operator,StartDateTime,EndDateTime,ProductionTest,TestSuiteName,ErrorDescription,MeasurementName,Value,Units,LowerLimit,UpperLimit,PegaCode,TicketID
+202608040205515,S6A673400064,,PreProcess,PRCAL-PRE01,Boot Status Check,ML,0,S19170077,08/04/2026 10:05:51 AM,08/04/2026 10:05:52 AM,0,ML_PreProcess_1.00a_20260728,Success,,,,,,,Debug
+202608040205515,S6A673400064,,PreProcess,PRCAL-PRE01,Dsi_restore_factory_calibration,ML,0,S19170077,08/04/2026 10:05:52 AM,08/04/2026 10:06:33 AM,0,ML_PreProcess_1.00a_20260728,Success,,,,,,,Debug
+202608040205515,S6A673400064,,PreProcess,PRCAL-PRE01,Dsi_restore_factory_calibration,Retry Times,0,S19170077,08/04/2026 10:05:52 AM,08/04/2026 10:06:33 AM,0,ML_PreProcess_1.00a_20260728,,Retry Times,0,Times,0,1,,Debug
+202608040205515,S6A673400064,,PreProcess,PRCAL-PRE01,Pre_Process,ML,0,S19170077,08/04/2026 10:06:33 AM,08/04/2026 10:08:24 AM,0,ML_PreProcess_1.00a_20260728,Success,,,,,,,Debug
+202608040205515,S6A673400064,,PreProcess,PRCAL-PRE01,Pre_Process,Retry Times,0,S19170077,08/04/2026 10:06:33 AM,08/04/2026 10:08:24 AM,0,ML_PreProcess_1.00a_20260728,,Retry Times,0,Times,0,1,,Debug
+202608040205515,S6A673400064,,PreProcess,PRCAL-PRE01,TcsTestSuiteDuration,ML,0,S19170077,08/04/2026 10:08:24 AM,08/04/2026 10:08:24 AM,0,ML_PreProcess_1.00a_20260728,Success,Duration,153721.0243,ms,,,,Debug

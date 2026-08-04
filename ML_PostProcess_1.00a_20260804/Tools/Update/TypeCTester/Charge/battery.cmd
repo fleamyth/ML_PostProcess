@@ -1,0 +1,1 @@
+battery.exe -ix >battery.log

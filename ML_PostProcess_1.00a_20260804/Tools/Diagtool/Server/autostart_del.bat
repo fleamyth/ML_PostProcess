@@ -1,0 +1,1 @@
+del "C:\Users\MTEAdmin\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\Server.bat - Shortcut.lnk"

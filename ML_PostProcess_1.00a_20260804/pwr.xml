@@ -1,0 +1,1697 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Diagnostic Project="Chariot_FCT" Station="PCBA_FCT" Version="1.04a_beta" ProductionTest="True">
+	<Test Name="IO_Port_Initial" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="0" Wait="0" Retry="0" File="BSC\IO_Initial.bat" Action="" ShowTerminal="False" FailStop="True" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Group Name="PowerUp" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Test Name="BSC Initial" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Initial.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="0" PEGA="" String="Success" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Power Supply Input ON" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.3 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SL1_PWR_AC_EN" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.1 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="TBD PWR" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="3" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.4 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Test Name="Press POWER Button" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.6 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="0" PEGA="" String="Success" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Release POWER Button" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="2.0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.6 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="0" PEGA="" String="Success" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="PWR-Pull CONTROL_SW_1 LOW" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0.2" Timeout="0" Check="True">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.6 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="0" PEGA="" String="Success" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Check PWR_ON_Voltage_+VCORE" Variation="Chariot" MeasureName="PWRON_+VCORE_Voltage" Min="0.55" Max="1.5" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="20" Wait="2" Retry="3" File="Tools\NIControl-diags.exe" Action="-nl /gv 3 0.55 1.5" ShowTerminal="False" FailStop="True" Rebase="False" />
+		<GetValue File="" Row="0" Col="11" Len="7" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F115500" PEGA="AKFV10" String="!-VOLTAGE_TEST-! Measurement +VCORE value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F115501" PEGA="AKFV11" String="!-VOLTAGE_TEST-! Measurement +VCORE value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Boot Status Check_1" Variation="Chariot" Class="BootCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\ping-auto.bat" Action="1 120" ShowTerminal="False" FailStop="True" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="FB" To="8F000005" PEGA="AKFQ63" String="!- Boot_Chk -! DUT can't boot." />
+			<Replace Source="FC" To="8F000024" PEGA="AKSB27" String="!- Boot_Chk -! OS can't start up." />
+			<Replace Source="FD" To="8F000003" PEGA="AKFI19" String="!- LAN_TEST -! Could not ping DUT" />
+			<Replace Source="FF" To="8F000003" PEGA="AKFI19" String="!- LAN_TEST -! Could not ping DUT" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Get MTEOS Version" Variation="Chariot" MeasureName="MTEOS version" Min="" Max="" Unit="" Class="MTEOS Version Check" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\MTEOS.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="mteos.log" Row="2" Col="27" Len="30" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F050102" PEGA="AKFHXA" String="!-MTEOS_Version_Check-! MTEOS Version {value::{Value}} is not matched." />
+			<Replace Source="*" To="*" PEGA="AKFHXA" String="{File:api-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Get KDS Version" Variation="Chariot" MeasureName="KDS version" Min="" Max="" Unit="" Class="KDS Version Check" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="0" Wait="0" Retry="1" File="Tools\software-diag.exe" Action="-vmis -timeout 60 /app" ShowTerminal="False" FailStop="True" Rebase="False" />
+		<GetValue File="" Row="1" Col="13" Len="15" />
+		<ErrorTransform>
+			<Replace Source="1" To="0" PEGA="" String="Success" />
+			<Replace Source="FF" To="8F000004" PEGA="AKFQ60" String="!- KDS fail -! Could not update KDS" />
+			<Replace Source="*" To="*" PEGA="AKFQ60" String="{File:Software-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Group Name="FWVersion" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Test Name="UEFI Version" Variation="Chariot" MeasureName="UEFI_Ver" Min="" Max="" Unit="" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\FW.bat" Action="UEFI" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="UEFI.dat" Row="1" Col="0" Len="8" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F090603" PEGA="AKFV4N" String="!-VERSION_CHECK-! UEFI version {value::{Value}} is not match" />
+				<Replace Source="*" To="*" PEGA="AKFV4N" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SAM Version" Variation="Chariot" MeasureName="SAM_Ver" Min="" Max="" Unit="" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\FW.bat" Action="SAM" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SAM.dat" Row="1" Col="0" Len="8" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F090604" PEGA="AKFV4P" String="!-VERSION_CHECK-! SAM version {value::{Value}} is not match" />
+				<Replace Source="*" To="*" PEGA="AKFV4P" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="EC Version" Variation="Chariot" MeasureName="EC_Ver" Min="" Max="" Unit="" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\FW.bat" Action="EC" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="EC.dat" Row="1" Col="0" Len="8" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F090605" PEGA="AKFV4Q" String="!-VERSION_CHECK-! EC version {value::{Value}} is not match" />
+				<Replace Source="*" To="*" PEGA="AKFV4Q" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Test Name="Boot Status Check_2" Variation="Chariot" Class="BootCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="30.0" Wait="0" Retry="0" File="Tools\ping-auto.bat" Action="2 120" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="FB" To="8F000005" PEGA="AKFQ63" String="!- Boot_Chk -! DUT can't boot." />
+			<Replace Source="FC" To="8F000024" PEGA="AKSB27" String="!- Boot_Chk -! OS can't start up." />
+			<Replace Source="FD" To="8F000003" PEGA="AKFI19" String="!- LAN_TEST -! Could not ping DUT" />
+			<Replace Source="FF" To="8F000003" PEGA="AKFI19" String="!- LAN_TEST -! Could not ping DUT" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Boot Status Check_3" Variation="Chariot" Class="BootCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="30.0" Wait="0" Retry="0" File="Tools\ping-auto.bat" Action="3 120" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="FB" To="8F000005" PEGA="AKFQ63" String="!- Boot_Chk -! DUT can't boot." />
+			<Replace Source="FC" To="8F000024" PEGA="AKSB27" String="!- Boot_Chk -! OS can't start up." />
+			<Replace Source="FD" To="8F000003" PEGA="AKFI19" String="!- LAN_TEST -! Could not ping DUT" />
+			<Replace Source="FF" To="8F000003" PEGA="AKFI19" String="!- LAN_TEST -! Could not ping DUT" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Switch to S5 Mode_Power Off_" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\PwrStateCtrl-diag.exe" Action="/poweroff" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F000017" PEGA="AKFBQV" String="!- POWEROFF -! Fail to shutdown the DUT by software command" />
+			<Replace Source="*" To="*" PEGA="AKFBQV" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Check S5_Power Off Status_" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Jig_PowerOff.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="*" To="0" PEGA="" String="Success" />
+		</ErrorTransform>
+	</Test>
+	<Group Name="SL_RID_ADC" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Open Tracing" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="3" File="Tools\RID_Tracing.bat" Action="ON" ShowTerminal="True" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="FA" To="8F000036" PEGA="AKFV5P" String="!-Serial Port-! Executed Serial Port Command Error." />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Get RID1 Value" Variation="Chariot" MeasureName="RID1" Min="523" Max="599" Unit="" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\RID_Value.bat" Action="1 523 599" ShowTerminal="True" FailStop="False" Rebase="False" />
+			<GetValue File="update.txt" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115578" PEGA="AKFV5R" String="!-ADC Reading-! Measurement ADC Reading of RID1 7.87K value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115579" PEGA="AKFV5S" String="!-ADC Reading-! Measurement ADC Reading of RID1 7.87K value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FA" To="8F000036" PEGA="AKFV5P" String="!-Serial Port-! Executed Serial Port Command Error." />
+				<Replace Source="FB" To="8F11557E" PEGA="AKFV5X" String="!-ADC Reading-! Measurement ADC Reading fail." />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Switch to RID2" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="1" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\RID_Switch.bat" Action="2" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Get RID2 Value" Variation="Chariot" MeasureName="RID2" Min="752" Max="826" Unit="" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\RID_Value.bat" Action="2 752 826" ShowTerminal="True" FailStop="False" Rebase="False" />
+			<GetValue File="update.txt" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11557A" PEGA="AKFV5T" String="!-ADC Reading-! Measurement ADC Reading of RID2 2.87K value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11557B" PEGA="AKFV5U" String="!-ADC Reading-! Measurement ADC Reading of RID2 2.87K value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FA" To="8F000036" PEGA="AKFV5P" String="!-Serial Port-! Executed Serial Port Command Error." />
+				<Replace Source="FB" To="8F11557E" PEGA="AKFV5X" String="!-ADC Reading-! Measurement ADC Reading fail." />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Switch to RID3" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="1" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\RID_Switch.bat" Action="3" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Get RID3 Value" Variation="Chariot" MeasureName="RID3" Min="372" Max="447" Unit="" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\RID_Value.bat" Action="3 372 447" ShowTerminal="True" FailStop="False" Rebase="False" />
+			<GetValue File="update.txt" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11557C" PEGA="AKFV5V" String="!-ADC Reading-! Measurement ADC Reading of RID3 14.3K value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11557D" PEGA="AKFV5W" String="!-ADC Reading-! Measurement ADC Reading of RID3 14.3K value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FA" To="8F000036" PEGA="AKFV5P" String="!-Serial Port-! Executed Serial Port Command Error." />
+				<Replace Source="FB" To="8F11557E" PEGA="AKFV5X" String="!-ADC Reading-! Measurement ADC Reading fail." />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Close Tracing" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\RID_Tracing.bat" Action="OFF" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="FA" To="8F000036" PEGA="AKFV5P" String="!-Serial Port-! Executed Serial Port Command Error." />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="Battery Charge" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="BSC Initial for Pre-Charge" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Initial.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="0" PEGA="" String="Success" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Switch to BSC Pre-Charge Mode" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Pre-Charge.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="0" PEGA="" String="Success" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BSC Pre-Charge_Current" Variation="Chariot" MeasureName="Pre-Charge_Current" Min="160" Max="350" Unit="mA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="3.0" Wait="0" Retry="20" File="Tools\NIControl-diags.exe" Action="-nl -mul 100000 /gdv 0 160 350" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="1" Col="9" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115566" PEGA="AKFV3Z" String="!-VOLTAGE_TEST-! Measurement Pre-Charge_Current value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115567" PEGA="AKFV4A" String="!-VOLTAGE_TEST-! Measurement Pre-Charge_Current value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BSC Pre-Charge_Voltage" Variation="Chariot" MeasureName="Pre-Charge_Voltage" Min="5.2" Max="6" Unit="Volt" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 1 5.2 6" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115564" PEGA="AKFV3X" String="!-VOLTAGE_TEST-! Measurement Pre-Charge_Voltage value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115565" PEGA="AKFV3Y" String="!-VOLTAGE_TEST-! Measurement Pre-Charge_Voltage value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BSC Initial for Fast-Charge" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Initial.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="0" PEGA="" String="Success" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Switch to BSC Fast-Charge Mode" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Fast-Charge.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="0" PEGA="" String="Success" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BSC Fast-Charge_Current" Variation="Chariot" MeasureName="Fast-Charge_Current" Min="900" Max="1320" Unit="mA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="3.0" Wait="0" Retry="20" File="Tools\NIControl-diags.exe" Action="-nl -mul 100000 /gdv 0 900 1320" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="1" Col="9" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115562" PEGA="AKFV3V" String="!-VOLTAGE_TEST-! Measurement Fast-Charge_Current value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115563" PEGA="AKFV3W" String="!-VOLTAGE_TEST-! Measurement Fast-Charge_Current value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BSC Fast-Charge_Voltage" Variation="Chariot" MeasureName="Fast-Charge_Voltage" Min="6" Max="8" Unit="Volt" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 1 6 8" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115560" PEGA="AKFV3T" String="!-VOLTAGE_TEST-! Measurement Fast-Charge_Voltage value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115561" PEGA="AKFV3U" String="!-VOLTAGE_TEST-! Measurement Fast-Charge_Voltage value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BSC Initial after Charge" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Initial.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="0" PEGA="" String="Success" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="DevicesCheck" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Check Device Status" Variation="Chariot" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\DeviceCheck.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F140101" PEGA="AKFM9L" String="!- DEVICE_CHECK -! Device Driver check fail." />
+				<Replace Source="FF" To="8F140001" PEGA="AKFM9L" String="!- DEVICE_CHECK -! Device Driver check fail." />
+				<Replace Source="*" To="*" PEGA="AKFM9L" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check SSD Device Status" Variation="Chariot" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\HWInfo-diag.exe" Action="/D &quot;SCSI\Disk&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F140101" PEGA="AKFM9L" String="!- DEVICE_CHECK -! Device Driver check fail." />
+				<Replace Source="FF" To="8F140001" PEGA="AKFM9L" String="!- DEVICE_CHECK -! Device Driver check fail." />
+				<Replace Source="*" To="*" PEGA="AKFM9L" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check RF_Marvell Kingfisher MFG" Variation="Chariot" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\HWInfo-diag.exe" Action="/D &quot;Net;PCI\VEN_11AB&amp;DEV_2B38&amp;SUBSYS_00000000&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F060007" PEGA="AKFBP5" String="!- DRIVER_STATUS_CHECK -! WIFI Driver status check fail" />
+				<Replace Source="FF" To="8F060007" PEGA="AKFBP5" String="!- DRIVER_STATUS_CHECK -! WIFI Driver status check fail" />
+				<Replace Source="*" To="*" PEGA="AKFBP4" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check Marvell AVASTAR Bluetooth" Variation="Chariot" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\HWInfo-diag.exe" Action="/D &quot;Bluetooth;USB\VID_1286&amp;PID_2046&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F060006" PEGA="AKFBP4" String="!- DRIVER_STATUS_CHECK -! Bluetooth Driver status check fail" />
+				<Replace Source="FF" To="8F060006" PEGA="AKFBP4" String="!- DRIVER_STATUS_CHECK -! Bluetooth Driver status check fail" />
+				<Replace Source="*" To="*" PEGA="AKFBP4" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check Touch Device ID" Variation="Chariot" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\HWInfo-diag.exe" Action="/D &quot;Intel(R) Precise Touch Device&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F060010" PEGA="AKFL94" String="!- DRIVER_STATUS_CHECK -! Touch Driver status check fail" />
+				<Replace Source="FF" To="8F060010" PEGA="AKFL94" String="!- DRIVER_STATUS_CHECK -! Touch Driver status check fail" />
+				<Replace Source="*" To="*" PEGA="AKFL94" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Test Name="CPU Name" Variation="Chariot" MeasureName="CPU Name" Min="" Max="" Unit="" Class="CPU" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\CPU-diag.exe" Action="/Name &quot;{File:CPUName.dat}&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="6" Len="40" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F020002" PEGA="AKFBRE" String="!-CPU_NAME_CHECK-! CPU name value {value::{Value}} is not matched" />
+			<Replace Source="FF" To="8F020002" PEGA="AKFBRE" String="!-CPU_NAME_CHECK-! CPU name value {value::{Value}} is not matched" />
+			<Replace Source="*" To="*" PEGA="AKFBRE" String="{File:CPU-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="CPU Frequency" Variation="Chariot" MeasureName="CPU Frequency" Min="{File:CPU_FRQ_Min.dat}" Max="{File:CPU_FRQ_Max.dat}" Unit="Hz" Class="CPU" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\CPU-diag.exe" Action="/MSPD {File:CPU_FRQ_Min.dat} {File:CPU_FRQ_Max.dat}" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="2" Col="15" Len="5" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F020105" PEGA="AKFBRF" String="!-CPU_FREQ_CHECK-! Measurement CPU frequency value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F020106" PEGA="AKFBRG" String="!-CPU_FREQ_CHECK-! Measurement CPU frequency value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F020103" PEGA="AKFC04" String="!- CPU_FREQ_CHECK -! Could not get CPU frequency" />
+			<Replace Source="*" To="*" PEGA="AKFBRE" String="{File:CPU-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Memory Size Check" Variation="Chariot" MeasureName="Memory_Size" Min="{File:Mem_Min.dat}" Max="{File:Mem_Max.dat}" Unit="Bytes" Class="Memory" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Memory-diag.exe" Action="/S {File:Mem_Min.dat} {File:Mem_Max.dat}" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="3" Col="13" Len="13" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F030001" PEGA="AKFD01" String="!- MEM_SIZE_CHECK -! MEM size value {value::{Value}}({Unit}) is lower than limit {limit:{Min}}({Unit})" />
+			<Replace Source="2" To="8F030002" PEGA="AKFD02" String="!- MEM_SIZE_CHECK -! MEM size value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F030003" PEGA="AKFD03" String="!- MEM_SIZE_CHECK -! Could not get MEM Size" />
+			<Replace Source="*" To="*" PEGA="AKFD03" String="{File:Memory-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Memory Manufacturer Check_No0" Variation="Chariot" MeasureName="MemoryID_No0" Min="" Max="" Unit="" Class="Memory" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Memory-diag.exe" Action="-NL -no 0 /M &quot;{File:Mem0_VID.dat}&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="16" Len="8" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F030402" PEGA="AKFHXB" String="!-MEM_VENDOR_CHECK-! Memory Vendor ID {value::{Value}} is not matched." />
+			<Replace Source="FF" To="8F030402" PEGA="AKFHXB" String="!-MEM_VENDOR_CHECK-! Memory Vendor ID {value::{Value}} is not matched." />
+			<Replace Source="*" To="*" PEGA="AKFD07" String="{File:Memory-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Memory Manufacturer Check_No1" Variation="Chariot" MeasureName="MemoryID_No1" Min="" Max="" Unit="" Class="Memory" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Memory-diag.exe" Action="-NL -no 1 /M &quot;{File:Mem1_VID.dat}&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="16" Len="8" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F030402" PEGA="AKFHXB" String="!-MEM_VENDOR_CHECK-! Memory Vendor ID {value::{Value}} is not matched." />
+			<Replace Source="FF" To="8F030402" PEGA="AKFHXB" String="!-MEM_VENDOR_CHECK-! Memory Vendor ID {value::{Value}} is not matched." />
+			<Replace Source="*" To="*" PEGA="AKFD07" String="{File:Memory-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Memory Frequency Check_No1" Variation="Chariot" MeasureName="MemoryFreq_No1" Min="{File:MSPD_1_Min.dat}" Max="{File:MSPD_1_Max.dat}" Unit="Hz" Class="Memory" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Memory-diag.exe" Action="-NL -no 1 /F {File:MSPD_1_Min.dat} {File:MSPD_1_Max.dat}" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="3" Len="7" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F030504" PEGA="AKFBRJ" String="!-MEM_FREQ_CHECK-! Measurement MEM Frequency value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F030505" PEGA="AKFBRK" String="!-MEM_FREQ_CHECK-! Measurement MEM Frequency value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F030503" PEGA="AKFFLG" String="!- MEM_FREQ_CHECK -! Could not get MEM Frequency" />
+			<Replace Source="*" To="*" PEGA="AKFFLG" String="{File:Memory-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Memory Frequency Check_No0" Variation="Chariot" MeasureName="MemoryFreq_No0" Min="{File:MSPD_0_Min.dat}" Max="{File:MSPD_0_Max.dat}" Unit="Hz" Class="Memory" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Memory-diag.exe" Action="-NL -no 0 /F {File:MSPD_0_Min.dat} {File:MSPD_0_Max.dat}" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="3" Len="7" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F030504" PEGA="AKFBRJ" String="!-MEM_FREQ_CHECK-! Measurement MEM Frequency value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F030505" PEGA="AKFBRK" String="!-MEM_FREQ_CHECK-! Measurement MEM Frequency value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F030503" PEGA="AKFFLG" String="!- MEM_FREQ_CHECK -! Could not get MEM Frequency" />
+			<Replace Source="*" To="*" PEGA="AKFFLG" String="{File:Memory-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Memory Data Walking Ones Zeros" Variation="Chariot" Class="Memory" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Memory-diag.exe" Action="-p /t 50" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F020105" PEGA="AKFBRF" String="!-CPU_FREQ_CHECK-! Measurement CPU frequency value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F020106" PEGA="AKFBRG" String="!-CPU_FREQ_CHECK-! Measurement CPU frequency value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F020103" PEGA="AKFC04" String="!- CPU_FREQ_CHECK -! Could not get CPU frequency" />
+			<Replace Source="*" To="*" PEGA="AKFBRE" String="{File:Memory-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="SSD Size Check" Variation="Chariot" MeasureName="SSD_Size" Min="{File:SSD_Min.dat}" Max="{File:SSD_Max.dat}" Unit="Bytes" Class="SSD" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Storage-diag.exe" Action="/Size {File:SSD_Min.dat} {File:SSD_Max.dat}" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="6" Len="15" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F040D02" PEGA="AKFHTS" String="!-SSD_SIZE_CHECK-! Measurement SSD Size value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F040D03" PEGA="AKFHTT" String="!-SSD_SIZE_CHECK-! Measurement SSD Size value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F040D01" PEGA="AKFX12" String="!- SSD_SIZE_CHECK -! SSD Size Check fail" />
+			<Replace Source="*" To="*" PEGA="AKFX12" String="{File:Storage-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="SSD Model Name Check" Variation="Chariot" MeasureName="SSD_MODEL_Name" Min="" Max="" Unit="" Class="SSD" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Storage-diag.exe" Action="/M &quot;{File:SSD_Model.dat}&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="11" Len="30" />
+		<ErrorTransform>
+			<Replace Source="1" To="0" PEGA="" String="Success" />
+			<Replace Source="FF" To="8F040702" PEGA="AKFHTV" String="!-SSD_MODEL_CHECK-! Measurement SSD model name {value::{Value}} check fail." />
+			<Replace Source="*" To="*" PEGA="AKFHTV" String="{File:Storage-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Display Check" Variation="Chariot" Class="Video" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\dp.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="3" To="8F010003" PEGA="AKFB03" String="!- SCREEN_RGB_TEST -! RGB color RED test error" />
+			<Replace Source="4" To="8F010004" PEGA="AKFB04" String="!- SCREEN_RGB_TEST -! RGB color GREEN test error" />
+			<Replace Source="5" To="8F010005" PEGA="AKFB05" String="!- SCREEN_RGB_TEST -! RGB color BLUE test error" />
+			<Replace Source="6" To="8F010001" PEGA="AKFB01" String="!- SCREEN_RGB_TEST -! Operation timeout." />
+			<Replace Source="FF" To="8F010006" PEGA="AKFB08" String="!- SCREEN_RGB_TEST -! RGB test error" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="3D fps Test" Variation="Chariot" Class="Video" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\3d.bat" Action="10 100 4" ShowTerminal="True" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F010501" PEGA="AKFB16" String="!- SCREEN_3D_TEST -! Screen 3D test error" />
+			<Replace Source="2" To="8F010501" PEGA="AKFB16" String="!- SCREEN_3D_TEST -! Screen 3D test error" />
+			<Replace Source="FF" To="8F010501" PEGA="AKFB16" String="!- SCREEN_3D_TEST -! Screen 3D test error" />
+			<Replace Source="*" To="*" PEGA="AKFB16" String="{File:API-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="TPM Self Test" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\TPM.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F040C02" PEGA="AKFHX6" String="!-TPM_CHECK-! Check TPM Manufacturer ID Failed" />
+			<Replace Source="2" To="8F040C03" PEGA="AKFHX7" String="!-TPM_CHECK-! Check TPM Manufacturer Version Failed" />
+			<Replace Source="3" To="8F040C04" PEGA="AKFHX8" String="!-TPM_CHECK-! Check TPM Specification Version Failed" />
+			<Replace Source="4" To="8F040C05" PEGA="AKFHX9" String="!-TPM_CHECK-! TPM Self Test Failed" />
+			<Replace Source="*" To="*" PEGA="AKFG54" String="{File:api-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Group Name="Camera and FAN Enable" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Enable_ON_+5V_FAN_REG" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.0 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Voltage-Pull CONTROL_SW_2 Low" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0.2" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.7 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="LEDOFF_Voltage_LED_W_RT_K" Variation="Chariot" MeasureName="LEDOFF_Voltage_LED_W_RT_K" Min="2" Max="4" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 26 2 4" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115546" PEGA="AKFV80" String="!-VOLTAGE_TEST-! Measurement LED_W_RT_K value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115547" PEGA="AKFV81" String="!-VOLTAGE_TEST-! Measurement LED_W_RT_K value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="LEDOFF_Voltage_LED_W_FT_K" Variation="Chariot" MeasureName="LEDOFF_Voltage_LED_W_FT_K" Min="2" Max="4" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 27 2 4" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115548" PEGA="AKFV82" String="!-VOLTAGE_TEST-! Measurement LED_W_FT_K value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115549" PEGA="AKFV83" String="!-VOLTAGE_TEST-! Measurement LED_W_FT_K value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Enable_CAM_R_PWR_DN_N" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 0.17 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Enable_CAM_F_PWR_DN_N" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 0.18 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="Camera_HINGER_FAN_Voltage_Test" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Voltage_HINGER2_POS_A" Variation="Chariot" MeasureName="Voltage_HINGER2_POS_A" Min="0" Max="3.3" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 25 0 3.3" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11558F" PEGA="AKFVCI" String="!-VOLTAGE_TEST-! Measurement HINGER2_POS_A value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115590" PEGA="AKFVCJ" String="!-VOLTAGE_TEST-! Measurement HINGER2_POS_A value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="FAN_Voltage_CFAN_PWM_R" Variation="Chariot" MeasureName="FAN_Voltage_CFAN_PWM_R" Min="-0.1" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 22 -0.1 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11556A" PEGA="AKFV4D" String="!-VOLTAGE_TEST-! Measurement CFAN_PWM_R_1 value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11556B" PEGA="AKFV4E" String="!-VOLTAGE_TEST-! Measurement CFAN_PWM_R_1 value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="FAN_Voltage_+5V_FAN" Variation="Chariot" MeasureName="FAN_Voltage_+5V_FAN" Min="4.75" Max="5.25" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 23 4.75 5.25" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115540" PEGA="AKFV74" String="!-VOLTAGE_TEST-! Measurement +5V_FAN value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115541" PEGA="AKFV75" String="!-VOLTAGE_TEST-! Measurement +5V_FAN value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="LEDON_Voltage_LED_W_RT_K" Variation="Chariot" MeasureName="LEDON_Voltage_LED_W_RT_K" Min="-0.1" Max="0.42" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 26 -0.1 0.42" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115546" PEGA="AKFV80" String="!-VOLTAGE_TEST-! Measurement LED_W_RT_K value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115547" PEGA="AKFV81" String="!-VOLTAGE_TEST-! Measurement LED_W_RT_K value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="LEDON_Voltage_LED_W_FT_K" Variation="Chariot" MeasureName="LEDON_Voltage_LED_W_FT_K" Min="-0.1" Max="0.42" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 27 -0.1 0.42" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115548" PEGA="AKFV82" String="!-VOLTAGE_TEST-! Measurement LED_W_FT_K value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115549" PEGA="AKFV83" String="!-VOLTAGE_TEST-! Measurement LED_W_FT_K value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_+1P8V_CAM_F" Variation="Chariot" MeasureName="+1P8V_CAM_F_Voltage" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 28 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11554A" PEGA="AKFV84" String="!-VOLTAGE_TEST-! Measurement +1P8V_CAM_F value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11554B" PEGA="AKFV85" String="!-VOLTAGE_TEST-! Measurement +1P8V_CAM_F value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_+1P8V_CAM_R" Variation="Chariot" MeasureName="+1P8V_CAM_R_Voltage" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 29 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11554C" PEGA="AKFV86" String="!-VOLTAGE_TEST-! Measurement +1P8V_CAM_R value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11554D" PEGA="AKFV87" String="!-VOLTAGE_TEST-! Measurement +1P8V_CAM_R value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_+1P8V_CAM_IR" Variation="Chariot" MeasureName="+1P8V_CAM_IR_Voltage" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 30 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11554E" PEGA="AKFV88" String="!-VOLTAGE_TEST-! Measurement +1P8V_CAM_IR value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11554F" PEGA="AKFV89" String="!-VOLTAGE_TEST-! Measurement +1P8V_CAM_IR value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Voltage-Pull CONTROL_SW_2 High" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0.2" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.7 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Voltage_HINGER1_POS_A" Variation="Chariot" MeasureName="Voltage_HINGER1_POS_A" Min="2.7" Max="3.3" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 23 2.7 3.3" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11558D" PEGA="AKFVCG" String="!-VOLTAGE_TEST-! Measurement HINGER1_POS_A value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11558E" PEGA="AKFVCH" String="!-VOLTAGE_TEST-! Measurement HINGER1_POS_A value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Output_Pulse_On_CAM_IR_STB" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Parallel" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /PWM 0.16 17 50 3" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_IR_SENSE" Variation="Chariot" MeasureName="IR_SENSE_Voltage" Min="0.075" Max="0.225" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl -log -rms 0 66 /gv2 25 0 0.075 0.225" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="5" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115554" PEGA="AKFV94" String="!-VOLTAGE_TEST-! Measurement IR_SENSE value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115555" PEGA="AKFV95" String="!-VOLTAGE_TEST-! Measurement IR_SENSE value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_+1P2V_CAM_R" Variation="Chariot" MeasureName="+1P2V_CAM_R_Voltage" Min="1.14" Max="1.26" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 26 1.14 1.26" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115556" PEGA="AKFV96" String="!-VOLTAGE_TEST-! Measurement +1P2V_CAM_R value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115557" PEGA="AKFV97" String="!-VOLTAGE_TEST-! Measurement +1P2V_CAM_R value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_+2P8V_CAM_R" Variation="Chariot" MeasureName="+2P8V_CAM_R_Voltage" Min="2.66" Max="2.94" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 27 2.66 2.94" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115558" PEGA="AKFV98" String="!-VOLTAGE_TEST-! Measurement +2P8V_CAM_R value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115559" PEGA="AKFV99" String="!-VOLTAGE_TEST-! Measurement +2P8V_CAM_R value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_+2P8V_CAM_F" Variation="Chariot" MeasureName="+2P8V_CAM_F_Voltage" Min="2.66" Max="2.94" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 28 2.66 2.94" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11555A" PEGA="AKFV0A" String="!-VOLTAGE_TEST-! Measurement +2P8V_CAM_F value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11555B" PEGA="AKFV0B" String="!-VOLTAGE_TEST-! Measurement +2P8V_CAM_F value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_+3P3V_VCM" Variation="Chariot" MeasureName="+3P3V_VCM_Voltage" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0.0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 29 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11555C" PEGA="AKFV0C" String="!-VOLTAGE_TEST-! Measurement +3P3V_VCM value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11555D" PEGA="AKFV0D" String="!-VOLTAGE_TEST-! Measurement +3P3V_VCM value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Camera_Voltage_+2P8V_CAM_IR" Variation="Chariot" MeasureName="+2P8V_CAM_IR_Voltage" Min="2.66" Max="2.94" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 30 2.66 2.94" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11555E" PEGA="AKFV0E" String="!-VOLTAGE_TEST-! Measurement +2P8V_CAM_IR value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11555F" PEGA="AKFV0F" String="!-VOLTAGE_TEST-! Measurement +2P8V_CAM_IR value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="FAN_Voltage_CFAN_D" Variation="Chariot" MeasureName="FAN_Voltage_CFAN_D" Min="2.9" Max="3.6" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="1" Wait="0.1" Retry="3" File="Tools\NIControl-diags.exe" Action="-nl /gv 31 2.9 3.6" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115550" PEGA="AKFV90" String="!-VOLTAGE_TEST-! Measurement CFAN_D_1 value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115551" PEGA="AKFV91" String="!-VOLTAGE_TEST-! Measurement CFAN_D_1 value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="Camera and FAN Disable" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Disable_CAM_R_PWR_DN_N" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 0.17 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Disable_CAM_F_PWR_DN_N" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 0.18 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Disable_ON_+5V_FAN_REG" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.0 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="TDM Power and Backlight" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="TDM power_3P3V_PANEL_Enable" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 0.8 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check 3.3V TDM power_+3P3V_PANEL" Variation="Chariot" MeasureName="TDMPWR_+3P3V_PANEL" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 24 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115552" PEGA="AKFV92" String="!-VOLTAGE_TEST-! Measurement +3P3V_PANEL value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115553" PEGA="AKFV93" String="!-VOLTAGE_TEST-! Measurement +3P3V_PANEL value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Enable BKLT_EN" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="1" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 0.9 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Group Name="Backlight Bright 10 percentage" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Test Name="Backlight Bright 10 percentage" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Parallel" Hold="0" Timeout="0" Check="False">
+				<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /aopwm 3 5 0 20000 10 2000" ShowTerminal="False" FailStop="False" Rebase="False" />
+				<ErrorTransform>
+					<Replace Source="*" To="8F010926" PEGA="AKFBR9" String="!- SCREEN_PWM_TEST -! Bright PWM Set Fail" />
+				</ErrorTransform>
+			</Test>
+			<Test Name="Backlight Current LED_CURRENT_10" Variation="Chariot" MeasureName="10_Backlight_Current" Min="0" Max="1000" Unit="mA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+				<Exec PreWait="1" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl -log -ln 10.log -mul 2000 /gdv 2" ShowTerminal="False" FailStop="False" Rebase="False" />
+				<GetValue File="" Row="1" Col="9" Len="7" />
+				<ErrorTransform>
+					<Replace Source="1" To="8F11556C" PEGA="AKFV4H" String="!-VOLTAGE_TEST-! Measurement LED_CURRENT value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+					<Replace Source="2" To="8F11556D" PEGA="AKFV4I" String="!-VOLTAGE_TEST-! Measurement LED_CURRENT value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+					<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+				</ErrorTransform>
+			</Test>
+		</Group>
+		<Group Name="Backlight Bright 50 percentage" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Test Name="Backlight Bright 50 percentage" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Parallel" Hold="0" Timeout="0" Check="False">
+				<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /aopwm 3 5 0 20000 50 2000" ShowTerminal="False" FailStop="False" Rebase="False" />
+				<ErrorTransform>
+					<Replace Source="*" To="8F010926" PEGA="AKFBR9" String="!- SCREEN_PWM_TEST -! Bright PWM Set Fail" />
+				</ErrorTransform>
+			</Test>
+			<Test Name="Backlight Current LED_CURRENT_50" Variation="Chariot" MeasureName="50_Backlight_Current" Min="0" Max="1000" Unit="mA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+				<Exec PreWait="1" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl -log -ln 50.log -mul 2000 /gdv 2" ShowTerminal="False" FailStop="False" Rebase="False" />
+				<GetValue File="" Row="1" Col="9" Len="7" />
+				<ErrorTransform>
+					<Replace Source="1" To="8F11556C" PEGA="AKFV4H" String="!-VOLTAGE_TEST-! Measurement LED_CURRENT value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+					<Replace Source="2" To="8F11556D" PEGA="AKFV4I" String="!-VOLTAGE_TEST-! Measurement LED_CURRENT value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+					<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+				</ErrorTransform>
+			</Test>
+		</Group>
+		<Group Name="Backlight Bright 90 percentage" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Test Name="Backlight Bright 90 percentage" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Parallel" Hold="0" Timeout="0" Check="False">
+				<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /aopwm 3 5 0 20000 90 2000" ShowTerminal="False" FailStop="False" Rebase="False" />
+				<ErrorTransform>
+					<Replace Source="*" To="8F010926" PEGA="AKFBR9" String="!- SCREEN_PWM_TEST -! Bright PWM Set Fail" />
+				</ErrorTransform>
+			</Test>
+			<Test Name="Backlight Current LED_CURRENT_90" Variation="Chariot" MeasureName="90_Backlight_Current" Min="0" Max="1000" Unit="mA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+				<Exec PreWait="1" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl -log -ln 90.log -mul 2000 /gdv 2" ShowTerminal="False" FailStop="False" Rebase="False" />
+				<GetValue File="" Row="1" Col="9" Len="7" />
+				<ErrorTransform>
+					<Replace Source="1" To="8F11556C" PEGA="AKFV4H" String="!-VOLTAGE_TEST-! Measurement LED_CURRENT value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+					<Replace Source="2" To="8F11556D" PEGA="AKFV4I" String="!-VOLTAGE_TEST-! Measurement LED_CURRENT value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+					<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+				</ErrorTransform>
+			</Test>
+		</Group>
+		<Test Name="Backlight Current 50_10" Variation="Chariot" MeasureName="50_10_Backlight_Current" Min="20" Max="60" Unit="mA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\10-50.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115581" PEGA="AKFV6J" String="!-VOLTAGE_TEST-! 50% and 10% Backlight Difference value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115582" PEGA="AKFV6K" String="!-VOLTAGE_TEST-! 50% and 10% Backlight Difference value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Backlight Current 90_50" Variation="Chariot" MeasureName="90_50_Backlight_Current" Min="20" Max="60" Unit="mA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\90-50.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115583" PEGA="AKFV6L" String="!-VOLTAGE_TEST-! 90% and 50% Backlight Difference value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115584" PEGA="AKFV6M" String="!-VOLTAGE_TEST-! 90% and 50% Backlight Difference value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Disable BKLT_EN" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 0.9 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="TDM power_3P3V_PANEL_Disable  " Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 0.8 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check Touch Status" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Touch.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="8F080001" PEGA="AKFI01" String="!- TOUCH_CONNECTOR_TEST -! Touch Connector test fail" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="Thermal" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Get CPU Temp by EC" Variation="Chariot" MeasureName="CPU_Temperature" Min="20" Max="100" Unit="degC" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Thermal-diag.exe" Action="-nl /E0 20 100" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="T_CPU.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F150205" PEGA="AKFBSA" String="!-THERMAL_TEST-! Measurement CPU Temperature value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F150204" PEGA="AKFBS9" String="!-THERMAL_TEST-! Measurement CPU Temperature value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="*" To="*" PEGA="AKFHXG" String="{File:Thermal-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Get PCH Temp by EC" Variation="Chariot" MeasureName="PCH_Temperature" Min="20" Max="100" Unit="degC" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Thermal-diag.exe " Action="-nl /E1 20 100" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="T_PCH.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F150305" PEGA="AKFBSC" String="!-THERMAL_TEST-! Measurement PCH Temperature value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F150304" PEGA="AKFBSB" String="!-THERMAL_TEST-! Measurement PCH Temperature value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="*" To="*" PEGA="AKFHXH" String="{File:Thermal-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Get Surrend Temp by EC" Variation="Chariot" MeasureName="Surrend_Temperature" Min="20" Max="85" Unit="degC" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Thermal-diag.exe " Action="-nl /E2 20 85" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="T_DIMM.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F150805" PEGA="AKFHXL" String="!-THERMAL_TEST-! Measurement Surrend Temperature value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F150804" PEGA="AKFHXK" String="!-THERMAL_TEST-! Measurement Surrend Temperature value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="*" To="*" PEGA="AKFHXM" String="{File:Thermal-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Get Surface Temp by EC" Variation="Chariot" MeasureName="Surface_Temperature" Min="20" Max="60" Unit="degC" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Thermal-diag.exe " Action="-nl /E3 20 60" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="T_Surface.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F150705" PEGA="AKFHXF" String="!-THERMAL_TEST-! Measurement Surface Temperature value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F150704" PEGA="AKFHXE" String="!-THERMAL_TEST-! Measurement Surface Temperature value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="*" To="*" PEGA="AKFHXJ" String="{File:Thermal-diag.log}" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="Buttons" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Press Volume Up Button" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.5 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Release Volume Up Button" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.5 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check Volume Up Button" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Buttons-diag.exe" Action="/vk 175" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F170001" PEGA="AKFI35" String="!- Button_CHECK -! Volume up button test fail" />
+				<Replace Source="*" To="*" PEGA="AKFI35" String="{File:Buttons-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Press Volume Down Button" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.7 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Release Volume Down Button" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.7 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check Volume Down Button" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Buttons-diag.exe" Action="/vk 174" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F170002" PEGA="AKFI36" String="!- Button_CHECK -! Volume down button test fail" />
+				<Replace Source="*" To="*" PEGA="AKFI36" String="{File:Buttons-diag.log}" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="Sensors" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Check Accelerometer Standard Deviation" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Sensor.bat" Action="ASD" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F0B0001" PEGA="AKFQ04" String="!- SENSORCHECK -! Accelerometer not detected" />
+				<Replace Source="*" To="*" PEGA="AKFQ04" String="{File:Sensor-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check Magnetometer Standard Deviation" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Sensor.bat" Action="MSD" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F0B0003" PEGA="AKFQ06" String="!- SENSORCHECK -! Magnetometer not detected" />
+				<Replace Source="*" To="*" PEGA="AKFQ06" String="{File:Sensor-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check Gyro Standard Deviation" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Sensor.bat" Action="GSD" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F0B0002" PEGA="AKFQ05" String="!- SENSORCHECK -! Gyroscope not detected" />
+				<Replace Source="*" To="*" PEGA="AKFQ05" String="{File:Sensor-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check Ambient Light Sensor Lux Value" Variation="Chariot" MeasureName="ALS_Lux_Value" Min="1" Max="999999" Unit="Lux" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Sensor-diag.exe" Action="-ext 30 /AL 1 999999" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="2" Col="6" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F0B0006" PEGA="AKFQ10" String="!- SENSORCHECK -! AmbientLight sensor not detected" />
+				<Replace Source="FF" To="8F0B0006" PEGA="AKFQ10" String="!- SENSORCHECK -! AmbientLight sensor not detected" />
+				<Replace Source="*" To="*" PEGA="AKFQ10" String="{File:Sensor-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Sensor Self Test" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Sensor-diag.exe" Action="/ST" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F0B000D" PEGA="AKSX92" String="! - SENSORCHECK - ! Self -Test Accelerometer communication test fail." />
+				<Replace Source="2" To="8F0B000E" PEGA="AKSX93" String="! - SENSORCHECK - ! Self -Test Gyroscope communication test fail." />
+				<Replace Source="3" To="8F0B000F" PEGA="AKSX94" String="! - SENSORCHECK - ! Self -Test Magnetometer communication test fail." />
+				<Replace Source="4" To="8F0B0010" PEGA="AKSX95" String="! - SENSORCHECK - ! Self -Test ALS communication test fail." />
+				<Replace Source="*" To="*" PEGA="AKFQ70" String="{File:Sensor-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Pull HALL_CONTROL Low" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0.2" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.1 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SensorDetect-HallEffect High_South Pole" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="3" File="Tools\Sensor-diag.exe" Action="-ext 10 /HE 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F0B0007" PEGA="AKFQ11" String="!- SENSORCHECK -! HallEffect sensor not detected" />
+				<Replace Source="FF" To="8F0B0007" PEGA="AKFQ11" String="!- SENSORCHECK -! HallEffect sensor not detected" />
+				<Replace Source="*" To="*" PEGA="AKFQ11" String="{File:Sensor-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Pull HALL_CONTROL High" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0.2" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.1 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SensorDetect-HallEffect Low_North Pole " Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="3" File="Tools\Sensor-diag.exe" Action="-ext 10 /HE 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F0B0007" PEGA="AKFQ11" String="!- SENSORCHECK -! HallEffect sensor not detected" />
+				<Replace Source="FF" To="8F0B0007" PEGA="AKFQ11" String="!- SENSORCHECK -! HallEffect sensor not detected" />
+				<Replace Source="*" To="*" PEGA="AKFQ11" String="{File:Sensor-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Pull HALL_CONTROL Low to Close" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="/sio 2.1 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="USB3.0" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="U3PE Test" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\IO-diag.exe" Action="/U3PE" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="FF" To="8F041010" PEGA="AKFM16" String="!- U3PE -! U3pe failed to connect and enumerate" />
+				<Replace Source="*" To="*" PEGA="AKFLZZ" String="{File:IO-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="USB 3.0 thru hub Enumeration_Right" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\USB3Enumeration_Right.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F041102" PEGA="AKSY4K" String="!- USB_STATUS-! USB 3.0 device status CHECK FAIL" />
+				<Replace Source="*" To="*" PEGA="AKSY4K" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="USB 3.0 Drive Enumeration_Left" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\USB3Enumeration_left.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F041102" PEGA="AKSY4K" String="!- USB_STATUS-! USB 3.0 device status CHECK FAIL" />
+				<Replace Source="*" To="*" PEGA="AKSY4K" String="{File:HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="USB 3.0 thru hub WRC Test_Right" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Storage-diag.exe" Action="-usb1 /WRC 0 1000000" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="2" To="8F040A01" PEGA="AKFE14" String="!- USB_HDD_RW_CHECK -! USB HDD read write test fail" />
+				<Replace Source="1" To="8F040A01" PEGA="AKFE14" String="!- USB_HDD_RW_CHECK -! USB HDD read write test fail" />
+				<Replace Source="80860021" To="8F041202" PEGA="AKSVZU" String="Volume label 'USB1Volume' cannot be found on the Dut's available drives." />
+				<Replace Source="*" To="*" PEGA="AKFE14" String="{File:Storage-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="USB 3.0 Drive WRC Test_Left" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Storage-diag.exe" Action="-usb2 /WRC 0 1000000" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="2" To="8F040A01" PEGA="AKFE14" String="!- USB_HDD_RW_CHECK -! USB HDD read write test fail" />
+				<Replace Source="1" To="8F040A01" PEGA="AKFE14" String="!- USB_HDD_RW_CHECK -! USB HDD read write test fail" />
+				<Replace Source="80860021" To="8F041203" PEGA="AKSVZU" String="Volume label 'USB2Volume' cannot be found on the Dut's available drives." />
+				<Replace Source="*" To="*" PEGA="AKFE14" String="{File:Storage-diag.log}" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="Speaker" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Switching to Speaker_HPOUT_JD_Low" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="3.0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.2 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_Volume_Unmute" Variation="Chariot" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio-diag.exe" Action="-spk /Unmute" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070223" PEGA="AKSW3A" String="!- Audio_SPEAKER_TEST -! SPEAKER Set Volume fail" />
+				<Replace Source="FF" To="8F070223" PEGA="AKSW3A" String="!- Audio_SPEAKER_TEST -! SPEAKER Set Volume fail" />
+				<Replace Source="*" To="*" PEGA="AKSW3A" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_Playback_Volume_Max" Variation="Chariot" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio-diag.exe" Action="-spk /pvol 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070223" PEGA="AKSW3A" String="!- Audio_SPEAKER_TEST -! SPEAKER Set Volume fail" />
+				<Replace Source="FF" To="8F070223" PEGA="AKSW3A" String="!- Audio_SPEAKER_TEST -! SPEAKER Set Volume fail" />
+				<Replace Source="*" To="*" PEGA="AKSW3A" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_Capture_Volume_Mic_Max" Variation="Chariot" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio-diag.exe" Action="-mic /cvol 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070223" PEGA="AKSW3A" String="!- Audio_SPEAKER_TEST -! SPEAKER Set Volume fail" />
+				<Replace Source="FF" To="8F070223" PEGA="AKSW3A" String="!- Audio_SPEAKER_TEST -! SPEAKER Set Volume fail" />
+				<Replace Source="*" To="*" PEGA="AKSW3A" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_Record_Left_1KHz_Right_2KHz" Variation="Chariot" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio-diag.exe" Action="-spk -mic -amp 1 -ampr 1 -timeout 5 -t 2 /lr 1000 2000" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070101" PEGA="AKFH03" String="!- Audio_SPEAKER_TEST -! SPEAKER test fail" />
+				<Replace Source="FF" To="8F070101" PEGA="AKFH03" String="!- Audio_SPEAKER_TEST -! SPEAKER test fail" />
+				<Replace Source="*" To="*" PEGA="AKFH0D" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_1KHz_Left_LeftChannel_dB_Analyze" Variation="Chariot" MeasureName="Speaker_Left_Left_dB" Min="40" Max="100" Unit="dB" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Speaker.bat" Action="40 100 L L 0 1500 D" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SPK_Left_Left_dB.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070227" PEGA="AKFBQB" String="!- Audio_SPEAKER_TEST -! Left SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) lower than limit {limit::{Min}} ({Unit})" />
+				<Replace Source="2" To="8F070228" PEGA="AKFBQC" String="!- Audio_SPEAKER_TEST -! Left SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) greater than limit {limit::{Max}} ({Unit})" />
+				<Replace Source="FF" To="8F070103" PEGA="AKFH0C" String="!- Audio_SPEAKER_TEST -! Left SPEAKER or DMIC test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_1KHz_Left_RightChannel_dB_Analyze" Variation="Chariot" MeasureName="Speaker_Left_Right_dB" Min="40" Max="100" Unit="dB" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Speaker.bat" Action="40 100 L R 0 1500 D" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SPK_Left_Right_dB.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070227" PEGA="AKFBQB" String="!- Audio_SPEAKER_TEST -! Left SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) lower than limit {limit::{Min}} ({Unit})" />
+				<Replace Source="2" To="8F070228" PEGA="AKFBQC" String="!- Audio_SPEAKER_TEST -! Left SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) greater than limit {limit::{Max}} ({Unit})" />
+				<Replace Source="FF" To="8F070103" PEGA="AKFH0C" String="!- Audio_SPEAKER_TEST -! Left SPEAKER or DMIC test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_1KHz_Left_LeftChannel_Frequency_Analyze" Variation="Chariot" MeasureName="Speaker_Left_Left_Frequency" Min="900" Max="1100" Unit="Hz" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Speaker.bat" Action="900 1100 L L 0 1500 F" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SPK_Left_Left_Frequency.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070227" PEGA="AKFBQB" String="!- Audio_SPEAKER_TEST -! Left SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) lower than limit {limit::{Min}} ({Unit})" />
+				<Replace Source="2" To="8F070228" PEGA="AKFBQC" String="!- Audio_SPEAKER_TEST -! Left SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) greater than limit {limit::{Max}} ({Unit})" />
+				<Replace Source="FF" To="8F070103" PEGA="AKFH0C" String="!- Audio_SPEAKER_TEST -! Left SPEAKER or DMIC test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_1KHz_Left_RightChannel_Frequency_Analyze" Variation="Chariot" MeasureName="Speaker_Left_Right_Frequency" Min="900" Max="1100" Unit="Hz" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Speaker.bat" Action="900 1100 L R 0 1500 F" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SPK_Left_Right_Frequency.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070227" PEGA="AKFBQB" String="!- Audio_SPEAKER_TEST -! Left SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) lower than limit {limit::{Min}} ({Unit})" />
+				<Replace Source="2" To="8F070228" PEGA="AKFBQC" String="!- Audio_SPEAKER_TEST -! Left SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) greater than limit {limit::{Max}} ({Unit})" />
+				<Replace Source="FF" To="8F070103" PEGA="AKFH0C" String="!- Audio_SPEAKER_TEST -! Left SPEAKER or DMIC test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_2KHz_Right_LeftChannel_dB_Analyze" Variation="Chariot" MeasureName="Speaker_Right_LeftC_dB" Min="50" Max="100" Unit="dB" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Speaker.bat" Action="50 100 R L 1500 20000 D" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SPK_Right_Left_dB.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070229" PEGA="AKFBQD" String="!- Audio_SPEAKER_TEST -! Right SPEAKER to DMIC Left Channel test DB value {value::{Value}}({Unit}) lower than limit {limit::{Min}} ({Unit})" />
+				<Replace Source="2" To="8F070230" PEGA="AKFBQE" String="!- Audio_SPEAKER_TEST -! Right SPEAKER to DMIC Left Channel test DB value {value::{Value}}({Unit}) greater than limit {limit::{Max}} ({Unit})" />
+				<Replace Source="FF" To="8F070104" PEGA="AKFH0D" String="!- Audio_SPEAKER_TEST -! Right SPEAKER or DMIC test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_2KHz_Right_RightChannel_dB_Analyze" Variation="Chariot" MeasureName="Speaker_Right_RightC_dB" Min="50" Max="100" Unit="dB" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Speaker.bat" Action="50 100 R R 1500 20000 D" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SPK_Right_Right_dB.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070231" PEGA="AKFBQF" String="!- Audio_SPEAKER_TEST -! Right SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) lower than limit {limit::{Min}} ({Unit})" />
+				<Replace Source="2" To="8F070232" PEGA="AKFBQG" String="!- Audio_SPEAKER_TEST -! Right SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) greater than limit {limit::{Max}} ({Unit})" />
+				<Replace Source="FF" To="8F070104" PEGA="AKFH0D" String="!- Audio_SPEAKER_TEST -! Right SPEAKER or DMIC test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_2KHz_Right_LeftChannel_Frequency_Analyze" Variation="Chariot" MeasureName="Speaker_Right_Left_Frequency" Min="1900" Max="2100" Unit="Hz" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Speaker.bat" Action="1900 2100 R L 1500 20000 F" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SPK_Right_Left_Frequency.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070229" PEGA="AKFBQD" String="!- Audio_SPEAKER_TEST -! Right SPEAKER to DMIC Left Channel test DB value {value::{Value}}({Unit}) lower than limit {limit::{Min}} ({Unit})" />
+				<Replace Source="2" To="8F070230" PEGA="AKFBQE" String="!- Audio_SPEAKER_TEST -! Right SPEAKER to DMIC Left Channel test DB value {value::{Value}}({Unit}) greater than limit {limit::{Max}} ({Unit})" />
+				<Replace Source="FF" To="8F070104" PEGA="AKFH0D" String="!- Audio_SPEAKER_TEST -! Right SPEAKER or DMIC test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_2KHz_Right_RightChannel_Frequency_Analyze" Variation="Chariot" MeasureName="Speaker_Right_Right_Frequency" Min="1900" Max="2100" Unit="Hz" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Speaker.bat" Action="1900 2100 R R 1500 20000 F" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="SPK_Right_Right_Frequency.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070231" PEGA="AKFBQF" String="!- Audio_SPEAKER_TEST -! Right SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) lower than limit {limit::{Min}} ({Unit})" />
+				<Replace Source="2" To="8F070232" PEGA="AKFBQG" String="!- Audio_SPEAKER_TEST -! Right SPEAKER to DMIC Right Channel test DB value {value::{Value}}({Unit}) greater than limit {limit::{Max}} ({Unit})" />
+				<Replace Source="FF" To="8F070104" PEGA="AKFH0D" String="!- Audio_SPEAKER_TEST -! Right SPEAKER or DMIC test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Speaker_Delete_Files" Variation="Chariot" Class="Speaker" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="C:\Windows\System32\cmd.exe" Action="/c &quot;DEL SPK_*.log AudioLog.txt *.wav&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="0" PEGA="" String="Success" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Group Name="Headset" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="Switch to Headset_HPOUT_JD_High" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="3.0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.2 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Detect_HS_Playback_Jack_Inserted" Variation="Chariot" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="1" Retry="3" File="tools\Audio-diag.exe" Action="/PJ" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070006" PEGA="AKSU92" String="!- Audio_HEADPHONE_TEST -! HEADPHONE AudioJack Plugin test fail." />
+				<Replace Source="FF" To="8F070006" PEGA="AKSU92" String="!- Audio_HEADPHONE_TEST -! HEADPHONE AudioJack Plugin test fail." />
+				<Replace Source="*" To="*" PEGA="AKSU92" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Detect_HS_Capture_Jack_Inserted" Variation="Chariot" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="1" Retry="3" File="tools\Audio-diag.exe" Action="/CJ" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070006" PEGA="AKSU92" String="!- Audio_HEADPHONE_TEST -! HEADPHONE AudioJack Plugin test fail." />
+				<Replace Source="FF" To="8F070006" PEGA="AKSU92" String="!- Audio_HEADPHONE_TEST -! HEADPHONE AudioJack Plugin test fail." />
+				<Replace Source="*" To="*" PEGA="AKSU92" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="HeadSet_Volume_Unmute" Variation="Chariot" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio-diag.exe" Action="/Unmute" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070101" PEGA="AKFH0C" String="!- Audio_SPEAKER_TEST -! SPEAKER Set Volume fail" />
+				<Replace Source="FF" To="8F070101" PEGA="AKFH0C" String="!- Audio_SPEAKER_TEST -! SPEAKER Set Volume fail" />
+				<Replace Source="*" To="*" PEGA="AKFH0C" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_Playback_Volume_Max" Variation="Chariot" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio-diag.exe" Action="/pvol 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070003" PEGA="AKFH0A" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Left Channel test fail" />
+				<Replace Source="FF" To="8F070003" PEGA="AKFH0A" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Left Channel test fail" />
+				<Replace Source="*" To="*" PEGA="AKSW7U" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_Capture_Volume_Max" Variation="Chariot" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="3" File="Tools\Audio-diag.exe" Action="/cvol 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="FF" To="8F070224" PEGA="AKSW3B" String="!- Audio_HEADPHONE_TEST -! HEADPHONE Set Volume fail" />
+				<Replace Source="*" To="*" PEGA="AKSW7U" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_Play_Left_1KHz_Right_2KHz_Record" Variation="Chariot" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio-diag.exe" Action="-amp 1 -ampr 1 -timeout 5 -t 2 /lr 1000 2000" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070001" PEGA="AKFH01" String="!- Audio_HEADPHONE_TEST -! HEADPHONE test fail" />
+				<Replace Source="FF" To="8F070001" PEGA="AKFH01" String="!- Audio_HEADPHONE_TEST -! HEADPHONE test fail" />
+				<Replace Source="*" To="*" PEGA="AKFH0A" String="{File:Audio-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_1KHz_Left_Frequency_Analyze" Variation="Chariot" MeasureName="Headset_Left_Frequency" Min="900" Max="1100" Unit="Hz" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Headset.bat" Action="900 1100 L F 0 1500" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="HS_Left_Frequency.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="0" To="0" PEGA="" String="Success" />
+				<Replace Source="1" To="8F070014" PEGA="AKFBPL" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Left Channel test Freq value {value::{Value}}({Unit}) is lower than limit {limit::{Min}}({Unit}) " />
+				<Replace Source="2" To="8F070015" PEGA="AKFBPM" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Left Channel test Freq value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit}) " />
+				<Replace Source="FF" To="8F070003" PEGA="AKFH0A" String="!- Audio_HEADPHONE_TEST -! HEADPHONE Left Channel test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_1KHz_Left_dB_Analyze" Variation="Chariot" MeasureName="Headset_Left_dB" Min="45" Max="100" Unit="dB" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Headset.bat" Action="45 100 L D 0 1500" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="HS_Left_dB.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070012" PEGA="AKFBPJ" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Left Channel test DB value {value::{Value}}({Unit}) is lower than limit {limit::{Min}}({Unit}) " />
+				<Replace Source="2" To="8F070013" PEGA="AKFBPK" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Left Channel test DB value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit}) " />
+				<Replace Source="FF" To="8F070003" PEGA="AKFH0A" String="!- Audio_HEADPHONE_TEST -! HEADPHONE Left Channel test fail" />
+				<Replace Source="*" To="*" PEGA="AKFH0A" String="!- Audio_HEADPHONE_TEST -! HEADPHONE Left Channel test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_1KHz_Left_THD_Analyze" Variation="Chariot" MeasureName="Headset_Left_THD" Min="0" Max="0.5" Unit="%" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Headset.bat" Action="0 0.5 L T 0 1500" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="HS_Left_THD.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F07001A" PEGA="AKFBQI" String="!- Audio_HEADPHONE_TEST -! Left HEADPHONE out to Mic THD value {value::{Value}}({Unit}) is lower than limit {limit::{Min}}({Unit}) " />
+				<Replace Source="2" To="8F07001B" PEGA="AKFBQJ" String="!- Audio_HEADPHONE_TEST -! Left HEADPHONE out to Mic THD value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit}) " />
+				<Replace Source="FF" To="8F070201" PEGA="AKFH0F" String="!- Audio_TEST -! LEFT THD test fail." />
+				<Replace Source="*" To="*" PEGA="AKFH0F" String="!- Audio_TEST -! LEFT THD test fail." />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_1KHz_Left_SNR_Analyze" Variation="Chariot" MeasureName="Headset_Left_SNR" Min="60" Max="160" Unit="dB" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Headset.bat" Action="60 160 L S 0 1500" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="HS_Left_SNR.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F07001C" PEGA="AKFBQK" String="!- Audio_HEADPHONE_TEST -! Left HEADPHONE out to Mic SNR value {value::{Value}}({Unit}) is lower than limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F07001D" PEGA="AKFBQL" String="!- Audio_HEADPHONE_TEST -! Left HEADPHONE out to Mic SNR value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F070203" PEGA="AKFH0H" String="!- Audio_TEST -! LEFT SNR test fail" />
+				<Replace Source="*" To="*" PEGA="AKFH0H" String="!- Audio_TEST -! LEFT SNR test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_2KHz_Right_Frequency_Analyze" Variation="Chariot" MeasureName="Headset_Right_Frequency" Min="1900" Max="2100" Unit="Hz" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Headset.bat" Action="1900 2100 R F 1500 20000" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="HS_Right_Frequency.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070018" PEGA="AKFBPQ" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Right Channel test Freq value {value::{Value}}({Unit}) is lower than limit {limit::{Min}}({Unit}) " />
+				<Replace Source="2" To="8F070019" PEGA="AKFBPR" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Right Channel test Freq value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit}) " />
+				<Replace Source="FF" To="8F070004" PEGA="AKFH0B" String="!- Audio_HEADPHONE_TEST -! HEADPHONE right Channel test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_2KHz_Right_dB_Analyze" Variation="Chariot" MeasureName="Headset_Right_dB" Min="45" Max="100" Unit="dB" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Headset.bat" Action="45 100 R D 1500 20000" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="HS_Right_dB.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070016" PEGA="AKFBPN" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Right Channel test DB value {value::{Value}}({Unit}) is lower than limit {limit::{Min}}({Unit}) " />
+				<Replace Source="2" To="8F070017" PEGA="AKFBPP" String="!- Audio_HEADPHONE_TEST -! HEADPHONE in/out Right Channel test DB value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit}) " />
+				<Replace Source="FF" To="8F070004" PEGA="AKFH0B" String="!- Audio_HEADPHONE_TEST -! HEADPHONE right Channel test fail" />
+				<Replace Source="*" To="*" PEGA="AKFH0B" String="!- Audio_HEADPHONE_TEST -! HEADPHONE right Channel test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_2KHz_Right_THD_Analyze" Variation="Chariot" MeasureName="Headset_Right_THD" Min="0" Max="0.5" Unit="%" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Headset.bat" Action="0 0.5 R T 1500 20000" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="HS_Right_THD.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F07001E" PEGA="AKFBQM" String="!- Audio_HEADPHONE_TEST -! Right HEADPHONE out to Mic THD value {value::{Value}}({Unit}) is lower than limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F07001F" PEGA="AKFBQN" String="!- Audio_HEADPHONE_TEST -! Right HEADPHONE out to Mic THD value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F070202" PEGA="AKFH0G" String="!- Audio_TEST -! RIGHT THD test fail" />
+				<Replace Source="*" To="*" PEGA="AKFH0G" String="!- Audio_TEST -! RIGHT THD test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_2KHz_Right_SNR_Analyze" Variation="Chariot" MeasureName="Headset_Right_SNR_Judge" Min="60" Max="160" Unit="dB" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Audio_Headset.bat" Action="60 160 R S 1500 20000" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="HS_Right_SNR.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F070020" PEGA="AKFBQP" String="!- Audio_HEADPHONE_TEST -! Right HEADPHONE out to Mic SNR value {value::{Value}}({Unit}) is lower than limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F070021" PEGA="AKFBQQ" String="!- Audio_HEADPHONE_TEST -! Right HEADPHONE out to Mic SNR value {value::{Value}}({Unit}) is greater than limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F070204" PEGA="AKFH0I" String="!- Audio_TEST -! RIGHT SNR test fail" />
+				<Replace Source="*" To="*" PEGA="AKFH0I" String="!- Audio_TEST -! RIGHT SNR test fail" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Headset_Delete_Files" Variation="Chariot" Class="Headset" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="C:\Windows\System32\cmd.exe" Action="/c &quot;DEL HS_*.log AudioLog.txt *.wav&quot;" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="*" To="0" PEGA="" String="Success" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Test Name="Start CPU Loading" Variation="Chariot" Class="CPU" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\CPU-diag.exe" Action="/START" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="6" Len="40" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F020002" PEGA="AKFBRE" String="!-CPU_NAME_CHECK-! CPU name value {value::{Value}} is not matched" />
+			<Replace Source="FF" To="8F020002" PEGA="AKFBRE" String="!-CPU_NAME_CHECK-! CPU name value {value::{Value}} is not matched" />
+			<Replace Source="*" To="*" PEGA="AKFBRE" String="{File:CPU-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="BSC Initial_for_BAT Mode" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Initial.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="*" To="0" PEGA="" String="Success" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Switching BSC Battery Mode" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="3.0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="BSC\BatteryMode.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+	</Test>
+	<Test Name="SL1_PWR_AC_OFF for BAT Mode" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.1 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="0" PEGA="" String="Success" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Group Name="PowerManagement_Battery Mode" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="BAT Mode Voltage-Pull CONTROL_SW_1 Low" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0.2" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.6 0" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+VCORE" Variation="Chariot" MeasureName="BAT_Voltage_+VCORE" Min="0.55" Max="1.5" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 3 0.55 1.5" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115500" PEGA="AKFV10" String="!-VOLTAGE_TEST-! Measurement +VCORE value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115501" PEGA="AKFV11" String="!-VOLTAGE_TEST-! Measurement +VCORE value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+1VSB" Variation="Chariot" MeasureName="BAT_Voltage_+1VSB" Min="0.95" Max="1.05" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 4 0.95 1.05" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115502" PEGA="AKFV12" String="!-VOLTAGE_TEST-! Measurement +1VSB value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115503" PEGA="AKFV13" String="!-VOLTAGE_TEST-! Measurement +1VSB value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+VCCGT" Variation="Chariot" MeasureName="BAT_Voltage_+VCCGT" Min="0" Max="1.5" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 5 0 1.5" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115504" PEGA="AKFV14" String="!-VOLTAGE_TEST-! Measurement +VCCGT value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115505" PEGA="AKFV15" String="!-VOLTAGE_TEST-! Measurement +VCCGT value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+VCCST_CPU" Variation="Chariot" MeasureName="BAT_Voltage_+VCCST_CPU" Min="0.95" Max="1.05" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 6 0.95 1.05" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115506" PEGA="AKFV16" String="!-VOLTAGE_TEST-! Measurement +VCCST_CPU value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115507" PEGA="AKFV17" String="!-VOLTAGE_TEST-! Measurement +VCCST_CPU value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+VCCIO" Variation="Chariot" MeasureName="BAT_Voltage_+VCCIO" Min="0.9025" Max="0.9975" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 7 0.9025 0.9975" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115508" PEGA="AKFV18" String="!-VOLTAGE_TEST-! Measurement +VCCIO value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115509" PEGA="AKFV19" String="!-VOLTAGE_TEST-! Measurement +VCCIO value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+3P3VSB" Variation="Chariot" MeasureName="BAT_Voltage_+3P3VSB" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 11 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11550A" PEGA="AKFV20" String="!-VOLTAGE_TEST-! Measurement +3P3VSB value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11550B" PEGA="AKFV21" String="!-VOLTAGE_TEST-! Measurement +3P3VSB value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+5VSB" Variation="Chariot" MeasureName="BAT_Voltage_+5VSB" Min="4.75" Max="5.25" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 12 4.75 5.25" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11550C" PEGA="AKFV22" String="!-VOLTAGE_TEST-! Measurement +5VSB value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11550D" PEGA="AKFV23" String="!-VOLTAGE_TEST-! Measurement +5VSB value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+VCCSTG" Variation="Chariot" MeasureName="BAT_Voltage_+VCCSTG" Min="0.95" Max="1.05" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 13 0.95 1.05" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11550E" PEGA="AKFV24" String="!-VOLTAGE_TEST-! Measurement +VCCSTG value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11550F" PEGA="AKFV25" String="!-VOLTAGE_TEST-! Measurement +VCCSTG value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+1P8V_DUAL" Variation="Chariot" MeasureName="BAT_Voltage_+1P8V_DUAL" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 14 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115510" PEGA="AKFV26" String="!-VOLTAGE_TEST-! Measurement +1P8V_DUAL value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115511" PEGA="AKFV27" String="!-VOLTAGE_TEST-! Measurement +1P8V_DUAL value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+1P2V_DUAL" Variation="Chariot" MeasureName="BAT_Voltage_+1P2V_DUAL" Min="1.14" Max="1.26" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 16 1.14 1.26" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115514" PEGA="AKFV30" String="!-VOLTAGE_TEST-! Measurement +1P2V_DUAL value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115515" PEGA="AKFV31" String="!-VOLTAGE_TEST-! Measurement +1P2V_DUAL value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+VCCSA" Variation="Chariot" MeasureName="BAT_Voltage_+VCCSA" Min="0.55" Max="1.15" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 18 0.55 1.15" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115518" PEGA="AKFV34" String="!-VOLTAGE_TEST-! Measurement +VCCSA value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115519" PEGA="AKFV35" String="!-VOLTAGE_TEST-! Measurement +VCCSA value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+VPCHCORE" Variation="Chariot" MeasureName="BAT_Voltage_+VPCHCORE" Min="0.8075" Max="1.05" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 19 0.8075 1.05" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11551A" PEGA="AKFV36" String="!-VOLTAGE_TEST-! Measurement +VPCHCORE value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11551B" PEGA="AKFV37" String="!-VOLTAGE_TEST-! Measurement +VPCHCORE value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+1V_MODPHY" Variation="Chariot" MeasureName="BAT_Voltage_+1V_MODPHY" Min="0.95" Max="1.05" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 20 0.95 1.05" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11551C" PEGA="AKFV38" String="!-VOLTAGE_TEST-! Measurement +1V_MODPHY value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11551D" PEGA="AKFV39" String="!-VOLTAGE_TEST-! Measurement +1V_MODPHY value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+1P8VSB" Variation="Chariot" MeasureName="BAT_Voltage_+1P8VSB" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 21 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11551E" PEGA="AKFV40" String="!-VOLTAGE_TEST-! Measurement +1P8VSB value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11551F" PEGA="AKFV41" String="!-VOLTAGE_TEST-! Measurement +1P8VSB value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT Mode Voltage-Pull CONTROL_SW_1 HIGH" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0.2" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.6 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+3P3VA" Variation="Chariot" MeasureName="BAT_Voltage_+3P3VA" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 3 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115520" PEGA="AKFV42" String="!-VOLTAGE_TEST-! Measurement +3P3VA value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115521" PEGA="AKFV43" String="!-VOLTAGE_TEST-! Measurement +3P3VA value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+3P3V_WWAN" Variation="Chariot" MeasureName="BAT_Voltage_+3P3V_WWAN" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 4 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115522" PEGA="AKFV44" String="!-VOLTAGE_TEST-! Measurement +3P3V_WWAN value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115523" PEGA="AKFV45" String="!-VOLTAGE_TEST-! Measurement +3P3V_WWAN value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+3P3VAS" Variation="Chariot" MeasureName="BAT_Voltage_+3P3VAS" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 5 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115524" PEGA="AKFV46" String="!-VOLTAGE_TEST-! Measurement +3P3VAS value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115525" PEGA="AKFV47" String="!-VOLTAGE_TEST-! Measurement +3P3VAS value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+3P3V" Variation="Chariot" MeasureName="BAT_Voltage_+3P3V" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 6 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115526" PEGA="AKFV48" String="!-VOLTAGE_TEST-! Measurement +3P3V value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115527" PEGA="AKFV49" String="!-VOLTAGE_TEST-! Measurement +3P3V value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+1P8V_AUDIO" Variation="Chariot" MeasureName="BAT_Voltage_+1P8V_AUDIO" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 7 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="11" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115528" PEGA="AKFV50" String="!-VOLTAGE_TEST-! Measurement +1P8V_AUDIO value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115529" PEGA="AKFV51" String="!-VOLTAGE_TEST-! Measurement +1P8V_AUDIO value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_DMIC_PWR" Variation="Chariot" MeasureName="BAT_Voltage_DMIC_PWR" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 11 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11552A" PEGA="AKFV52" String="!-VOLTAGE_TEST-! Measurement DMIC_PWR value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11552B" PEGA="AKFV53" String="!-VOLTAGE_TEST-! Measurement DMIC_PWR value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+V_VDDQ_VTT" Variation="Chariot" MeasureName="BAT_Voltage_+V_VDDQ_VTT" Min="0.57" Max="0.63" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 12 0.57 0.63" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11552C" PEGA="AKFV54" String="!-VOLTAGE_TEST-! Measurement +V_VDDQ_VTT value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11552D" PEGA="AKFV55" String="!-VOLTAGE_TEST-! Measurement +V_VDDQ_VTT value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+5V_AUDIO" Variation="Chariot" MeasureName="BAT_Voltage_+5V_AUDIO" Min="4.75" Max="5.25" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 13 4.75 5.25" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11552E" PEGA="AKFV56" String="!-VOLTAGE_TEST-! Measurement +5V_AUDIO value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11552F" PEGA="AKFV57" String="!-VOLTAGE_TEST-! Measurement +5V_AUDIO value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+3P3V_EC" Variation="Chariot" MeasureName="BAT_Voltage_+3P3V_EC" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 14 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115530" PEGA="AKFV58" String="!-VOLTAGE_TEST-! Measurement +3P3V_EC value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115531" PEGA="AKFV59" String="!-VOLTAGE_TEST-! Measurement +3P3V_EC value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+5V" Variation="Chariot" MeasureName="BAT_Voltage_+5V" Min="4.75" Max="5.25" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 15 4.75 5.25" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115532" PEGA="AKFV60" String="!-VOLTAGE_TEST-! Measurement +5V value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115533" PEGA="AKFV61" String="!-VOLTAGE_TEST-! Measurement +5V value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+3P3V_HPD" Variation="Chariot" MeasureName="BAT_Voltage_+3P3V_HPD" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 16 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115534" PEGA="AKFV62" String="!-VOLTAGE_TEST-! Measurement +3P3V_HPD value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115535" PEGA="AKFV63" String="!-VOLTAGE_TEST-! Measurement +3P3V_HPD value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+3P3V_SSD" Variation="Chariot" MeasureName="BAT_Voltage_+3P3V_SSD" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 17 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115536" PEGA="AKFV64" String="!-VOLTAGE_TEST-! Measurement +3P3V_SSD value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115537" PEGA="AKFV65" String="!-VOLTAGE_TEST-! Measurement +3P3V_SSD value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+VCCDSW" Variation="Chariot" MeasureName="BAT_Voltage_+VCCDSW" Min="3.135" Max="3.465" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 18 3.135 3.465" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F115538" PEGA="AKFV66" String="!-VOLTAGE_TEST-! Measurement +VCCDSW value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F115539" PEGA="AKFV67" String="!-VOLTAGE_TEST-! Measurement +VCCDSW value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+1P8VA" Variation="Chariot" MeasureName="BAT_Voltage_+1P8VA" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 19 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11553A" PEGA="AKFV68" String="!-VOLTAGE_TEST-! Measurement +1P8VA value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11553B" PEGA="AKFV69" String="!-VOLTAGE_TEST-! Measurement +1P8VA value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+1P8V" Variation="Chariot" MeasureName="BAT_Voltage_+1P8V" Min="1.71" Max="1.89" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /gv 20 1.71 1.89" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="" Row="0" Col="12" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11553C" PEGA="AKFV70" String="!-VOLTAGE_TEST-! Measurement +1P8V value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11553D" PEGA="AKFV71" String="!-VOLTAGE_TEST-! Measurement +1P8V value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="BAT_Voltage_+5V_SL1" Variation="Chariot" MeasureName="BAT_Voltage_+5V_SL1" Min="4.75" Max="5.25" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="3" File="Tools\5V_SL1.bat" Action="4.75 5.25" ShowTerminal="False" FailStop="False" Rebase="False" />
+			<GetValue File="5V_SL1.log" Row="0" Col="0" Len="7" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F11553E" PEGA="AKFV72" String="!-VOLTAGE_TEST-! Measurement +5V_SL1 value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+				<Replace Source="2" To="8F11553F" PEGA="AKFV73" String="!-VOLTAGE_TEST-! Measurement +5V_SL1 value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+				<Replace Source="FA" To="8F000036" PEGA="AKFV5P" String="!-Serial Port-! Executed Serial Port Command Error." />
+				<Replace Source="FB" To="8F115580" PEGA="AKFV6B" String="!-VOLTAGE_TEST-! Power on 5V for +5V_SL1 thru serial port command fail" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+	<Test Name="Stop CPU Loading" Variation="Chariot" Class="CPU" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\CPU-diag.exe" Action="/STOP" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="6" Len="40" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F020002" PEGA="AKFBRE" String="!-CPU_NAME_CHECK-! CPU name value {value::{Value}} is not matched" />
+			<Replace Source="FF" To="8F020002" PEGA="AKFBRE" String="!-CPU_NAME_CHECK-! CPU name value {value::{Value}} is not matched" />
+			<Replace Source="*" To="*" PEGA="AKFBRE" String="{File:CPU-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Switch to S5 Mode_Power Off" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\PwrStateCtrl-diag.exe" Action="/poweroff" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F000017" PEGA="AKFBQV" String="!- POWEROFF -! Fail to shutdown the DUT by software command" />
+			<Replace Source="*" To="*" PEGA="AKFBQV" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Check S5_Power Off Status" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="20" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Jig_PowerOff.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="*" To="0" PEGA="" String="Success" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Waiting for Power Off" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\Countdown-auto.exe" Action="-t 20 /r shutdown.dat" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="*" To="0" PEGA="" String="Success" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Enable S5 Current Test" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="BSC\S5.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="*" To="0" PEGA="" String="Success" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Read S5_Current" Variation="Chariot" MeasureName="S5_Current" Min="5" Max="50" Unit="mA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl -mul 100 /gdv 1 5 50" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="1" Col="9" Len="7" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F114A03" PEGA="AKFBT5" String="!-VOLTAGE_TEST-! Measurement S5 current value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F114A04" PEGA="AKFBT6" String="!-VOLTAGE_TEST-! Measurement S5 current value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="SL1_PWR_AC_EN for Sleep Test" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 1.1 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="0" PEGA="" String="Success" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="BSC Initial for DeepMode" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Initial.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="*" To="0" PEGA="" String="Success" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Switch to BSC Deep Mode" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Deep.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="*" To="0" PEGA="" String="Success" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Deep Mode-Pull CONTROL_SW_1 HIGH" Variation="Chariot" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0.2" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\NIControl-diags.exe" Action="-nl /sio 2.6 1" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="0" PEGA="" String="Success" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Check Deep Mode Status_+3P3V_EC" Variation="Chariot" MeasureName="Deep Mode_+3P3V_EC" Min="-0.1" Max="0.1" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="1" Wait="0.1" Retry="10" File="Tools\NIControl-diags.exe" Action="-nl /gv 14 -0.1 0.1" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="0" Col="12" Len="7" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F115530" PEGA="AKFV58" String="!-VOLTAGE_TEST-! Measurement +3P3V_EC value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F115531" PEGA="AKFV59" String="!-VOLTAGE_TEST-! Measurement +3P3V_EC value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Check Deep Mode Status_+VCCDSW" Variation="Chariot" MeasureName="Deep Mode_+VCCDSW" Min="-0.1" Max="0.1" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0.1" Retry="3" File="Tools\NIControl-diags.exe" Action="-nl /gv 18 -0.1 0.1" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="0" Col="12" Len="7" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F115538" PEGA="AKFV66" String="!-VOLTAGE_TEST-! Measurement +VCCDSW value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F115539" PEGA="AKFV67" String="!-VOLTAGE_TEST-! Measurement +VCCDSW value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Check Deep Mode Status_+3P3V_HPD" Variation="Chariot" MeasureName="Deep Mode_+3P3V_HPD" Min="-0.1" Max="0.1" Unit="Volt" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0.1" Retry="3" File="Tools\NIControl-diags.exe" Action="-nl /gv 16 -0.1 0.1" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="" Row="0" Col="12" Len="7" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F115534" PEGA="AKFV62" String="!-VOLTAGE_TEST-! Measurement +3P3V_HPD value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F115535" PEGA="AKFV63" String="!-VOLTAGE_TEST-! Measurement +3P3V_HPD value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Read Deep_Current" Variation="Chariot" MeasureName="Deep_Current" Min="100" Max="500" Unit="uA" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\DeepCurrent.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<GetValue File="DeepCurrent.log" Row="0" Col="0" Len="7" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F115568" PEGA="AKFV4B" String="!-VOLTAGE_TEST-! Measurement Deep_Current value {value::{Value}}({Unit}) is lower than its limit {limit::{Min}}({Unit})" />
+			<Replace Source="2" To="8F115569" PEGA="AKFV4C" String="!-VOLTAGE_TEST-! Measurement Deep_Current value {value::{Value}}({Unit}) is greater than its limit {limit::{Max}}({Unit})" />
+			<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="BSC Initial at the End" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="BSC\Initial.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="*" To="0" PEGA="" String="Success" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Check Board ID" Variation="Chariot" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\IO-diag.exe" Action="/BID" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F140101" PEGA="AKFM9L" String="!- DEVICE_CHECK -! Device Driver check fail." />
+			<Replace Source="FF" To="8F140001" PEGA="AKFM9L" String="!- DEVICE_CHECK -! Device Driver check fail." />
+			<Replace Source="*" To="*" PEGA="AKFM9L" String="{File:HWInfo-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="SSD SN Check" Variation="Chariot" Class="SSD" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="Tools\SSDSNCheck.bat" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="FF" To="8F040F01" PEGA="AKSQB1" String="!- SSD_SN_CHECK -! SSD SN check fail." />
+			<Replace Source="*" To="*" PEGA="AKSQB1" String="{File:Storage-diag.log}" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="PCIE 4X test" Variation="Chariot" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="0" File="" Action="" ShowTerminal="False" FailStop="False" Rebase="False" />
+		<ErrorTransform>
+			<Replace Source="FF" To="" PEGA="" String="" />
+		</ErrorTransform>
+	</Test>
+</Diagnostic>

@@ -1,0 +1,122 @@
+ROOT\JUNGO\0000                                             : atmelwindrvr
+ROOT\JUNGO\0001                                             : WinDriver
+PCI\VEN_8086&DEV_1C2D&SUBSYS_1C2D8086&REV_05\3&11583659&F&D0: Intel(R) 6 Series/C200 Series Chipset Family USB Enhanced Host Controller - 1C2D
+USB\VID_0C2E&PID_0974&MI_00\7&2A54F88E&0&0000               : Honeywell N5600 Series Area Image Engine
+ACPI\PNP0C01\1                                              : System board
+ACPI\PNP0C01\2                                              : System board
+ACPI\PNP0C02\1                                              : Motherboard resources
+ACPI\PNP0C02\2                                              : Motherboard resources
+USB\ROOT_HUB20\4&2628A10E&0                                 : USB Root Hub
+ACPI\PNP0C0B\0                                              : ACPI Fan
+ACPI\PNP0401\4&2D2AF631&0                                   : ECP Printer Port (LPT1)
+USB\VID_04D9&PID_1503&MI_01\7&30DDCD6B&0&0001               : USB Input Device
+ROOT\VOLMGR\0000                                            : Volume Manager
+HID\VID_05E0&PID_1900&MI_00\9&33943B7&0&0000                : HID-compliant vendor-defined device
+SWD\MSRRAS\MS_PPPOEMINIPORT                                 : WAN Miniport (PPPOE)
+ROOT\BASICDISPLAY\0000                                      : Microsoft Basic Display Driver
+HID\VID_04D9&PID_1503&MI_00\8&3073E293&0&0000               : HID Keyboard Device
+PCIIDE\IDECHANNEL\4&6C7422E&0&0                             : ATA Channel 0
+PCIIDE\IDECHANNEL\4&6C7422E&0&1                             : ATA Channel 1
+HDAUDIO\FUNC_01&VEN_10EC&DEV_0892&SUBSYS_00000000&REV_1003\4&273F86CE&0&0001: High Definition Audio Device
+ACPI\THERMALZONE\TZ00                                       : ACPI Thermal Zone
+ACPI\THERMALZONE\TZ01                                       : ACPI Thermal Zone
+ACPI\GENUINEINTEL_-_INTEL64_FAMILY_6_MODEL_42_-_________INTEL(R)_CORE(TM)_I5-2400_CPU_@_3.10GHZ\_1: Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz
+ACPI\GENUINEINTEL_-_INTEL64_FAMILY_6_MODEL_42_-_________INTEL(R)_CORE(TM)_I5-2400_CPU_@_3.10GHZ\_2: Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz
+ACPI\GENUINEINTEL_-_INTEL64_FAMILY_6_MODEL_42_-_________INTEL(R)_CORE(TM)_I5-2400_CPU_@_3.10GHZ\_3: Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz
+ACPI\GENUINEINTEL_-_INTEL64_FAMILY_6_MODEL_42_-_________INTEL(R)_CORE(TM)_I5-2400_CPU_@_3.10GHZ\_4: Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz
+UMB\UMB\1&841921D&0&TERMINPUT_BUS                           : UMBus Enumerator
+SWD\MSRRAS\{5E259276-BC7E-40E3-B93B-8F89B5F3ABC0}           : Microsoft RRAS Root Enumerator
+USB\VID_8087&PID_0024\5&144B9BCA&0&1                        : Generic USB Hub
+SWD\MSRRAS\MS_PPTPMINIPORT                                  : WAN Miniport (PPTP)
+USBCDCACM\VID_0C2E&PID_0974&MI_00\1&2B53A856&0&7_2A54F88E_0_0000_00: Honeywell N5600 Series Area Image Engine (COM3)
+PCI\VEN_1912&DEV_0014&SUBSYS_00000000&REV_03\4&35327277&0&0008: Renesas USB 3.0 eXtensible Host Controller - 1.0 (Microsoft)
+USB\VID_093A&PID_2510\6&38A9D4DA&0&3                        : USB Input Device
+ROOT\VID\0000                                               : Microsoft Hyper-V Virtualization Infrastructure Driver
+ACPI\PNP0103\0                                              : High precision event timer
+SWD\MSRRAS\MS_AGILEVPNMINIPORT                              : WAN Miniport (IKEv2)
+ROOT\COMPOSITEBUS\0000                                      : Composite Bus Enumerator
+ROOT\VDRVROOT\0000                                          : Microsoft Virtual Drive Enumerator
+USB\VID_04D9&PID_1503\6&38A9D4DA&0&4                        : USB Composite Device
+ROOT\SPACEPORT\0000                                         : Microsoft Storage Spaces Controller
+PCI\VEN_1093&DEV_70AA&SUBSYS_00000000&REV_00\5&20FB2A52&0&6000E4: PCI-6229
+ACPI\PNP0501\1                                              : Communications Port (COM1)
+ACPI\PNP0501\2                                              : Communications Port (COM2)
+USB\VID_8087&PID_0024\5&B81599F&0&1                         : Generic USB Hub
+ROOT\KDNIC\0000                                             : Microsoft Kernel Debug Network Adapter
+PCI\VEN_8086&DEV_244E&SUBSYS_1C188086&REV_B5\3&11583659&F&E4: PCI-to-PCI Bridge
+PCI\VEN_8086&DEV_0101&SUBSYS_01018086&REV_09\3&11583659&F&08: PCI-to-PCI Bridge
+UMB\UMB\1&841921D&0&TS_USB_HUB_ENUMERATOR                   : UMBus Enumerator
+ACPI\PNP0B00\4&2D2AF631&0                                   : System CMOS/real time clock
+PCI\VEN_1283&DEV_8892&SUBSYS_00000000&REV_41\4&2BE0CFAA&0&00E4: PCI-to-PCI Bridge
+PCIIDE\IDECHANNEL\4&344002B6&0&0                            : ATA Channel 0
+PCIIDE\IDECHANNEL\4&344002B6&0&1                            : ATA Channel 1
+ACPI\PNP0000\4&2D2AF631&0                                   : Programmable interrupt controller
+ACPI\PNP0303\4&2D2AF631&0                                   : Standard PS/2 Keyboard
+USB\VID_0C2E&PID_0974&MI_02\7&2A54F88E&0&0002               : USB Input Device
+USB\VID_05E3&PID_0610\6&1A03A41D&0&1                        : Generic USB Hub
+ROOT\UMBUS\0000                                             : UMBus Root Bus Enumerator
+ACPI\INT3F0D\4&2D2AF631&0                                   : Motherboard resources
+SWD\RADIO\{3DB5895D-CC28-44B3-AD3D-6F01A782B8D2}            : Microsoft Radio Device Enumeration Bus
+SWD\MMDEVAPI\{0.0.0.00000000}.{9AF918B4-0CD4-4AE7-AA04-38C89F71563E}: Digital Audio (S/PDIF) (High Definition Audio Device)
+ROOT\ACPI_HAL\0000                                          : ACPI x64-based PC
+SWD\MSRRAS\MS_NDISWANBH                                     : WAN Miniport (Network Monitor)
+SWD\MSRRAS\MS_NDISWANIP                                     : WAN Miniport (IP)
+PCI\VEN_8086&DEV_1503&SUBSYS_00008086&REV_05\3&11583659&F&C8: Intel(R) 82579V Gigabit Network Connection
+ACPI\PNP0A08\0                                              : PCI Express Root Complex
+STORAGE\VOLUME\{F79F8C62-0FFE-11EE-835E-806E6F6E6963}#0000000015F00000: Volume
+ACPI\PNP0200\4&2D2AF631&0                                   : Direct memory access controller
+USB\VID_05E0&PID_1900&MI_00\8&38DECA74&0&0000               : USB Input Device
+PCI\VEN_8086&DEV_1C00&SUBSYS_1C008086&REV_05\3&11583659&F&FA: Standard Dual Channel PCI IDE Controller
+HID\VID_093A&PID_2510\7&2EB773DD&0&0000                     : HID-compliant mouse
+PCI\VEN_8086&DEV_1C5C&SUBSYS_1C5C8086&REV_05\3&11583659&F&F8: LPC Controller
+ACPI_HAL\PNP0C08\0                                          : Microsoft ACPI-Compliant System
+HTREE\ROOT\0
+ROOT\BASICRENDER\0000                                       : Microsoft Basic Render Driver
+PCI\VEN_8086&DEV_1C08&SUBSYS_1C088086&REV_05\3&11583659&F&FD: Standard Dual Channel PCI IDE Controller
+UMB\UMB\1&841921D&0&RDCAMERA_BUS                            : Remote Desktop Camera Bus
+UMB\UMB\1&841921D&0&TSBUS                                   : UMBus Enumerator
+SWD\MSRRAS\MS_SSTPMINIPORT                                  : WAN Miniport (SSTP)
+PCI\VEN_8086&DEV_0102&SUBSYS_20108086&REV_09\3&11583659&F&10: Microsoft Basic Display Adapter
+ACPI\FIXEDBUTTON\2&DABA3FF&F                                : ACPI Fixed Feature Button
+ACPI\PNP0C02\10                                             : Motherboard resources
+USB\VID_0B95&PID_1790\00000EC659A267                        : ASIX AX88179 USB 3.0 to Gigabit Ethernet Adapter
+ACPI\PNP0C04\4&2D2AF631&0                                   : Numeric data processor
+USB\VID_05E0&PID_1900&MI_01\8&38DECA74&0&0001               : SNAPI Imaging Interface
+USB\ROOT_HUB30\5&12CF4E03&0&0                               : USB Root Hub (USB 3.0)
+ROOT\WPD\0000                                               : Microsoft Visual Studio Location Simulator Sensor
+SWD\MMDEVAPI\MICROSOFTGSWAVETABLESYNTH                      : Microsoft GS Wavetable Synth
+ACPI\PNP0C0C\AA                                             : ACPI Power Button
+HID\VID_04D9&PID_1503&MI_01&COL02\8&C9CA4D1&0&0001          : HID-compliant consumer control device
+ROOT\USB\0000                                               : Honeywell Control Device
+ROOT\NDISVIRTUALBUS\0000                                    : NDIS Virtual Network Adapter Enumerator
+IDE\DISKST1000DM010-2EP102______________________CC43____\5&2398CFAD&0&0.0.0: ST1000DM010-2EP102 ATA Device
+HID\VID_04D9&PID_1503&MI_01&COL01\8&C9CA4D1&0&0000          : HID-compliant system controller
+USB\VID_05E0&PID_1900\S/N:AECD5A3A4B80A8428F090B3FA83BEEE7_REV:PAABJS00-002-R03-: USB Composite Device
+PCI\VEN_8086&DEV_0100&SUBSYS_01008086&REV_09\3&11583659&F&00: Memory Controller
+HDAUDIO\FUNC_01&VEN_8086&DEV_2805&SUBSYS_80860101&REV_1000\4&273F86CE&0&0301: High Definition Audio Device
+HID\VID_0C2E&PID_0974&MI_02\8&25248D7E&0&0000               : HID-compliant vendor-defined device
+USB\ROOT_HUB20\4&3273F0B0&0                                 : USB Root Hub
+PCI\VEN_8086&DEV_1C10&SUBSYS_1C108086&REV_B5\3&11583659&F&E0: PCI-to-PCI Bridge
+ACPI\INT0800\4&2D2AF631&0                                   : Legacy device
+ACPI\PNP0C02\111                                            : Motherboard resources
+ACPI\PNP0C02\222                                            : Motherboard resources
+PCI\VEN_8086&DEV_1C3A&SUBSYS_1C3A8086&REV_04\3&11583659&F&B0: Intel(R) Management Engine Interface 
+USB\VID_04D9&PID_1503&MI_00\7&30DDCD6B&0&0000               : USB Input Device
+STORAGE\VOLUME\{F79F8C62-0FFE-11EE-835E-806E6F6E6963}#0000000000100000: Volume
+TS_USB_HUB_ENUMERATOR\UMB\2&30D3618&F&TS_USB_HUB            : Remote Desktop USB Hub
+PCI\VEN_8086&DEV_1C20&SUBSYS_1C208086&REV_05\3&11583659&F&D8: High Definition Audio Controller
+PCI\VEN_8086&DEV_1C22&SUBSYS_1C228086&REV_05\3&11583659&F&FB: SM Bus Controller
+ROOT\MSSMBIOS\0000                                          : Microsoft System Management BIOS Driver
+ACPI\PNP0F03\4&2D2AF631&0                                   : Microsoft PS/2 Mouse
+PCI\VEN_8086&DEV_1C26&SUBSYS_1C268086&REV_05\3&11583659&F&E8: Intel(R) 6 Series/C200 Series Chipset Family USB Enhanced Host Controller - 1C26
+ROOT\SYSTEM\0000                                            : Plug and Play Software Device Enumerator
+ROOT\SYSTEM\0001                                            : NI Ethernet Device Enumerator
+ROOT\SYSTEM\0002                                            : Consumer IR Devices
+ACPI\PNP0100\4&2D2AF631&0                                   : System timer
+ROOT\RDPBUS\0000                                            : Remote Desktop Device Redirector Bus
+SWD\MSRRAS\MS_NDISWANIPV6                                   : WAN Miniport (IPv6)
+USB\VID_0C2E&PID_0974\24052B6D2C                            : USB Composite Device
+LPTENUM\MICROSOFTRAWPORT\5&2349E55&0&LPT1                   : Printer Port Logical Interface
+DISPLAY\DELA04A\4&59ADBE9&0&UID0                            : Generic PnP Monitor
+SWD\MSRRAS\MS_L2TPMINIPORT                                  : WAN Miniport (L2TP)
+121 matching device(s) found.

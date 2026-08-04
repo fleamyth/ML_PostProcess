@@ -1,0 +1,27 @@
+                     Battery module x64 factory release 6099.4
+
+(Testing Primary Battery)
+    Commodity               = Battery
+    ChargeCycles            = 565
+    Temperature             = 33C
+    Voltage                 = 8521mV
+    Current                 = 0mA
+    RemainingCapacity       =  5.691Ah
+    FullCapacity            =  5.691Ah
+    RelativeCharge          = 100%
+    BatteryHealth           =  72%
+    DesignCapacity          = 59Wh,78Wh
+    ManufacturerName        = LGC-LGC7.780
+    DeviceChemistry         = LION
+    DeviceName              = DELL MYJ9684I
+    ManufactureAccess       = 4788
+    ManufactureDate         = 3/24/2018
+    SerialNumber            = 7b69
+(Primary Battery Test Results)
+Status: Pass
+
+(Testing Charger)
+  AC Adapter Present: Yes
+  AC Adapter Power: 60 Watts
+(Charger Test Results)
+Status: Pass

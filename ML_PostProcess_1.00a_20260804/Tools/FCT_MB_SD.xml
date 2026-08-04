@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Diagnostic Project="Cairns_FCT_MB_SD" Station="FCT_MB" Version="1.01ai" ProductionTest="True">
+	<Group Name="SDXC" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Test Name="SD_ON_Enable" Variation="Cairns" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="2.0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="NIControl-diags.exe" Action="-nl /sio 1.2 1" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SD_WP_MOS_NI_Enable" Variation="Cairns" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="3.0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="NIControl-diags.exe" Action="-nl /sio 0.16 1" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check SDXC version" Variation="Cairns" MeasureName="SDFW" Min="" Max="" Unit="" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="SDXC.bat" Action="" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<GetValue File="SDXC.log" Row="0" Col="43" Len="4" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F040515" PEGA="AKFX14" String="!- SD_FIRMWARE_CHECK -! SD firmware check fail." />
+				<Replace Source="FF" To="8F040515" PEGA="AKFX14" String="!- SD_FIRMWARE_CHECK -! SD firmware check fail." />
+				<Replace Source="*" To="*" PEGA="AKFBP4" String="{File:Tools\HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SD RW Check" Variation="Cairns" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="LANRS-diags.exe" Action="/e -ip {file:ip.dat} -w -ex -f &quot;c:\diagtool\wdrvt-diags.exe -vn sdhcvolume /t&quot;" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="2" To="8F040501" PEGA="AKFX01" String="!- SD_RW_CHECK -! MicroSD read write test" />
+				<Replace Source="1" To="8F040501" PEGA="AKFX01" String="!- SD_RW_CHECK -! MicroSD read write test" />
+				<Replace Source="80860021" To="8F041201" PEGA="AKSVZT" String="Volume label 'SdhcVolume' cannot be found on the Dut's available drives." />
+				<Replace Source="*" To="*" PEGA="AKFX01" String="{File:Storage-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SD_ON_Disable" Variation="Cairns" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="3" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="NIControl-diags.exe" Action="-nl /sio 1.2 0" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="Check SDXC version_Disable" Variation="Cairns" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+			<Exec PreWait="5" Wait="0" Retry="0" Ask4Retry="False" File="SDXC_disable.bat" Action="" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F040520" PEGA="AKFTLV" String="!- SD_FIRMWARE_CHECK -! SD firmware disable check fail." />
+				<Replace Source="FF" To="8F040520" PEGA="AKFTLV" String="!- SD_FIRMWARE_CHECK -! SD firmware disable check fail." />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SD_WP_MOS_NI_Disable" Variation="Cairns" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="2.0" Timeout="0" Check="True">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="NIControl-diags.exe" Action="-nl /sio 0.16 0" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SD_ON_Enable_2" Variation="Cairns" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="2.0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="NIControl-diags.exe" Action="-nl /sio 1.2 1" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SD_ON_Enable_2 Check SDXC version" Variation="Cairns" MeasureName="SDFW" Min="" Max="" Unit="" Class="DeviceCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="SDXC.bat" Action="" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<GetValue File="SDXC.log" Row="1" Col="32" Len="4" />
+			<ErrorTransform>
+				<Replace Source="1" To="8F040515" PEGA="AKFX14" String="!- SD_FIRMWARE_CHECK -! SD firmware check fail." />
+				<Replace Source="FF" To="8F040515" PEGA="AKFX14" String="!- SD_FIRMWARE_CHECK -! SD firmware check fail." />
+				<Replace Source="*" To="*" PEGA="AKFBP4" String="{File:Tools\HWInfo-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SD_ON_Enable_2 SD RW Check" Variation="Cairns" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="Storage-diag.exe" Action="-sd /WRC 0 1000000" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="2" To="8F040501" PEGA="AKFX01" String="!- SD_RW_CHECK -! MicroSD read write test" />
+				<Replace Source="1" To="8F040501" PEGA="AKFX01" String="!- SD_RW_CHECK -! MicroSD read write test" />
+				<Replace Source="80860021" To="8F041201" PEGA="AKSVZT" String="Volume label 'SdhcVolume' cannot be found on the Dut's available drives." />
+				<Replace Source="*" To="*" PEGA="AKFX01" String="{File:Storage-diag.log}" />
+			</ErrorTransform>
+		</Test>
+		<Test Name="SD_ON_Disable_2" Variation="Cairns" Class="NI" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="NIControl-diags.exe" Action="-nl /sio 1.2 0" ShowTerminal="False" FailStop="True" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F000019" PEGA="AKFM82" String="!-NI Error -! NI Card issue Command Error please check NI Card" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+</Diagnostic>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Diagnostic Project="ML_PostProcess" Station="PostProcess" Version="1.00a" ProductionTest="True">
+	<Test Name="Boot Status Check" Variation="ML" Class="BootCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="60" Check="True">
+		<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="Tools\Ping_DUT.bat" Action="" ShowTerminal="True" FailStop="True" Rebase="False" Log="" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F000003" PEGA="AKFI19" String="!- LAN_TEST -! Could not ping DUT" />
+			<Replace Source="FF" To="8F000003" PEGA="AKFI19" String="!- LAN_TEST -! Could not ping DUT" />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Dsi_restore_factory_calibration" Variation="ML" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="3.0" Retry="1" Ask4Retry="False" File="C:\Users\USER\Desktop\Engineer_Scripts\dsi_restore_factory_calibration.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" Log="" />
+		<ErrorTransform>
+			<Replace Source="0" To="0" PEGA="" String="Success" />
+			<Replace Source="FB" To="8F042281" PEGA="NM100065015" String="!- TypeC_CHECK -! Type C tester device not found." />
+			<Replace Source="FC" To="8F042280" PEGA="NM100065014" String="!- TypeC_CHECK -! Type C tester LOG files not found." />
+			<Replace Source="FD" To="8F041223" PEGA="EM100032968" String="!- U3PE -! USB-C Side Port 1 failed to connect and enumerate" />
+			<Replace Source="FE" To="8F041224" PEGA="EM100032969" String="!- U3PE -! USB-C Side Port 2 failed to connect and enumerate" />
+			<Replace Source="FF" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+			<Replace Source="*" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+		</ErrorTransform>
+	</Test>
+	<Test Name="Post_Process" Variation="ML" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="0" Wait="3.0" Retry="0" Ask4Retry="False" File="Tools\post_process_single_no_audio.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" Log="" />
+		<ErrorTransform>
+			<Replace Source="0" To="0" PEGA="" String="Success" />
+			<Replace Source="FB" To="8F042281" PEGA="NM100065015" String="!- TypeC_CHECK -! Type C tester device not found." />
+			<Replace Source="FC" To="8F042280" PEGA="NM100065014" String="!- TypeC_CHECK -! Type C tester LOG files not found." />
+			<Replace Source="FD" To="8F041223" PEGA="EM100032968" String="!- U3PE -! USB-C Side Port 1 failed to connect and enumerate" />
+			<Replace Source="FE" To="8F041224" PEGA="EM100032969" String="!- U3PE -! USB-C Side Port 2 failed to connect and enumerate" />
+			<Replace Source="FF" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+			<Replace Source="*" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+		</ErrorTransform>
+	</Test>
+	<Test Name="ML" Variation="ML" Class="BootCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Exec PreWait="0" Wait="0" Retry="3" Ask4Retry="False" File="" Action="" ShowTerminal="True" FailStop="True" Rebase="False" Log="" />
+		<ErrorTransform>
+			<Replace Source="1" To="8F1A0018" PEGA="AKFP1L" String="!-Battery_Power_TEST-! Set Battery Level Fail." />
+			<Replace Source="FF" To="8F1A0018" PEGA="AKFP1L" String="!-Battery_Power_TEST-! Set Battery Level Fail." />
+		</ErrorTransform>
+	</Test>
+	<Group Name="Shut Down" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
+		<Test Name="BF Shut Down" Variation="ML" Class="" Front="False" Loop="1" Mode="Sequential" Hold="15.0" Timeout="0" Check="False">
+			<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="Tools\BiFrostTools\_System.bat" Action="PowerControl Shutdown" ShowTerminal="True" FailStop="False" Rebase="False" Log="" />
+			<ErrorTransform>
+				<Replace Source="1" To="0" PEGA="" String="Success" />
+				<Replace Source="FF" To="8F00000E" PEGA="AKFNGE" String="!- POWEROFF -! Fail to shutdown the DUT" />
+			</ErrorTransform>
+		</Test>
+	</Group>
+</Diagnostic>
