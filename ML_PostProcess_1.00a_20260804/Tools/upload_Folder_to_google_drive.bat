@@ -1,5 +1,24 @@
 @echo off
 setlocal EnableExtensions
+if /i "%~1"=="__LOCKED_UPLOAD" goto :locked_upload
+
+set "UPLOAD_LOCK=%TEMP%\ML_GoogleDrive_Upload.lock"
+
+:wait_for_upload_lock
+mkdir "%UPLOAD_LOCK%" 2>nul
+if not errorlevel 1 goto :upload_lock_acquired
+echo Another Google Drive upload is running. Waiting...
+timeout /t 10 /nobreak >nul
+goto :wait_for_upload_lock
+
+:upload_lock_acquired
+call "%~f0" __LOCKED_UPLOAD "%~1" "%~2" "%~3"
+set "UPLOAD_EXITCODE=%ERRORLEVEL%"
+rmdir "%UPLOAD_LOCK%" 2>nul
+exit /b %UPLOAD_EXITCODE%
+
+:locked_upload
+shift /1
 
 if /i "%~1"=="/?" goto :usage
 if /i "%~1"=="--help" goto :usage
@@ -62,22 +81,29 @@ if errorlevel 1 (
 )
 
 if exist "%SOURCE%\Robocal\" (
-  call :MOVE_LEGACY_ROBOCAL_FOLDER DGC
-  if errorlevel 1 exit /b 6
-  call :MOVE_LEGACY_ROBOCAL_FOLDER DCC
+  call :UPLOAD_FOLDER_ZIP "Robocal"
   if errorlevel 1 exit /b 6
 )
 
-echo Uploading "%SOURCE%" to Google Drive...
+if exist "%SOURCE%\PostProcess\" (
+  call :UPLOAD_FOLDER_ZIP "PostProcess"
+  if errorlevel 1 exit /b 6
+)
+
+echo Uploading remaining files from "%SOURCE%" to Google Drive...
 rclone copy "%SOURCE%" "%REMOTE%:%DESTINATION_FOLDER%" ^
   --drive-root-folder-id "%ROOT_FOLDER_ID%" ^
   --progress ^
   --stats 30s ^
-  --transfers 8 ^
+  --transfers 4 ^
   --checkers 8 ^
-  --drive-chunk-size 128M ^
+  --drive-chunk-size 64M ^
+  --contimeout 30s ^
+  --timeout 15m ^
   --retries 10 ^
   --low-level-retries 20 ^
+  --exclude "/Robocal/**" ^
+  --exclude "/PostProcess/**" ^
   --log-file "%LOG_FILE%" ^
   --log-level INFO
 
@@ -90,17 +116,48 @@ echo Upload completed successfully.
 echo Log: "%LOG_FILE%"
 exit /b 0
 
-:MOVE_LEGACY_ROBOCAL_FOLDER
-rclone lsf "%REMOTE%:%DESTINATION_FOLDER%/%~1" --drive-root-folder-id "%ROOT_FOLDER_ID%" --max-depth 1 --log-file "%LOG_FILE%" --log-level INFO >nul 2>&1
-if errorlevel 1 exit /b 0
+:UPLOAD_FOLDER_ZIP
+set "ZIP_FOLDER_NAME=%~1"
+for %%I in ("%SOURCE%") do set "ZIP_TEMP_DIR=%%~dpI.upload-temp"
+set "ZIP_FILE=%ZIP_TEMP_DIR%\%DESTINATION_FOLDER%_%ZIP_FOLDER_NAME%_%RANDOM%_%RANDOM%.zip"
+if not exist "%ZIP_TEMP_DIR%\" mkdir "%ZIP_TEMP_DIR%" 2>nul
+if not exist "%ZIP_TEMP_DIR%\" (
+  echo ERROR: Could not create ZIP temporary directory: "%ZIP_TEMP_DIR%"
+  exit /b 1
+)
 
-echo Moving Google Drive folder "%DESTINATION_FOLDER%/%~1" under Robocal...
-rclone mkdir "%REMOTE%:%DESTINATION_FOLDER%/Robocal/%~1" --drive-root-folder-id "%ROOT_FOLDER_ID%" --log-file "%LOG_FILE%" --log-level INFO
-if errorlevel 1 exit /b 1
-rclone move "%REMOTE%:%DESTINATION_FOLDER%/%~1" "%REMOTE%:%DESTINATION_FOLDER%/Robocal/%~1" --drive-root-folder-id "%ROOT_FOLDER_ID%" --delete-empty-src-dirs --log-file "%LOG_FILE%" --log-level INFO
-if errorlevel 1 exit /b 1
-rclone rmdir "%REMOTE%:%DESTINATION_FOLDER%/%~1" --drive-root-folder-id "%ROOT_FOLDER_ID%" --log-file "%LOG_FILE%" --log-level INFO >nul 2>&1
-exit /b 0
+echo Packaging "%SOURCE%\%ZIP_FOLDER_NAME%" as %ZIP_FOLDER_NAME%.zip...
+pushd "%SOURCE%"
+"%~dp07z\7za.exe" a -tzip -mx=0 "%ZIP_FILE%" "%ZIP_FOLDER_NAME%"
+set "ZIP_EXITCODE=%ERRORLEVEL%"
+popd
+if not "%ZIP_EXITCODE%"=="0" goto :ZIP_FAIL
+
+"%~dp07z\7za.exe" t "%ZIP_FILE%" >nul
+if errorlevel 1 goto :ZIP_FAIL
+
+echo Uploading %ZIP_FOLDER_NAME%.zip...
+rclone copyto "%ZIP_FILE%" "%REMOTE%:%DESTINATION_FOLDER%/%ZIP_FOLDER_NAME%.zip" ^
+  --drive-root-folder-id "%ROOT_FOLDER_ID%" ^
+  --progress ^
+  --stats 30s ^
+  --drive-chunk-size 64M ^
+  --contimeout 30s ^
+  --timeout 15m ^
+  --retries 1 ^
+  --low-level-retries 3 ^
+  --log-file "%LOG_FILE%" ^
+  --log-level DEBUG
+set "ZIP_EXITCODE=%ERRORLEVEL%"
+del /q "%ZIP_FILE%" 2>nul
+rmdir "%ZIP_TEMP_DIR%" 2>nul
+exit /b %ZIP_EXITCODE%
+
+:ZIP_FAIL
+echo ERROR: Could not create or verify %ZIP_FOLDER_NAME%.zip.
+del /q "%ZIP_FILE%" 2>nul
+rmdir "%ZIP_TEMP_DIR%" 2>nul
+exit /b 1
 
 :usage
 echo Usage:
