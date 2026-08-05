@@ -16,6 +16,7 @@
 			<Replace Source="FD" To="8F041223" PEGA="EM100032968" String="!- U3PE -! USB-C Side Port 1 failed to connect and enumerate" />
 			<Replace Source="FE" To="8F041224" PEGA="EM100032969" String="!- U3PE -! USB-C Side Port 2 failed to connect and enumerate" />
 			<Replace Source="FF" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+			<Replace Source="2C7" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
 			<Replace Source="*" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
 		</ErrorTransform>
 	</Test>

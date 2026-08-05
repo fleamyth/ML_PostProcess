@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Diagnostic Project="ML_Robocal" Station="Robocal" Version="1.00a" ProductionTest="True">
+<Diagnostic Project="ML_PostProcess" Station="PostProcess" Version="1.00a" ProductionTest="True">
 	<Test Name="Boot Status Check" Variation="ML" Class="BootCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="60" Check="True">
 		<Exec PreWait="0" Wait="0" Retry="0" Ask4Retry="False" File="Tools\Ping_DUT.bat" Action="" ShowTerminal="True" FailStop="True" Rebase="False" Log="" />
 		<ErrorTransform>
@@ -16,11 +16,12 @@
 			<Replace Source="FD" To="8F041223" PEGA="EM100032968" String="!- U3PE -! USB-C Side Port 1 failed to connect and enumerate" />
 			<Replace Source="FE" To="8F041224" PEGA="EM100032969" String="!- U3PE -! USB-C Side Port 2 failed to connect and enumerate" />
 			<Replace Source="FF" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+			<Replace Source="711" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
 			<Replace Source="*" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
 		</ErrorTransform>
 	</Test>
-	<Test Name="Robocal" Variation="ML" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
-		<Exec PreWait="0" Wait="3.0" Retry="0" Ask4Retry="False" File="C:\Users\User\Desktop\glasses_scripts\run_robocal_single_no_audio.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" Log="" />
+	<Test Name="Post_Process" Variation="ML" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
+		<Exec PreWait="0" Wait="3.0" Retry="0" Ask4Retry="False" File="Tools\post_process_single_no_audio.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" Log="" />
 		<ErrorTransform>
 			<Replace Source="0" To="0" PEGA="" String="Success" />
 			<Replace Source="FB" To="8F042281" PEGA="NM100065015" String="!- TypeC_CHECK -! Type C tester device not found." />
@@ -28,6 +29,7 @@
 			<Replace Source="FD" To="8F041223" PEGA="EM100032968" String="!- U3PE -! USB-C Side Port 1 failed to connect and enumerate" />
 			<Replace Source="FE" To="8F041224" PEGA="EM100032969" String="!- U3PE -! USB-C Side Port 2 failed to connect and enumerate" />
 			<Replace Source="FF" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+			<Replace Source="2C7" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
 			<Replace Source="*" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
 		</ErrorTransform>
 	</Test>
