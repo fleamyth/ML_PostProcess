@@ -30,7 +30,7 @@ SET "DESKTOP_DIR="
 FOR /F "usebackq delims=" %%D IN (`powershell.exe -NoProfile -Command "[Environment]::GetFolderPath('Desktop')"`) DO SET "DESKTOP_DIR=%%D"
 IF NOT DEFINED DESKTOP_DIR SET "DESKTOP_DIR=%USERPROFILE%\Desktop"
 SET "LOG_ROOT=%DESKTOP_DIR%\logs"
-SET "LOG_ARCHIVE_ROOT=D:\logs"
+SET "LOG_ARCHIVE_ROOT=C:\logs"
 SET /a SCAN=0
 
 :START_OP
@@ -268,63 +268,15 @@ CALL :UPLOAD_GRR_AND_WAIT_DUT_DISCONNECT
 GOTO Record
 
 :UPLOAD_GRR_AND_WAIT_DUT_DISCONNECT
-REM Move this run's logs to D:\logs first, then upload that folder to Google Drive.
+REM Archive this run's logs to C:\logs, start the Google Drive upload in the background, then wait only for DUT disconnect.
 CALL :ARCHIVE_COMPLETED_LOGS
 SET "LOG_ARCHIVE_RESULT=%ERRORLEVEL%"
 DEL /Q "%TEST_RUN_MARKER%" 2>nul
 SET "TEST_RUN_MARKER="
 IF NOT "%LOG_ARCHIVE_RESULT%" EQU "0" EXIT /B 1
-SET "GOOGLE_DRIVE_UPLOAD_STATUS=%TEMP%\ML_PostProcess_gdrive_status_%RANDOM%_%RANDOM%.tmp"
-DEL /Q "%GOOGLE_DRIVE_UPLOAD_STATUS%" "%GOOGLE_DRIVE_UPLOAD_STATUS%.new" 2>nul
 START "" /B CMD.EXE /D /C CALL "%~f0" __UPLOAD_GRR_WORKER
-IF %ERRORLEVEL% NEQ 0 >"%GOOGLE_DRIVE_UPLOAD_STATUS%" ECHO 1
-CALL :WAIT_FOR_UPLOAD_AND_DUT_DISCONNECT
-
-:WAIT_GOOGLE_DRIVE_UPLOAD
-IF NOT EXIST "%GOOGLE_DRIVE_UPLOAD_STATUS%" (
-	TIMEOUT /T 1 /NOBREAK >nul
-	GOTO WAIT_GOOGLE_DRIVE_UPLOAD
-)
-SET "GOOGLE_DRIVE_UPLOAD_EXITCODE=1"
-SET /P GOOGLE_DRIVE_UPLOAD_EXITCODE=<"%GOOGLE_DRIVE_UPLOAD_STATUS%"
-DEL /Q "%GOOGLE_DRIVE_UPLOAD_STATUS%" 2>nul
-SET "GOOGLE_DRIVE_UPLOAD_STATUS="
-IF NOT "%GOOGLE_DRIVE_UPLOAD_EXITCODE%" EQU "0" GOTO GOOGLE_DRIVE_UPLOAD_ERROR
+CALL :WAIT_DUT_DISCONNECT
 EXIT /B 0
-
-:GOOGLE_DRIVE_UPLOAD_ERROR
-Tools\Screen-diag.exe -nl -enter /SS 40 "Google Drive upload FAIL!!<br><br>Log ID: %LOG_IDENTIFIER%<br>Please check rclone and network settings.<br><br>Press [Enter] to continue." 0xFFFFFF -bg 0x882222
-EXIT /B 1
-
-:WAIT_FOR_UPLOAD_AND_DUT_DISCONNECT
-START "" Tools\Screen-diag.exe -nl /SS 55 "Please disconnect the device from the computer.<br><br>Google Drive upload is running..." 0xFFFFFF -bg 0xFF7F25
-TIMEOUT /T 1 /NOBREAK >nul
-SET "GOOGLE_DRIVE_UPLOAD_COMPLETE="
-SET "DUT_DISCONNECTED="
-
-:WAIT_FOR_UPLOAD_AND_DUT_DISCONNECT_CHECK
-IF NOT DEFINED GOOGLE_DRIVE_UPLOAD_COMPLETE IF EXIST "%GOOGLE_DRIVE_UPLOAD_STATUS%" (
-	SET "GOOGLE_DRIVE_UPLOAD_COMPLETE=TRUE"
-	SET "GOOGLE_DRIVE_UPLOAD_EXITCODE=1"
-	SET /P GOOGLE_DRIVE_UPLOAD_EXITCODE=<"%GOOGLE_DRIVE_UPLOAD_STATUS%"
-)
-IF DEFINED GOOGLE_DRIVE_UPLOAD_COMPLETE IF NOT "%GOOGLE_DRIVE_UPLOAD_EXITCODE%" EQU "0" (
-	taskkill /IM Screen-diag.exe
-	EXIT /B 0
-)
-
-SET "ADB_DEVICE_CONNECTED="
-adb devices >"%TEMP%\ML_PostProces_adb_devices.tmp" 2>nul
-IF %ERRORLEVEL% EQU 0 FOR /F "usebackq skip=1 tokens=1" %%A IN ("%TEMP%\ML_PostProces_adb_devices.tmp") DO SET "ADB_DEVICE_CONNECTED=TRUE"
-DEL /Q "%TEMP%\ML_PostProces_adb_devices.tmp" 2>nul
-IF NOT DEFINED ADB_DEVICE_CONNECTED SET "DUT_DISCONNECTED=TRUE"
-
-IF DEFINED GOOGLE_DRIVE_UPLOAD_COMPLETE IF DEFINED DUT_DISCONNECTED (
-	taskkill /IM Screen-diag.exe
-	EXIT /B 0
-)
-TIMEOUT /T 1 /NOBREAK >nul
-GOTO WAIT_FOR_UPLOAD_AND_DUT_DISCONNECT_CHECK
 
 :ARCHIVE_COMPLETED_LOGS
 IF /I "%TYPE%"=="RoboCal" GOTO ARCHIVE_COMPLETED_LOGS_RUN
@@ -388,7 +340,7 @@ Tools\Screen-diag.exe -nl -enter /SS 40 "Log archive FAIL!!<br><br>Source: %LOG_
 EXIT /B 1
 
 :WAIT_DUT_DISCONNECT
-START "" Tools\Screen-diag.exe -nl /SS 55 "Please disconnect the device from the computer.<br><br>Waiting for ADB device disconnection..." 0xFFFFFF -bg 0xFF7F25
+START "" Tools\Screen-diag.exe -nl /SS 55 "Please disconnect the device from the computer.<br><br>Google Drive upload is running in the background..." 0xFFFFFF -bg 0xFF7F25
 TIMEOUT /T 1 /NOBREAK >nul
 
 :WAIT_DUT_DISCONNECT_CHECK
@@ -416,16 +368,12 @@ IF %ERRORLEVEL% NEQ 0 SET "GOOGLE_DRIVE_UPLOAD_FAILED=1"
 
 :GOOGLE_DRIVE_UPLOAD_FINISH
 IF "%GOOGLE_DRIVE_UPLOAD_FAILED%" EQU "0" EXIT /B 0
-IF DEFINED GOOGLE_DRIVE_UPLOAD_BACKGROUND EXIT /B 1
-
-Tools\Screen-diag.exe -nl -enter /SS 40 "Google Drive upload FAIL!!<br><br>Log ID: %LOG_IDENTIFIER%<br>Please check rclone and network settings.<br><br>Press [Enter] to continue." 0xFFFFFF -bg 0x882222
+IF NOT EXIST "C:\MFGlog\%TYPE%log\event" MKDIR "C:\MFGlog\%TYPE%log\event" 2>nul
+>>"C:\MFGlog\%TYPE%log\event\_GDriveUploadError.log" ECHO %date%_%time% Google Drive upload FAIL - Log ID: %LOG_IDENTIFIER% Source: %GOOGLE_DRIVE_SOURCE%
 EXIT /B 1
 
 :UPLOAD_GRR_WORKER
-SET "GOOGLE_DRIVE_UPLOAD_BACKGROUND=1"
 CALL :UPLOAD_GRR_TO_GOOGLE_DRIVE
->"%GOOGLE_DRIVE_UPLOAD_STATUS%.new" ECHO %ERRORLEVEL%
-MOVE /Y "%GOOGLE_DRIVE_UPLOAD_STATUS%.new" "%GOOGLE_DRIVE_UPLOAD_STATUS%" >nul
 EXIT /B 0
 
 :Record
