@@ -30,7 +30,7 @@ SET "DESKTOP_DIR="
 FOR /F "usebackq delims=" %%D IN (`powershell.exe -NoProfile -Command "[Environment]::GetFolderPath('Desktop')"`) DO SET "DESKTOP_DIR=%%D"
 IF NOT DEFINED DESKTOP_DIR SET "DESKTOP_DIR=%USERPROFILE%\Desktop"
 SET "LOG_ROOT=%DESKTOP_DIR%\logs"
-SET "LOG_ARCHIVE_ROOT=D:\logs"
+SET "LOG_ARCHIVE_ROOT=C:\logs"
 SET /a SCAN=0
 
 :START_OP
@@ -266,7 +266,7 @@ CALL :UPLOAD_GRR_AND_WAIT_DUT_DISCONNECT
 GOTO Record
 
 :UPLOAD_GRR_AND_WAIT_DUT_DISCONNECT
-REM Move this run's logs to D:\logs first, then upload that folder to Google Drive.
+REM Move this run's logs to C:\logs first, then upload that folder to Google Drive.
 CALL :ARCHIVE_COMPLETED_LOGS
 SET "LOG_ARCHIVE_RESULT=%ERRORLEVEL%"
 DEL /Q "%TEST_RUN_MARKER%" 2>nul
