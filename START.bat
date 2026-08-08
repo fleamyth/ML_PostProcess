@@ -171,6 +171,7 @@ ECHO Interupt Error
 GOTO START
 
 :TestFail
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\generate_ml_robocal.ps1" -sn %SN% -OverwriteTemplate -AttachCsv ML_Postprocess.csv
 find /i "%PROJECT%,80" %CSV_NAME%
 IF %ERRORLEVEL% equ 0 goto ShowFail
 find /i "%PROJECT%,8F" %CSV_NAME%
@@ -180,6 +181,8 @@ IF %ERRORLEVEL% equ 0 goto ShowFail
 find /i "%PROJECT%,N" %CSV_NAME%
 IF %ERRORLEVEL% equ 0 goto ShowFail
 find /i "%PROJECT%,M" %CSV_NAME%
+IF %ERRORLEVEL% equ 0 goto ShowFail
+find /i "%PROJECT%,0x" %CSV_NAME%
 IF %ERRORLEVEL% equ 0 goto ShowFail
 cls
 call Screen-diag.exe -enter /ss 70 "unexpected exit or unknow error code happens." 0xFFFFFF -bg 0xBB2222
@@ -194,6 +197,7 @@ CALL :UPLOAD_GRR_AND_WAIT_DUT_DISCONNECT
 GOTO jigup
 
 :TestPass
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\generate_ml_robocal.ps1" -sn %SN% -OverwriteTemplate -AttachCsv ML_Postprocess.csv
 cd %~dp0
 cd %FOLDER%
 SET Result=PASS
