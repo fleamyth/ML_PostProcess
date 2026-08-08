@@ -115,3 +115,74 @@ Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
 Checks:                 0 / 0, -, Listed 1
 Elapsed time:         0.0s
 
+2026/08/07 15:55:39 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/07 15:55:39 NOTICE: gdrive{iWtD9}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/07 15:55:40 INFO  : Google drive root '20260807/S6A67340005X': Making directory
+2026/08/07 15:55:53 DEBUG : rclone: Version "v1.75.0" starting with parameters ["rclone" "copyto" "C:\\logs\\.upload-temp\\S6A67340005X_PostProcess_10579_3751.zip" "gdrive:20260807/S6A67340005X/PostProcess.zip" "--drive-root-folder-id" "1VuN9N7JXBBuHByXVgUjm1jEw18wSW_N6" "--progress" "--stats" "30s" "--drive-chunk-size" "64M" "--contimeout" "30s" "--timeout" "15m" "--retries" "1" "--low-level-retries" "3" "--log-file" "C:\\ML_PostProcess\\ML_PostProcess_1.00a_20260804\\Tools\\logs\\rclone-upload-S6A67340005X.log" "--log-level" "DEBUG"]
+2026/08/07 15:55:53 DEBUG : Creating backend with remote "C:\\logs\\.upload-temp\\S6A67340005X_PostProcess_10579_3751.zip"
+2026/08/07 15:55:53 DEBUG : Using config file from "C:\\Users\\TEST\\AppData\\Roaming\\rclone\\rclone.conf"
+2026/08/07 15:55:53 DEBUG : fs cache: renaming child cache item "C:\\logs\\.upload-temp\\S6A67340005X_PostProcess_10579_3751.zip" to be canonical for parent "//?/C:/logs/.upload-temp"
+2026/08/07 15:55:53 DEBUG : Creating backend with remote "gdrive:20260807/S6A67340005X/"
+2026/08/07 15:55:53 DEBUG : gdrive: detected overridden config - adding "{hcGEi}" suffix to name
+2026/08/07 15:55:53 NOTICE: gdrive{hcGEi}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/07 15:55:55 DEBUG : fs cache: renaming cache item "gdrive:20260807/S6A67340005X/" to be canonical "gdrive{hcGEi}:20260807/S6A67340005X"
+2026/08/07 15:55:55 DEBUG : S6A67340005X_PostProcess_10579_3751.zip: Need to transfer - File not found at Destination
+2026/08/07 15:55:57 DEBUG : PostProcess.zip: Sending chunk 0 length 67108864
+2026/08/07 15:55:59 DEBUG : PostProcess.zip: Sending chunk 67108864 length 67108864
+2026/08/07 15:56:02 DEBUG : PostProcess.zip: Sending chunk 134217728 length 67108864
+2026/08/07 15:56:04 DEBUG : PostProcess.zip: Sending chunk 201326592 length 67108864
+2026/08/07 15:56:07 DEBUG : PostProcess.zip: Sending chunk 268435456 length 67108864
+2026/08/07 15:56:09 DEBUG : PostProcess.zip: Sending chunk 335544320 length 67108864
+2026/08/07 15:56:11 DEBUG : PostProcess.zip: Sending chunk 402653184 length 67108864
+2026/08/07 15:56:13 DEBUG : PostProcess.zip: Sending chunk 469762048 length 67108864
+2026/08/07 15:56:16 DEBUG : PostProcess.zip: Sending chunk 536870912 length 67108864
+2026/08/07 15:56:18 DEBUG : PostProcess.zip: Sending chunk 603979776 length 67108864
+2026/08/07 15:56:21 DEBUG : PostProcess.zip: Sending chunk 671088640 length 67108864
+2026/08/07 15:56:24 DEBUG : PostProcess.zip: Sending chunk 738197504 length 67108864
+2026/08/07 15:56:26 DEBUG : PostProcess.zip: Sending chunk 805306368 length 67108864
+2026/08/07 15:56:28 DEBUG : PostProcess.zip: Sending chunk 872415232 length 67108864
+2026/08/07 15:56:30 DEBUG : PostProcess.zip: Sending chunk 939524096 length 67108864
+2026/08/07 15:56:32 DEBUG : PostProcess.zip: Sending chunk 1006632960 length 67108864
+2026/08/07 15:56:35 DEBUG : PostProcess.zip: Sending chunk 1073741824 length 67108864
+2026/08/07 15:56:39 DEBUG : PostProcess.zip: Sending chunk 1140850688 length 67108864
+2026/08/07 15:56:41 DEBUG : PostProcess.zip: Sending chunk 1207959552 length 67108864
+2026/08/07 15:56:44 DEBUG : PostProcess.zip: Sending chunk 1275068416 length 67108864
+2026/08/07 15:56:46 DEBUG : PostProcess.zip: Sending chunk 1342177280 length 67108864
+2026/08/07 15:56:49 DEBUG : PostProcess.zip: Sending chunk 1409286144 length 67108864
+2026/08/07 15:56:52 DEBUG : PostProcess.zip: Sending chunk 1476395008 length 67108864
+2026/08/07 15:56:54 DEBUG : PostProcess.zip: Sending chunk 1543503872 length 67108864
+2026/08/07 15:56:58 DEBUG : PostProcess.zip: Sending chunk 1610612736 length 67108864
+2026/08/07 15:57:00 DEBUG : PostProcess.zip: Sending chunk 1677721600 length 67108864
+2026/08/07 15:57:02 DEBUG : PostProcess.zip: Sending chunk 1744830464 length 67108864
+2026/08/07 15:57:05 DEBUG : PostProcess.zip: Sending chunk 1811939328 length 67108864
+2026/08/07 15:57:08 DEBUG : PostProcess.zip: Sending chunk 1879048192 length 67108864
+2026/08/07 15:57:11 DEBUG : PostProcess.zip: Sending chunk 1946157056 length 67108864
+2026/08/07 15:57:17 DEBUG : PostProcess.zip: Sending chunk 2013265920 length 67108864
+2026/08/07 15:57:22 DEBUG : PostProcess.zip: Sending chunk 2080374784 length 67108864
+2026/08/07 15:57:26 DEBUG : PostProcess.zip: Sending chunk 2147483648 length 67108864
+2026/08/07 15:57:29 DEBUG : PostProcess.zip: Sending chunk 2214592512 length 67108864
+2026/08/07 15:57:32 DEBUG : PostProcess.zip: Sending chunk 2281701376 length 67108864
+2026/08/07 15:57:34 DEBUG : PostProcess.zip: Sending chunk 2348810240 length 67108864
+2026/08/07 15:57:37 DEBUG : PostProcess.zip: Sending chunk 2415919104 length 67108864
+2026/08/07 15:57:39 DEBUG : PostProcess.zip: Sending chunk 2483027968 length 67108864
+2026/08/07 15:57:42 DEBUG : PostProcess.zip: Sending chunk 2550136832 length 67108864
+2026/08/07 15:57:44 DEBUG : PostProcess.zip: Sending chunk 2617245696 length 67108864
+2026/08/07 15:57:47 DEBUG : PostProcess.zip: Sending chunk 2684354560 length 67108864
+2026/08/07 15:57:50 DEBUG : PostProcess.zip: Sending chunk 2751463424 length 67108864
+2026/08/07 15:57:52 DEBUG : PostProcess.zip: Sending chunk 2818572288 length 51118872
+2026/08/07 15:57:57 DEBUG : PostProcess.zip: size = 2869691160 OK
+2026/08/07 15:57:57 DEBUG : S6A67340005X_PostProcess_10579_3751.zip: md5 = 6248d0dd075b9aa3d6a1c8d43b46036d OK
+2026/08/07 15:57:57 INFO  : S6A67340005X_PostProcess_10579_3751.zip: Copied (new) to: PostProcess.zip
+2026/08/07 15:57:57 INFO  : 
+Transferred:   	    2.673 GiB / 2.673 GiB, 100%, 20.153 MiB/s, ETA 0s
+Transferred:            1 / 1, 100%
+Elapsed time:       2m1.5s
+
+2026/08/07 15:57:57 DEBUG : 3 go routines active
+2026/08/07 15:57:57 NOTICE: gdrive{hcGEi}: This remote uses rclone's shared Google Drive client_id, which is being retired and will stop working during 2026. Create your own client_id to avoid interruption: https://rclone.org/drive/#making-your-own-client-id
+2026/08/07 15:57:59 INFO  : There was nothing to transfer
+2026/08/07 15:57:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                 0 / 0, -, Listed 1
+Elapsed time:         0.0s
+
