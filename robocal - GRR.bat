@@ -75,7 +75,8 @@ if /i not "!ROBOCAL_TESTER!" == "RBCIN14" if /i not "!ROBOCAL_TESTER!" == "L89VJ
   exit /b 5
 )
 
-if /i not "%COMPUTERNAME%" == "!ROBOCAL_TESTER!" (
+echo %COMPUTERNAME% | findstr /i /c:"!ROBOCAL_TESTER!" >nul
+if errorlevel 1 (
   echo ERROR: Wrong RoboCal tester.
   echo This GRR run is assigned to !ROBOCAL_TESTER!, but this computer is %COMPUTERNAME%.
   echo Move the glasses to tester !ROBOCAL_TESTER! and run RoboCal again.
