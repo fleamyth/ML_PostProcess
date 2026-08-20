@@ -9,7 +9,8 @@ set "SCRIPT_DIR=!DESKTOP_DIR!\glasses_scripts"
 set "POST_PROCESS_BAT="
 set "OPERATION=OP1"
 set "BACKUP_ROOT=!DESKTOP_DIR!\RoboGRR"
-set "NETWORK_BACKUP_ROOT=\\RBCIN14\D\RoboGRR"
+set "ROBOCAL_TESTER_TAG=/sdcard/robocal_grr_tester.txt"
+set "NETWORK_BACKUP_ROOT="
 set "MASTER_OUTPUT=!DESKTOP_DIR!\logs"
 set "GOOGLE_DRIVE_URL=https://drive.google.com/drive/folders/1VuN9N7JXBBuHByXVgUjm1jEw18wSW_N6"
 set "GOOGLE_DRIVE_UPLOAD_BAT=%~dp0ML_PreProcess_1.00a_20260716\Tools\upload_Folder_to_google_drive.bat"
@@ -18,7 +19,6 @@ if not "%~1" == "" set "POST_PROCESS_BAT=%~1"
 if not "%~2" == "" set "OPERATION=%~2"
 if not "%~3" == "" set "BACKUP_ROOT=%~3"
 if not "%~4" == "" set "MASTER_OUTPUT=%~4"
-if not "%~5" == "" set "NETWORK_BACKUP_ROOT=%~5"
 
 if not defined POST_PROCESS_BAT (
   call :SELECT_POST_PROCESS_BAT
@@ -61,12 +61,27 @@ if not "!DEVICE_COUNT!" == "1" (
   exit /b 4
 )
 
+set "ROBOCAL_TESTER="
+for /f "usebackq delims=" %%H in (`adb shell "cat !ROBOCAL_TESTER_TAG!" 2^>nul`) do set "ROBOCAL_TESTER=%%H"
+if not defined ROBOCAL_TESTER (
+  echo ERROR: RoboCal tester tag was not found on the glasses.
+  echo Run pre_process - GRR.bat first and select the RoboCal tester.
+  exit /b 5
+)
+if /i not "!ROBOCAL_TESTER!" == "RBCIN14" if /i not "!ROBOCAL_TESTER!" == "L89VJIQ" (
+  echo ERROR: Invalid RoboCal tester tag "!ROBOCAL_TESTER!".
+  echo Run pre_process - GRR.bat again to select a valid tester.
+  exit /b 5
+)
+set "NETWORK_BACKUP_ROOT=\\RBCIN14\D\RoboGRR_!ROBOCAL_TESTER!"
+
 set "LOG_IDENTIFIER="
 for /f "usebackq delims=" %%H in (`adb shell getprop ro.serialno 2^>nul`) do set "LOG_IDENTIFIER=%%H"
 if not defined LOG_IDENTIFIER set "LOG_IDENTIFIER=!SERIAL!"
 
 echo ADB serial:     !SERIAL!
 echo Log identifier: !LOG_IDENTIFIER!
+echo RoboCal tester: !ROBOCAL_TESTER!
 
 if not exist "!MASTER_OUTPUT!" (
   echo ERROR: Post-process master output directory not found: "!MASTER_OUTPUT!"

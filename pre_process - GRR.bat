@@ -5,7 +5,9 @@ set "SCRIPT_DIR=C:\Users\TEST\Desktop\glasses_scripts"
 set "PRE_PROCESS_BAT="
 set "OPERATION=OP1"
 set "BACKUP_ROOT=C:\Users\TEST\Desktop\RoboGRR"
-set "NETWORK_BACKUP_ROOT=\\RBCIN14\D\RoboGRR"
+set "ROBOCAL_TESTER="
+set "ROBOCAL_TESTER_TAG=/sdcard/robocal_grr_tester.txt"
+set "NETWORK_BACKUP_ROOT="
 set "SOURCE_DIR=C:\Users\TEST\Desktop\logs\robocal_output"
 set "GOOGLE_DRIVE_URL=https://drive.google.com/drive/folders/1VuN9N7JXBBuHByXVgUjm1jEw18wSW_N6"
 set "GOOGLE_DRIVE_UPLOAD_BAT=%~dp0ML_PreProcess_1.00a_20260716\Tools\upload_Folder_to_google_drive.bat"
@@ -14,7 +16,7 @@ if not "%~1" == "" set "PRE_PROCESS_BAT=%~1"
 if not "%~2" == "" set "OPERATION=%~2"
 if not "%~3" == "" set "BACKUP_ROOT=%~3"
 if not "%~4" == "" set "SOURCE_DIR=%~4"
-if not "%~5" == "" set "NETWORK_BACKUP_ROOT=%~5"
+if not "%~5" == "" set "ROBOCAL_TESTER=%~5"
 
 if not defined PRE_PROCESS_BAT (
   call :SELECT_PRE_PROCESS_BAT
@@ -27,7 +29,19 @@ if "%~2" == "" (
   if defined OPERATION_INPUT set "OPERATION=!OPERATION_INPUT!"
 )
 
+if not defined ROBOCAL_TESTER (
+  call :SELECT_ROBOCAL_TESTER
+  if errorlevel 1 exit /b !ERRORLEVEL!
+)
+
+if /i not "!ROBOCAL_TESTER!" == "RBCIN14" if /i not "!ROBOCAL_TESTER!" == "L89VJIQ" (
+  echo ERROR: Invalid RoboCal tester "!ROBOCAL_TESTER!". Use RBCIN14 or L89VJIQ.
+  exit /b 2
+)
+set "NETWORK_BACKUP_ROOT=\\RBCIN14\D\RoboGRR_!ROBOCAL_TESTER!"
+
 echo Operation: !OPERATION!
+echo RoboCal tester: !ROBOCAL_TESTER!
 
 if not exist "!PRE_PROCESS_BAT!" (
   echo ERROR: Pre-process batch file not found: "!PRE_PROCESS_BAT!"
@@ -59,6 +73,19 @@ if not "!DEVICE_COUNT!" == "1" (
 )
 
 echo ADB serial: !SERIAL!
+
+adb shell "echo !ROBOCAL_TESTER! > !ROBOCAL_TESTER_TAG!"
+if errorlevel 1 (
+  echo ERROR: Failed to write RoboCal tester tag to !ROBOCAL_TESTER_TAG!.
+  exit /b 5
+)
+
+set "SAVED_ROBOCAL_TESTER="
+for /f "usebackq delims=" %%H in (`adb shell "cat !ROBOCAL_TESTER_TAG!" 2^>nul`) do set "SAVED_ROBOCAL_TESTER=%%H"
+if /i not "!SAVED_ROBOCAL_TESTER!" == "!ROBOCAL_TESTER!" (
+  echo ERROR: RoboCal tester tag verification failed.
+  exit /b 5
+)
 
 set "SOURCE_LOG_BEFORE="
 if exist "!SOURCE_DIR!" (
@@ -137,6 +164,25 @@ echo Google Drive: !GOOGLE_DRIVE_URL!
 echo Pre-process exit code: !PRE_PROCESS_EXITCODE!
 exit /b !PRE_PROCESS_EXITCODE!
 
+:SELECT_ROBOCAL_TESTER
+echo.
+echo Select the RoboCal tester for this GRR run:
+echo   1. RBCIN14
+echo   2. L89VJIQ
+:SELECT_ROBOCAL_TESTER_RETRY
+set "ROBOCAL_TESTER_SELECTION="
+set /p "ROBOCAL_TESTER_SELECTION=Select tester [1-2]: "
+if "!ROBOCAL_TESTER_SELECTION!" == "1" (
+  set "ROBOCAL_TESTER=RBCIN14"
+  exit /b 0
+)
+if "!ROBOCAL_TESTER_SELECTION!" == "2" (
+  set "ROBOCAL_TESTER=L89VJIQ"
+  exit /b 0
+)
+echo Invalid selection. Enter 1 or 2.
+goto SELECT_ROBOCAL_TESTER_RETRY
+
 :SELECT_PRE_PROCESS_BAT
 if not exist "!SCRIPT_DIR!\" (
   echo ERROR: Glasses scripts directory not found: "!SCRIPT_DIR!"
@@ -179,7 +225,7 @@ echo Invalid selection. Enter a number from 1 to !SCRIPT_COUNT!.
 goto SELECT_SCRIPT
 
 :usage
-echo Usage: %~nx0 [PRE_PROCESS_BAT] [OP] [BACKUP_ROOT] [SOURCE_DIR] [NETWORK_BACKUP_ROOT]
+echo Usage: %~nx0 [PRE_PROCESS_BAT] [OP] [BACKUP_ROOT] [SOURCE_DIR] [ROBOCAL_TESTER]
 echo.
 echo Run without arguments to select a batch file and OP interactively.
 echo The batch-file menu recursively scans:
@@ -190,7 +236,9 @@ echo must be connected with the state device.
 echo If BACKUP_ROOT is omitted, Desktop\RoboGRR is used.
 echo If SOURCE_DIR is omitted, this TEST user directory is used:
 echo C:\Users\TEST\Desktop\logs\robocal_output
-echo If NETWORK_BACKUP_ROOT is omitted, \\RBCIN14\D\RoboGRR is used.
+echo ROBOCAL_TESTER must be RBCIN14 or L89VJIQ. If omitted, it is selected interactively.
+echo The selection is saved to /sdcard/robocal_grr_tester.txt on the glasses.
+echo Network backup uses \\RBCIN14\D\RoboGRR_ROBOCAL_TESTER.
 echo.
 echo Example:
 echo %~nx0
