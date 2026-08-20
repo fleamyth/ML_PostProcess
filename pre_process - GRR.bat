@@ -150,17 +150,24 @@ if errorlevel 1 (
   exit /b 10
 )
 
-call "!GOOGLE_DRIVE_UPLOAD_BAT!" "!BACKUP_ROOT!\!SERIAL!" "!GOOGLE_DRIVE_URL!"
-if errorlevel 1 (
-  echo ERROR: Failed to upload pre-process data to Google Drive.
-  exit /b 11
+set "GOOGLE_DRIVE_STATUS=Skipped"
+set "UPLOAD_TO_GOOGLE_DRIVE="
+set /p "UPLOAD_TO_GOOGLE_DRIVE=Upload GRR data to Google Drive? [y/N]: "
+if /i "!UPLOAD_TO_GOOGLE_DRIVE!" == "Y" set "UPLOAD_TO_GOOGLE_DRIVE=YES"
+if /i "!UPLOAD_TO_GOOGLE_DRIVE!" == "YES" (
+  call "!GOOGLE_DRIVE_UPLOAD_BAT!" "!BACKUP_ROOT!\!SERIAL!" "!GOOGLE_DRIVE_URL!"
+  if errorlevel 1 (
+    echo ERROR: Failed to upload pre-process data to Google Drive.
+    exit /b 11
+  )
+  set "GOOGLE_DRIVE_STATUS=Uploaded to !GOOGLE_DRIVE_URL!"
 )
 
 echo Pre-process log backed up successfully.
 echo Source:      !SOURCE_LOG!
 echo Local:       !DESTINATION_LOG!
 echo Network:     !NETWORK_DESTINATION_LOG!
-echo Google Drive: !GOOGLE_DRIVE_URL!
+echo Google Drive: !GOOGLE_DRIVE_STATUS!
 echo Pre-process exit code: !PRE_PROCESS_EXITCODE!
 exit /b !PRE_PROCESS_EXITCODE!
 

@@ -141,17 +141,24 @@ if errorlevel 1 (
   exit /b 10
 )
 
-call "!GOOGLE_DRIVE_UPLOAD_BAT!" "!BACKUP_ROOT!\!SERIAL!" "!GOOGLE_DRIVE_URL!"
-if errorlevel 1 (
-  echo ERROR: Failed to upload post-process data to Google Drive.
-  exit /b 11
+set "GOOGLE_DRIVE_STATUS=Skipped"
+set "UPLOAD_TO_GOOGLE_DRIVE="
+set /p "UPLOAD_TO_GOOGLE_DRIVE=Upload GRR data to Google Drive? [y/N]: "
+if /i "!UPLOAD_TO_GOOGLE_DRIVE!" == "Y" set "UPLOAD_TO_GOOGLE_DRIVE=YES"
+if /i "!UPLOAD_TO_GOOGLE_DRIVE!" == "YES" (
+  call "!GOOGLE_DRIVE_UPLOAD_BAT!" "!BACKUP_ROOT!\!SERIAL!" "!GOOGLE_DRIVE_URL!"
+  if errorlevel 1 (
+    echo ERROR: Failed to upload post-process data to Google Drive.
+    exit /b 11
+  )
+  set "GOOGLE_DRIVE_STATUS=Uploaded to !GOOGLE_DRIVE_URL!"
 )
 
 echo Post-process data backed up successfully.
 echo Source:      !MASTER_OUTPUT!
 echo Local:       !DESTINATION_DIR!
 echo Network:     !NETWORK_DESTINATION_DIR!
-echo Google Drive: !GOOGLE_DRIVE_URL!
+echo Google Drive: !GOOGLE_DRIVE_STATUS!
 echo Files copied: !COPY_COUNT!
 echo Post-process exit code: !POST_PROCESS_EXITCODE!
 exit /b !POST_PROCESS_EXITCODE!

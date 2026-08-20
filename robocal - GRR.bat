@@ -171,17 +171,24 @@ if exist "!ROBOCAL_SOURCE!\" (
   )
 )
 
-call "!GOOGLE_DRIVE_UPLOAD_BAT!" "!BACKUP_ROOT!\!SERIAL!" "!GOOGLE_DRIVE_URL!"
-if errorlevel 1 (
-  echo ERROR: Failed to upload RoboCal data to Google Drive.
-  exit /b 12
+set "GOOGLE_DRIVE_STATUS=Skipped"
+set "UPLOAD_TO_GOOGLE_DRIVE="
+set /p "UPLOAD_TO_GOOGLE_DRIVE=Upload GRR data to Google Drive? [y/N]: "
+if /i "!UPLOAD_TO_GOOGLE_DRIVE!" == "Y" set "UPLOAD_TO_GOOGLE_DRIVE=YES"
+if /i "!UPLOAD_TO_GOOGLE_DRIVE!" == "YES" (
+  call "!GOOGLE_DRIVE_UPLOAD_BAT!" "!BACKUP_ROOT!\!SERIAL!" "!GOOGLE_DRIVE_URL!"
+  if errorlevel 1 (
+    echo ERROR: Failed to upload RoboCal data to Google Drive.
+    exit /b 12
+  )
+  set "GOOGLE_DRIVE_STATUS=Uploaded to !GOOGLE_DRIVE_URL!"
 )
 
 echo RoboCal data backed up successfully.
 echo Source:      !MASTER_OUTPUT!
 echo Local:       !DESTINATION_DIR!
 echo Network:     !NETWORK_DESTINATION_DIR!
-echo Google Drive: !GOOGLE_DRIVE_URL!
+echo Google Drive: !GOOGLE_DRIVE_STATUS!
 if exist "!LOG_ARCHIVE_DIR!\" echo Log archive: !LOG_ARCHIVE_DIR!
 echo Files copied: !COPY_COUNT!
 echo RoboCal exit code: !ROBOCAL_EXITCODE!
