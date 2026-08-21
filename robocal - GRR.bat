@@ -87,6 +87,12 @@ set "NETWORK_BACKUP_ROOT=\\RBCIN14\D\RoboGRR_!ROBOCAL_TESTER!"
 set "LOG_IDENTIFIER="
 for /f "usebackq delims=" %%H in (`adb shell getprop ro.serialno 2^>nul`) do set "LOG_IDENTIFIER=%%H"
 if not defined LOG_IDENTIFIER set "LOG_IDENTIFIER=!SERIAL!"
+powershell.exe -NoProfile -Command "if ($env:LOG_IDENTIFIER.IndexOfAny([IO.Path]::GetInvalidFileNameChars()) -ge 0) { exit 1 }"
+if errorlevel 1 (
+  echo ERROR: Invalid DUT log identifier "!LOG_IDENTIFIER!".
+  echo A wireless ADB endpoint such as IP:port cannot be used as a backup folder name.
+  exit /b 5
+)
 
 echo ADB serial:     !SERIAL!
 echo Log identifier: !LOG_IDENTIFIER!
@@ -108,7 +114,7 @@ echo Running RoboCal: "!ROBOCAL_BAT!"
 call "!ROBOCAL_BAT!"
 set "ROBOCAL_EXITCODE=!ERRORLEVEL!"
 
-set "DESTINATION_DIR=!BACKUP_ROOT!\!SERIAL!\!OPERATION!\Robocal"
+set "DESTINATION_DIR=!BACKUP_ROOT!\!LOG_IDENTIFIER!\!OPERATION!\Robocal"
 if not exist "!DESTINATION_DIR!\" mkdir "!DESTINATION_DIR!" 2>nul
 if not exist "!DESTINATION_DIR!\" (
   echo ERROR: Could not create "!DESTINATION_DIR!".
@@ -138,7 +144,7 @@ if "!COPY_COUNT!" == "0" (
   exit /b 9
 )
 
-set "NETWORK_DESTINATION_DIR=!NETWORK_BACKUP_ROOT!\!SERIAL!\!OPERATION!\Robocal"
+set "NETWORK_DESTINATION_DIR=!NETWORK_BACKUP_ROOT!\!LOG_IDENTIFIER!\!OPERATION!\Robocal"
 if not exist "!NETWORK_DESTINATION_DIR!\" mkdir "!NETWORK_DESTINATION_DIR!" 2>nul
 if not exist "!NETWORK_DESTINATION_DIR!\" (
   echo ERROR: Could not create network backup directory "!NETWORK_DESTINATION_DIR!".
@@ -177,7 +183,7 @@ set "UPLOAD_TO_GOOGLE_DRIVE="
 set /p "UPLOAD_TO_GOOGLE_DRIVE=Upload GRR data to Google Drive? [y/N]: "
 if /i "!UPLOAD_TO_GOOGLE_DRIVE!" == "Y" set "UPLOAD_TO_GOOGLE_DRIVE=YES"
 if /i "!UPLOAD_TO_GOOGLE_DRIVE!" == "YES" (
-  call "!GOOGLE_DRIVE_UPLOAD_BAT!" "!BACKUP_ROOT!\!SERIAL!" "!GOOGLE_DRIVE_URL!"
+  call "!GOOGLE_DRIVE_UPLOAD_BAT!" "!BACKUP_ROOT!\!LOG_IDENTIFIER!" "!GOOGLE_DRIVE_URL!"
   if errorlevel 1 (
     echo ERROR: Failed to upload RoboCal data to Google Drive.
     exit /b 12
