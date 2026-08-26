@@ -15,6 +15,11 @@ venv/
 # Generated CSV data
 *.csv
 
+# Runtime-generated device state and upload logs
+**/SN.dat
+**/Tools/MISCLog.zip
+**/Tools/logs/*.log
+
 # Track batch scripts only; keep traversing directories to find them.
 *
 !*/
