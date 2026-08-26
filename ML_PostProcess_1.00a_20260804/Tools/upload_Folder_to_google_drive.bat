@@ -1,24 +1,5 @@
 @echo off
 setlocal EnableExtensions
-if /i "%~1"=="__LOCKED_UPLOAD" goto :locked_upload
-
-set "UPLOAD_LOCK=%TEMP%\ML_GoogleDrive_Upload.lock"
-
-:wait_for_upload_lock
-mkdir "%UPLOAD_LOCK%" 2>nul
-if not errorlevel 1 goto :upload_lock_acquired
-echo Another Google Drive upload is running. Waiting...
-timeout /t 10 /nobreak >nul
-goto :wait_for_upload_lock
-
-:upload_lock_acquired
-call "%~f0" __LOCKED_UPLOAD "%~1" "%~2" "%~3" "%~4"
-set "UPLOAD_EXITCODE=%ERRORLEVEL%"
-rmdir "%UPLOAD_LOCK%" 2>nul
-exit /b %UPLOAD_EXITCODE%
-
-:locked_upload
-shift /1
 
 if /i "%~1"=="/?" goto :usage
 if /i "%~1"=="--help" goto :usage

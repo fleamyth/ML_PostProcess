@@ -14,3 +14,9 @@ venv/
 
 # Generated CSV data
 *.csv
+
+# Track batch scripts only; keep traversing directories to find them.
+*
+!*/
+!*.bat
+!.gitignore
