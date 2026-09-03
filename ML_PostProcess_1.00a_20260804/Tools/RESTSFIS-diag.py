@@ -245,6 +245,15 @@ def build_logging_payload(args: argparse.Namespace) -> dict[str, Any]:
     for row in rows:
         passed = is_measurement_pass(row)
         name = get_field(row, "MeasurementName", "TestName") or "Unnamed test"
+        error_code = get_field(row, "ErrorCode")
+        error_description = get_field(row, "ErrorDescription")
+        if (
+            args.append_error_description
+            and error_code
+            and error_code != "0"
+            and error_description
+        ):
+            name = f"{name}_{error_description}"
         value = get_field(row, "Value")
         measurements.append(
             {
@@ -255,7 +264,7 @@ def build_logging_payload(args: argparse.Namespace) -> dict[str, Any]:
                 "units": optional(get_field(row, "Units")),
                 "measurementStatus": passed,
                 "nominalValue": optional(get_field(row, "NominalValue")),
-                "message": optional(get_field(row, "ErrorDescription")),
+                "message": optional(error_description),
             }
         )
 
@@ -410,6 +419,11 @@ def build_parser(
     upload_parser.add_argument("--fixture", default=config.get("fixture"))
     upload_parser.add_argument("--fail-label")
     upload_parser.add_argument("--fail-message")
+    upload_parser.add_argument(
+        "--append-error-description",
+        action="store_true",
+        help="Append ErrorDescription to the name when ErrorCode is not 0 or empty",
+    )
     upload_parser.set_defaults(handler=upload_log)
     return parser
 

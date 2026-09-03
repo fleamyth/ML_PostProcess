@@ -53,7 +53,9 @@ class LoggingPayloadTests(unittest.TestCase):
         self.addCleanup(Path(temporary_file.name).unlink)
         return Path(temporary_file.name)
 
-    def arguments(self, log_path: Path) -> argparse.Namespace:
+    def arguments(
+        self, log_path: Path, append_error_description: bool = False
+    ) -> argparse.Namespace:
         return argparse.Namespace(
             log=str(log_path),
             sn=None,
@@ -68,6 +70,7 @@ class LoggingPayloadTests(unittest.TestCase):
             fixture=None,
             fail_label=None,
             fail_message=None,
+            append_error_description=append_error_description,
         )
 
     def test_builds_pass_payload_from_king_csv(self) -> None:
@@ -96,6 +99,7 @@ class LoggingPayloadTests(unittest.TestCase):
         self.assertEqual(payload["assemblyNumber"], "P123")
         self.assertEqual(payload["process"], "DAAT")
         self.assertEqual(payload["testStatus"], "P")
+        self.assertEqual(payload["measurements"][0]["name"], "Voltage")
         self.assertTrue(payload["measurements"][0]["measurementStatus"])
         self.assertEqual(payload["measurements"][0]["upperLimit"], "5.2")
 
@@ -120,6 +124,32 @@ class LoggingPayloadTests(unittest.TestCase):
         self.assertEqual(payload["testStatus"], "F")
         self.assertEqual(payload["failLabel"], "Camera test")
         self.assertEqual(payload["failMessage"], "Camera not found")
+        self.assertEqual(payload["measurements"][0]["name"], "Camera test")
+        self.assertFalse(payload["measurements"][0]["measurementStatus"])
+
+    def test_failure_appends_description_when_enabled(self) -> None:
+        log_path = self.write_log(
+            [
+                {
+                    "SerialNumber": "P123",
+                    "Operation": "DAAT",
+                    "TestName": "Camera test",
+                    "ErrorCode": "8F01",
+                    "Operator": "S123",
+                    "StartDateTime": "2026-07-23 10:00:00",
+                    "EndDateTime": "2026-07-23 10:01:00",
+                    "ErrorDescription": "Camera not found",
+                }
+            ]
+        )
+
+        payload = restsfis_diag.build_logging_payload(
+            self.arguments(log_path, append_error_description=True)
+        )
+
+        self.assertEqual(
+            payload["measurements"][0]["name"], "Camera test_Camera not found"
+        )
         self.assertFalse(payload["measurements"][0]["measurementStatus"])
 
     def test_rejects_multiple_serial_numbers(self) -> None:
