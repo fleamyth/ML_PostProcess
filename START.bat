@@ -2,6 +2,7 @@ REM Program Description
 REM Copyright by Pegatron, Build Date:2016-11-02 Rev1.01f, Diagnostics
 REM ============================================================
 @echo on
+cd /d "%~dp0"
 IF /I "%~1"=="__UPLOAD_GRR_WORKER" GOTO UPLOAD_GRR_WORKER
 IF EXIST op.dat DEL op.dat
 REM ===== Version Setting =====

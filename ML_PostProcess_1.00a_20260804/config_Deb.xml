@@ -21,7 +21,7 @@
 		</ErrorTransform>
 	</Test>
 	<Test Name="Post_Process" Variation="ML" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
-		<Exec PreWait="0" Wait="3.0" Retry="0" Ask4Retry="False" File="Tools\post_process_single_no_audio.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" Log="" />
+		<Exec PreWait="0" Wait="3.0" Retry="0" Ask4Retry="False" File="Tools\post_process_single.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" Log="" />
 		<ErrorTransform>
 			<Replace Source="0" To="0" PEGA="" String="Success" />
 			<Replace Source="C9" To="C9" PEGA="" String="!- POST_PROCESS -! WFSC post-process failed." />
