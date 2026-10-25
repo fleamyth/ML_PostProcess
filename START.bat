@@ -25,6 +25,7 @@ SET on_Drive=N:
 SET SFIS_IP=172.24.248.128
 SET Connect=FALSE
 SET "GOOGLE_DRIVE_URL=https://drive.google.com/drive/folders/1VuN9N7JXBBuHByXVgUjm1jEw18wSW_N6"
+IF /I NOT "%MODE%"=="D" SET "GOOGLE_DRIVE_URL=1U9hKoGkFsbvxEMnuKuYXAAUKrL1CcUBn"
 SET "GOOGLE_DRIVE_UPLOAD_BAT=%~dp0%FOLDER%\Tools\upload_Folder_to_google_drive.bat"
 FOR /F "usebackq delims=" %%P IN (`powershell.exe -NoProfile -Command "[Environment]::GetEnvironmentVariable('Path','Machine')+';'+[Environment]::GetEnvironmentVariable('Path','User')"`) DO SET "PATH=%%P"
 SET "DESKTOP_DIR="
@@ -379,7 +380,7 @@ EXIT /B 1
 
 :UPLOAD_GRR_WORKER
 CALL :UPLOAD_GRR_TO_GOOGLE_DRIVE
-EXIT /B 0
+EXIT /B %ERRORLEVEL%
 
 :Record
 IF "%MODE%" EQU "D" GOTO Record1

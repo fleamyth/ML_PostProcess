@@ -25,3 +25,4 @@ venv/
 !*/
 !*.bat
 !.gitignore
+!tests/test_google_drive_upload.py

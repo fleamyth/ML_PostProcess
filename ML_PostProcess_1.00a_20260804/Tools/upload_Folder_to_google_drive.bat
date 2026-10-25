@@ -1,5 +1,5 @@
 @echo off
-setlocal EnableExtensions
+setlocal EnableExtensions DisableDelayedExpansion
 
 if /i "%~1"=="/?" goto :usage
 if /i "%~1"=="--help" goto :usage
@@ -22,11 +22,11 @@ for %%I in ("%SOURCE%") do set "DESTINATION_FOLDER=%%~nxI"
 set "DESTINATION_PATH=%~4"
 if "%DESTINATION_PATH%"=="" set "DESTINATION_PATH=%DESTINATION_FOLDER%"
 
-set "ROOT_FOLDER_ID=%DRIVE_URL:https://drive.google.com/drive/folders/=%"
-for /f "tokens=1 delims=?/" %%I in ("%ROOT_FOLDER_ID%") do set "ROOT_FOLDER_ID=%%I"
+set "ROOT_FOLDER_ID="
+for /f "usebackq delims=" %%I in (`powershell.exe -NoProfile -Command "$value=$env:DRIVE_URL; if($value -cmatch '\A[A-Za-z0-9_-]+\z'){Write-Output $value} elseif($value -match '\Ahttps://drive[.]google[.]com/drive/(?:u/[0-9]+/)?folders/([A-Za-z0-9_-]+)/?(?:\?[^#\s]*)?(?:#[^\s]*)?\z'){Write-Output $Matches[1]} else {Write-Error 'Invalid Google Drive folder URL or ID.'; exit 1}"`) do set "ROOT_FOLDER_ID=%%I"
 
 if "%ROOT_FOLDER_ID%"=="" (
-  echo ERROR: A Google Drive folder URL or folder ID is required.
+  echo ERROR: Invalid Google Drive folder URL or folder ID. No files were uploaded.
   exit /b 1
 )
 
@@ -49,15 +49,16 @@ if errorlevel 1 (
 if not exist "%LOG_DIR%\" mkdir "%LOG_DIR%"
 
 echo Checking access to the Google Drive destination...
-rclone lsd "%REMOTE%:" --drive-root-folder-id "%ROOT_FOLDER_ID%" --log-file "%LOG_FILE%" --log-level INFO
+rclone lsd "%REMOTE%:" --drive-root-folder-id "%ROOT_FOLDER_ID%" --retries 1 --low-level-retries 1 --contimeout 30s --timeout 1m --log-file "%LOG_FILE%" --log-level INFO
 if errorlevel 1 (
   echo ERROR: Cannot access the Google Drive destination.
-  echo Complete "rclone config" and authorize the "%REMOTE%" remote, then retry.
+  echo Review "%LOG_FILE%" for API quota, authorization, folder permission or folder ID errors.
+  echo No files were uploaded. The account is determined by the "%REMOTE%" remote authorization.
   exit /b 4
 )
 
 echo Creating the destination folder if needed...
-rclone mkdir "%REMOTE%:%DESTINATION_PATH%" --drive-root-folder-id "%ROOT_FOLDER_ID%" --log-file "%LOG_FILE%" --log-level INFO
+rclone mkdir "%REMOTE%:%DESTINATION_PATH%" --drive-root-folder-id "%ROOT_FOLDER_ID%" --retries 1 --low-level-retries 1 --contimeout 30s --timeout 1m --log-file "%LOG_FILE%" --log-level INFO
 if errorlevel 1 (
   echo ERROR: Could not create or access the destination folder.
   exit /b 5
@@ -151,4 +152,6 @@ echo   %~nx0 "D:\RoboGRR\S6A67340005X" "https://drive.google.com/drive/folders/1
 echo   %~nx0 "D:\RoboGRR\S6A67340005X" "1PLmAKzagiYLUTX2Eqh8S_fDR1nE6tC5E" "gdrive"
 echo.
 echo Run without arguments to enter the local folder and Google Drive URL interactively.
+echo Folder URLs may include /drive/u/2/folders/, a query, a trailing slash or a fragment.
+echo The URL account index does not select an account; the rclone remote authorization does.
 exit /b 0
