@@ -16,20 +16,24 @@
 			<Replace Source="FD" To="8F041223" PEGA="EM100032968" String="!- U3PE -! USB-C Side Port 1 failed to connect and enumerate" />
 			<Replace Source="FE" To="8F041224" PEGA="EM100032969" String="!- U3PE -! USB-C Side Port 2 failed to connect and enumerate" />
 			<Replace Source="FF" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
-			<Replace Source="2C7" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
-			<Replace Source="*" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+			<Replace Source="711" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
 		</ErrorTransform>
 	</Test>
 	<Test Name="Post_Process" Variation="ML" Class="" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="True">
 		<Exec PreWait="0" Wait="3.0" Retry="0" Ask4Retry="False" File="Tools\post_process_single.bat" Action="" ShowTerminal="True" FailStop="False" Rebase="False" Log="" />
 		<ErrorTransform>
 			<Replace Source="0" To="0" PEGA="" String="Success" />
-			<Replace Source="FB" To="8F042281" PEGA="NM100065015" String="!- TypeC_CHECK -! Type C tester device not found." />
-			<Replace Source="FC" To="8F042280" PEGA="NM100065014" String="!- TypeC_CHECK -! Type C tester LOG files not found." />
-			<Replace Source="FD" To="8F041223" PEGA="EM100032968" String="!- U3PE -! USB-C Side Port 1 failed to connect and enumerate" />
-			<Replace Source="FE" To="8F041224" PEGA="EM100032969" String="!- U3PE -! USB-C Side Port 2 failed to connect and enumerate" />
-			<Replace Source="FF" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
-			<Replace Source="*" To="8F042250" PEGA="AKGFWV" String="!- TypeC_CHECK -! Type C USB 3.0 funtion Fail." />
+			<Replace Source="C9" To="C9" PEGA="" String="!- POST_PROCESS -! WFSC post-process failed." />
+			<Replace Source="CA" To="CA" PEGA="" String="!- POST_PROCESS -! UFSC post-process failed." />
+			<Replace Source="CB" To="CB" PEGA="" String="!- POST_PROCESS -! DGC or DCC post-process failed." />
+			<Replace Source="CC" To="CC" PEGA="" String="!- POST_PROCESS -! Audio post-process failed." />
+			<Replace Source="CF" To="CF" PEGA="" String="!- POST_PROCESS -! DGV post-process failed." />
+			<Replace Source="CD" To="CD" PEGA="" String="!- POST_PROCESS -! Failed to combine station calibration results into a device profile." />
+			<Replace Source="CE" To="CE" PEGA="" String="!- POST_PROCESS -! Post-combine command failed." />
+			<Replace Source="26E" To="26E" PEGA="" String="!- POST_PROCESS -! DGC eye-to-Android frame orientation validation failed." />
+			<Replace Source="259" To="259" PEGA="" String="!- POST_PROCESS -! DGC station software configuration initialization failed." />
+			<Replace Source="1F4" To="1F4" PEGA="" String="!- POST_PROCESS -! Device pre-process is incomplete or prerequisites are not met." />
+			<Replace Source="*" To="FF" PEGA="" String="!- POST_PROCESS -! ERROR state contains a non-numbered first_error." />
 		</ErrorTransform>
 	</Test>
 	<Test Name="ML" Variation="ML" Class="BootCheck" Front="False" Loop="1" Mode="Sequential" Hold="0" Timeout="0" Check="False">
